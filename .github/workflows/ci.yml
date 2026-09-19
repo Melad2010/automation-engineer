@@ -1,0 +1,36 @@
+name: tests
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # openpyxl is only needed by the two spreadsheet projects; their tests
+      # skip without it, but CI should actually exercise the workbooks.
+      - name: Install optional dependencies
+        run: python -m pip install --quiet openpyxl
+
+      - name: Run every project's tests
+        run: ./run-tests.sh
+
+      - name: Build the deliverables the projects produce
+        run: |
+          cd projects/quote-generator && python build_tool.py --out dist/QuoteTool.xlsx && cd -
+          cd projects/kpi-dashboard && python build.py --csv sample-sales.csv --out dist/dashboard.xlsx && cd -
+          cd projects/web-scraper-qa && python run.py --start fixtures/page-1.html --out out/ && cd -
+          cd projects/ai-agent && python run.py --dry-run && cd -

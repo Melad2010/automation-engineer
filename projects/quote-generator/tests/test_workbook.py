@@ -20,7 +20,7 @@ from quotekit.pricing import price_line
 
 if openpyxl is not None:
     from build_tool import MAX_LINES, SHEET_PASSWORD, build
-    from tests.xlformula import Evaluator
+    from tests.shared import Evaluator
 
 CATALOG = Catalog.load()
 FIRST_LINE = 9

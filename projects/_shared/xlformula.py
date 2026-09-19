@@ -1,15 +1,16 @@
-"""A very small Excel formula evaluator — just enough for QuoteTool.xlsx.
+"""A very small Excel formula evaluator — enough for the workbooks in this repo.
 
-Why this exists: the workbook is the deliverable, and a workbook whose formulas
-were never executed is an untested deliverable. There is no Excel on a CI box,
-so the tests evaluate the generated formulas here and compare the result against
-quotekit/pricing.py. If the two ever disagree, the build fails.
+Why this exists: in both spreadsheet projects the workbook is the deliverable,
+and a workbook whose formulas were never executed is an untested deliverable.
+There is no Excel on a CI box, so the tests evaluate the generated formulas here
+and compare the result against the Python implementation of the same rules. If
+the two ever disagree, the build fails.
 
-Supported: IF, INDEX, MATCH (exact only), LOOKUP (sorted vector form), IFERROR,
-MIN, MAX, ROUND, SUM, TODAY; the operators + - * / ^ & = <> < <= > >=; numbers,
-quoted strings, cell and range references with or without a sheet prefix.
-Anything else raises, so an unsupported formula fails loudly instead of quietly
-returning the wrong number.
+Supported: IF, IFERROR, INDEX, MATCH (exact only), LOOKUP (sorted vector form),
+SUMIFS, COUNTIFS, SUM, MIN, MAX, ROUND, ABS, AND, OR, TODAY; the operators
++ - * / ^ & = <> < <= > >=; numbers, quoted strings, cell and range references
+with or without a sheet prefix. Anything else raises, so an unsupported formula
+fails loudly instead of quietly returning the wrong number.
 """
 
 import re
@@ -275,6 +276,46 @@ class Evaluator:
             return left ** right
         raise FormulaError(f"unknown operator {operator!r}")
 
+    def _conditional_aggregate(self, name, args):
+        """SUMIFS(sum_range, criteria_range, criteria, ...) / COUNTIFS(range, criteria, ...).
+
+        Only the equality criteria these workbooks use are supported; an operator
+        criterion such as ">100" raises rather than being silently ignored.
+        """
+        if name == "SUMIFS":
+            totals = self._eval(args[0])
+            totals = totals if isinstance(totals, list) else [totals]
+            pairs = args[1:]
+        else:
+            totals = None
+            pairs = args
+        if len(pairs) % 2:
+            raise FormulaError(f"{name}() needs criteria in range/value pairs")
+
+        conditions = []
+        for index in range(0, len(pairs), 2):
+            values = self._eval(pairs[index])
+            values = values if isinstance(values, list) else [values]
+            needle = self._scalar(pairs[index + 1])
+            if isinstance(needle, str) and needle[:1] in ("<", ">", "="):
+                raise FormulaError(f"{name}() operator criteria are not supported: {needle!r}")
+            conditions.append((values, self._text(needle)))
+
+        length = len(totals) if totals is not None else len(conditions[0][0])
+        result = 0.0
+        for position in range(length):
+            if all(
+                position < len(values) and self._text(values[position]) == needle
+                for values, needle in conditions
+            ):
+                if totals is None:
+                    result += 1
+                elif position < len(totals):
+                    value = totals[position]
+                    if value is not None and value != "" and not isinstance(value, str):
+                        result += self._number(value)
+        return result
+
     def _call(self, name, args):
         if name == "IF":
             condition = self._scalar(args[0])
@@ -330,6 +371,16 @@ class Evaluator:
             if not numbers:
                 return 0.0
             return {"MIN": min, "MAX": max, "SUM": sum}[name](numbers)
+        if name in ("SUMIFS", "COUNTIFS"):
+            return self._conditional_aggregate(name, args)
+        if name == "ABS":
+            return abs(self._number(self._scalar(args[0])))
+        if name in ("AND", "OR"):
+            flags = []
+            for argument in args:
+                value = self._scalar(argument)
+                flags.append(value != "" if isinstance(value, str) else bool(value))
+            return all(flags) if name == "AND" else any(flags)
         if name == "ROUND":
             value = self._number(self._scalar(args[0]))
             digits = int(self._number(self._scalar(args[1])))
