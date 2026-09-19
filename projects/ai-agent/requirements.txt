@@ -1,0 +1,2 @@
+# Only needed for live mode. --dry-run and the whole test suite run without it.
+anthropic>=1.0

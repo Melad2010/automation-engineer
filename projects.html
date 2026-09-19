@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects — Melad Fekry, Automation Engineer</title>
+<meta name="description" content="Four working automation projects with their source and tests: a source-tracked scraper with a QA report, an Excel quote generator, a KPI dashboard, and an AI agent with budgets and rate limits.">
+<link rel="canonical" href="https://melad2010.github.io/automation-engineer/projects.html">
+<meta property="og:title" content="Projects — Melad Fekry, Automation Engineer">
+<meta property="og:description" content="Four working automation projects with their source and tests. Every one runs offline.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://melad2010.github.io/automation-engineer/projects.html">
+<meta property="og:image" content="https://melad2010.github.io/automation-engineer/img/C_scrape_1.jpg">
+<style>
+:root{--navy:#0e2a47;--ink:#141c26;--grey:#606e80;--line:#e3e9f0;--bg:#f5f8fb;--green:#1dbf73;--amber:#f5a623;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.55}
+a{color:var(--navy)}img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{background:var(--navy);color:#fff}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.nav .brand{font-weight:700;letter-spacing:.2px}
+.nav .brand a{color:#fff;text-decoration:none}
+.nav a{color:#c8d2de;text-decoration:none;margin-left:18px;font-size:14px}
+.intro{padding:46px 0 42px}
+.intro h1{font-size:36px;line-height:1.15;margin:0 0 14px}
+.intro p{color:#c8d2de;font-size:17px;margin:0 0 10px;max-width:70ch}
+.intro code{background:rgba(255,255,255,.12);padding:2px 7px;border-radius:5px;font-size:14px}
+section{padding:46px 0;border-bottom:1px solid var(--line)}
+h2{font-size:26px;margin:0 0 8px}.lead{color:var(--grey);margin:0 0 26px;font-size:16px;max-width:75ch}
+.projects{display:grid;gap:22px}
+.project{border:1px solid var(--line);border-radius:14px;padding:24px;background:#fff}
+.project h3{margin:0 0 4px;font-size:21px}
+.project .tag{display:inline-block;background:var(--bg);color:var(--grey);border-radius:20px;padding:3px 12px;font-size:12px;margin:0 6px 10px 0}
+.project .tag.tests{background:#e7f8ef;color:#12784a;font-weight:600}
+.project p{margin:0 0 12px;color:var(--ink)}
+.project ul{margin:0 0 14px;padding-left:20px;color:var(--grey)}
+.project li{margin:5px 0}
+.project pre{background:var(--navy);color:#dce6f2;border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:13px;margin:0 0 14px}
+.project .caught{border-left:3px solid var(--amber);background:#fffaf0;padding:12px 16px;margin:0 0 14px;color:var(--ink);font-size:15px}
+.project .caught b{display:block;margin-bottom:3px}
+.links a{display:inline-block;margin-right:14px;font-weight:600;font-size:15px}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.principles div{background:var(--bg);border-radius:12px;padding:20px}
+.principles h4{margin:0 0 8px;font-size:17px}
+.principles p{margin:0;color:var(--grey);font-size:15px}
+.cta{background:var(--bg)}
+.btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:13px 20px;border-radius:8px;margin:6px 8px 6px 0}
+.btn.alt{background:#fff;color:var(--navy);border:1px solid var(--line)}
+footer{padding:28px 0;color:var(--grey);font-size:14px}
+@media(max-width:800px){.intro h1{font-size:28px}.principles{grid-template-columns:1fr}.nav a{margin-left:10px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <span class="brand"><a href="index.html">Melad Fekry · Automation Engineer</a></span>
+      <nav><a href="index.html#services">Services</a><a href="index.html#how">How it works</a><a href="projects.html">Projects</a><a href="index.html#faq">FAQ</a></nav>
+    </div>
+    <div class="intro">
+      <h1>Four projects, with their source and their tests.</h1>
+      <p>Each one is a working deliverable, not a snippet. Every project runs with no network, no API key and no paid service, so you can clone the repository and see the same output I do.</p>
+      <p>The tests are the point. They cover what goes wrong — a page that 503s mid-crawl, a discount that would sell below cost, a CSV cell reading <code>three</code> instead of <code>3</code>, a model that never stops calling a tool.</p>
+    </div>
+  </div>
+</header>
+
+<section><div class="wrap">
+  <h2>What is in the repository</h2>
+  <p class="lead">204 tests across four projects. Two of them found real bugs in my own code before a client ever saw it; both are written up below, because a portfolio that only shows the parts that worked is not telling you much.</p>
+
+  <div class="projects">
+
+    <div class="project">
+      <h3>Source-tracked scraper with a QA report</h3>
+      <span class="tag">Python, standard library only</span><span class="tag tests">38 tests</span>
+      <p>Walks a paginated listing, de-duplicates it, and writes the dataset next to a report that says how far you can trust it. Every row carries the URL it was read from.</p>
+      <ul>
+        <li>Rows found versus the total the source itself publishes, with the variance stated</li>
+        <li>Duplicates removed, with the colliding key listed so you can overrule the decision</li>
+        <li>Rows missing a required field, named and linked — reported, never guessed</li>
+        <li>Retries 429 and 5xx with exponential backoff, refuses to retry a 404, one request per host per delay</li>
+      </ul>
+      <pre>cd projects/web-scraper-qa
+python3 run.py --start fixtures/page-1.html --out out/</pre>
+      <p class="links"><a href="https://github.com/Melad2010/automation-engineer/tree/main/projects/web-scraper-qa">Source and README →</a></p>
+    </div>
+
+    <div class="project">
+      <h3>Configurable quote generator</h3>
+      <span class="tag">Excel formulas, VBA, Apps Script, Python</span><span class="tag tests">50 tests</span>
+      <p>One catalogue, one set of pricing rules, four implementations — because clients live in Excel, in Google Sheets, and in scripts. Quantity breaks, customer tiers and manual discounts, all capped by a margin floor that says what it refused.</p>
+      <ul>
+        <li>Product, option and tier dropdowns; quantity validation that refuses 0 and 2.5 at entry</li>
+        <li>Pricing logic on protected sheets; cost and margin off the printed customer copy</li>
+        <li>A small Excel formula evaluator runs the generated workbook in CI, so the sheet and the engine cannot drift apart</li>
+      </ul>
+      <div class="caught"><b>What the tests caught</b>The engine rounded the margin-floor cap to two decimals and the sheet did not. Rounding a cap <em>up</em> pushes the line back under the very floor it exists to protect — about 19 cents on a $4,200 pump, on exactly the high-volume orders where margin is thinnest. The cap now keeps full precision and only the printed note rounds.</div>
+      <pre>cd projects/quote-generator
+python3 quote.py --demo
+python3 build_tool.py --out dist/QuoteTool.xlsx</pre>
+      <p class="links"><a href="https://github.com/Melad2010/automation-engineer/tree/main/projects/quote-generator">Source and README →</a></p>
+    </div>
+
+    <div class="project">
+      <h3>Excel KPI dashboard from a CSV</h3>
+      <span class="tag">Python, openpyxl, Excel formulas</span><span class="tag tests">45 tests</span>
+      <p>Six KPI cards, a month selector and three charts, all of them formulas over the data rather than pasted values. Refreshing next month is: paste the new rows, pick the month.</p>
+      <ul>
+        <li>A row that cannot be parsed is quarantined on its own sheet with the line number and the reason — never counted as zero</li>
+        <li>A previous period of zero shows blank, not <code>+100%</code> or infinity</li>
+        <li>The tests execute the workbook's own SUMIFS and card formulas and compare them against the Python engine, month by month</li>
+      </ul>
+      <div class="caught"><b>What the tests caught</b>Margin % was rounded to two decimals before the month-over-month change was taken, while the sheet computed it from the full-precision ratio. The two disagreed by a few hundredths of a point every single month. The engine now keeps the ratio unrounded and only the display rounds.</div>
+      <pre>cd projects/kpi-dashboard
+python3 make_sample_data.py
+python3 build.py --csv sample-sales.csv --out dist/dashboard.xlsx</pre>
+      <p class="links"><a href="https://github.com/Melad2010/automation-engineer/tree/main/projects/kpi-dashboard">Source and README →</a></p>
+    </div>
+
+    <div class="project">
+      <h3>Lead qualification agent, with the guardrails on</h3>
+      <span class="tag">Python, Anthropic API, Claude Opus 5</span><span class="tag tests">71 tests</span>
+      <p>An agent that researches an organisation with tools and returns a schema-validated verdict. The interesting part is not that it calls a model — it is what makes it stop.</p>
+      <ul>
+        <li>Cost, token and request budgets, each stopping the run rather than warning about it</li>
+        <li>A token reserve for the reply that has not arrived yet, so the last request cannot sail past the ceiling</li>
+        <li>Sliding-window rate limit, tool allowlist, per-tool call caps, oversized results truncated</li>
+        <li>Retries 429 and 5xx, never retries a 400; a refusal arrives as HTTP 200 and is checked before any content is read</li>
+        <li>Tools that return <code>found: false</code> rather than inventing a record, and a score that is computed, not estimated</li>
+      </ul>
+      <pre>cd projects/ai-agent
+python3 run.py --dry-run
+python3 run.py --dry-run --budget-usd 0.02   # watch the budget stop it</pre>
+      <p class="links"><a href="https://github.com/Melad2010/automation-engineer/tree/main/projects/ai-agent">Source and README →</a></p>
+    </div>
+
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>What runs through all four</h2>
+  <p class="lead">The same three habits, from twelve years of medical-device engineering where a device that fails quietly is the worst kind.</p>
+  <div class="principles">
+    <div>
+      <h4>Report the gaps, do not fill them</h4>
+      <p>A missing field is listed, not guessed. An unparseable row is quarantined, not counted as zero. A number you cannot trace is worse than one that is missing, because it looks like a fact.</p>
+    </div>
+    <div>
+      <h4>Test the deliverable, not a model of it</h4>
+      <p>The spreadsheets ship as workbooks, so the tests execute the workbooks' own formulas and compare them against the code. Both bugs above were found that way.</p>
+    </div>
+    <div>
+      <h4>Make the failure path the default case</h4>
+      <p>Backoff that refuses to retry a 404. Budgets that stop a run. Validation that names the invalid value. Most of the test effort goes here, because most of the real trouble does.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <h2>Want one of these for your workflow?</h2>
+  <p class="lead">Tell me the workflow, the tools it touches and what a good result looks like. I will tell you honestly whether a simpler fix will do. Orders and payments go through Fiverr, so your money is protected until you approve the work.</p>
+  <a class="btn" href="https://www.fiverr.com/meladfekry" rel="noopener">See services on Fiverr</a>
+  <a class="btn alt" href="https://github.com/Melad2010/automation-engineer" rel="noopener">Browse the repository</a>
+</div></section>
+
+<footer><div class="wrap">Orders, messages and files go through Fiverr only. <a href="https://www.fiverr.com/meladfekry" rel="noopener">fiverr.com/meladfekry</a></div></footer>
+</body>
+</html>

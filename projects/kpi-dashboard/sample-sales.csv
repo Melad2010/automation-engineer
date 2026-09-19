@@ -1,0 +1,490 @@
+date,region,product,channel,units,unit_price,unit_cost
+2025-04-01,Cairo,Centrifugal pump,Online,3,4113.11,3100.0
+2025-04-02,Cairo,Control panel,Online,4,2585.28,1850.0
+2025-04-04,Delta,Control panel,Online,2,2619.36,1850.0
+2025-04-06,Alexandria,Control panel,Distributor,4,2575.78,1850.0
+2025-04-06,Delta,Centrifugal pump,Direct,3,4255.27,3100.0
+2025-04-11,Cairo,Centrifugal pump,Distributor,1,4170.61,3100.0
+2025-04-11,Upper Egypt,Service contract,Direct,1,1478.77,900.0
+2025-04-13,Upper Egypt,Service contract,Direct,1,1439.35,900.0
+2025-04-16,Cairo,Control panel,Direct,1,2583.75,1850.0
+2025-04-18,Alexandria,Screw compressor,Online,1,12074.16,8900.0
+2025-04-18,Delta,Control panel,Distributor,1,2629.16,1850.0
+2025-04-20,Upper Egypt,Centrifugal pump,Direct,1,4078.05,3100.0
+2025-04-22,Alexandria,Service contract,Distributor,2,1415.35,900.0
+2025-04-22,Alexandria,Screw compressor,Direct,4,11740.86,8900.0
+2025-04-22,Cairo,Centrifugal pump,Distributor,2,4208.74,3100.0
+2025-04-23,Delta,Control panel,Direct,2,2616.14,1850.0
+2025-04-24,Cairo,Centrifugal pump,Direct,3,4076.94,3100.0
+2025-04-25,Delta,Service contract,Online,2,1423.32,900.0
+2025-04-26,Cairo,Screw compressor,Distributor,3,11730.78,8900.0
+2025-04-27,Cairo,Control panel,Distributor,2,2682.23,1850.0
+2025-04-28,Alexandria,Centrifugal pump,Distributor,2,4085.35,3100.0
+2025-05-02,Alexandria,Service contract,Direct,3,1406.92,900.0
+2025-05-03,Alexandria,Centrifugal pump,Direct,1,4124.6,3100.0
+2025-05-04,Cairo,Service contract,Distributor,2,1432.43,900.0
+2025-05-04,Cairo,Centrifugal pump,Distributor,1,4221.74,3100.0
+2025-05-05,Delta,Centrifugal pump,Online,4,4163.65,3100.0
+2025-05-06,Cairo,Centrifugal pump,Direct,1,4131.45,3100.0
+2025-05-07,Upper Egypt,Centrifugal pump,Distributor,1,4116.59,3100.0
+2025-05-10,Alexandria,Control panel,Online,3,2680.3,1853.33
+2025-05-10,Cairo,Screw compressor,Direct,4,11493.84,8900.0
+2025-05-12,Delta,Control panel,Distributor,4,2590.3,1853.33
+2025-05-12,Upper Egypt,Screw compressor,Distributor,4,11541.6,8900.0
+2025-05-13,Cairo,Centrifugal pump,Direct,4,4275.84,3100.0
+2025-05-13,Upper Egypt,Screw compressor,Direct,4,11572.36,8900.0
+2025-05-15,Delta,Control panel,Direct,2,2673.7,1853.33
+2025-05-15,Upper Egypt,Centrifugal pump,Direct,4,4132.18,3100.0
+2025-05-17,Delta,Control panel,Direct,4,2656.62,1853.33
+2025-05-19,Alexandria,Screw compressor,Direct,4,12090.34,8900.0
+2025-05-19,Cairo,Centrifugal pump,Distributor,4,4314.09,3100.0
+2025-05-20,Delta,Centrifugal pump,Online,1,4263.42,3100.0
+2025-05-21,Alexandria,Screw compressor,Online,3,12044.45,8900.0
+2025-05-21,Alexandria,Control panel,Direct,3,2688.74,1853.33
+2025-05-21,Cairo,Screw compressor,Direct,1,12041.49,8900.0
+2025-05-21,Cairo,Centrifugal pump,Direct,1,4076.22,3100.0
+2025-05-22,Delta,Control panel,Online,1,2705.99,1853.33
+2025-05-23,Alexandria,Screw compressor,Distributor,3,11478.5,8900.0
+2025-05-23,Delta,Screw compressor,Distributor,2,11565.0,8900.0
+2025-05-24,Alexandria,Service contract,Online,2,1490.94,900.0
+2025-05-27,Cairo,Service contract,Direct,1,1434.97,900.0
+2025-06-04,Alexandria,Control panel,Direct,1,2681.37,1856.66
+2025-06-05,Alexandria,Control panel,Direct,2,2724.21,1856.66
+2025-06-05,Delta,Control panel,Distributor,4,2667.47,1856.66
+2025-06-07,Alexandria,Screw compressor,Online,1,11742.74,8900.0
+2025-06-09,Cairo,Centrifugal pump,Direct,4,4114.5,3100.0
+2025-06-11,Cairo,Screw compressor,Direct,1,11601.29,8900.0
+2025-06-11,Cairo,Centrifugal pump,Direct,1,4310.41,3100.0
+2025-06-11,Delta,Screw compressor,Direct,3,11842.41,8900.0
+2025-06-12,Cairo,Service contract,Distributor,3,1454.89,900.0
+2025-06-13,Cairo,Control panel,Distributor,1,2603.21,1856.66
+2025-06-15,Alexandria,Control panel,Online,2,2667.09,1856.66
+2025-06-16,Alexandria,Screw compressor,Distributor,1,11976.48,8900.0
+2025-06-16,Delta,Control panel,Direct,2,2680.54,1856.66
+2025-06-18,Cairo,Centrifugal pump,Direct,4,4289.98,3100.0
+2025-06-21,Alexandria,Service contract,Direct,4,1434.94,900.0
+2025-06-23,Alexandria,Centrifugal pump,Direct,1,4122.46,3100.0
+2025-06-23,Alexandria,Screw compressor,Distributor,1,12067.96,8900.0
+2025-06-24,Cairo,Screw compressor,Distributor,4,11547.47,8900.0
+2025-06-24,Delta,Service contract,Direct,4,1453.42,900.0
+2025-06-26,Cairo,Service contract,Direct,2,1417.73,900.0
+2025-06-27,Cairo,Service contract,Direct,4,1463.21,900.0
+2025-06-28,Alexandria,Service contract,Direct,4,1472.56,900.0
+2025-06-28,Cairo,Control panel,Distributor,2,2666.1,1856.66
+2025-06-28,Cairo,Service contract,Direct,1,1469.16,900.0
+2025-06-28,Upper Egypt,Screw compressor,Direct,4,11446.16,8900.0
+2025-07-01,Cairo,Service contract,Direct,4,1470.79,900.0
+2025-07-05,Alexandria,Service contract,Distributor,2,1485.04,900.0
+2025-07-05,Cairo,Centrifugal pump,Distributor,3,4310.6,3100.0
+2025-07-05,Upper Egypt,Centrifugal pump,Direct,4,4155.38,3100.0
+2025-07-07,Delta,Centrifugal pump,Distributor,3,4206.37,3100.0
+2025-07-08,Alexandria,Screw compressor,Distributor,3,12133.29,8900.0
+2025-07-08,Cairo,Centrifugal pump,Direct,2,4247.29,3100.0
+2025-07-09,Cairo,Centrifugal pump,Distributor,1,4303.57,3100.0
+2025-07-11,Alexandria,Control panel,Online,2,2603.53,1859.99
+2025-07-11,Alexandria,Service contract,Direct,3,1439.5,900.0
+2025-07-12,Cairo,Screw compressor,Direct,1,12048.76,8900.0
+2025-07-12,Delta,Screw compressor,Distributor,2,11749.39,8900.0
+2025-07-12,Delta,Service contract,Online,3,1425.21,900.0
+2025-07-15,Upper Egypt,Service contract,Online,1,1421.38,900.0
+2025-07-16,Cairo,Screw compressor,Direct,1,11524.29,8900.0
+2025-07-17,Cairo,Service contract,Direct,2,1465.24,900.0
+2025-07-24,Alexandria,Service contract,Direct,2,1408.21,900.0
+2025-08-01,Delta,Service contract,Distributor,4,1421.69,900.0
+2025-08-02,Cairo,Control panel,Direct,3,2621.83,1863.32
+2025-08-07,Alexandria,Screw compressor,Direct,2,12140.84,8900.0
+2025-08-07,Cairo,Centrifugal pump,Direct,2,4131.04,3100.0
+2025-08-07,Delta,Centrifugal pump,Distributor,2,4307.27,3100.0
+2025-08-07,Delta,Screw compressor,Distributor,1,12048.93,8900.0
+2026-13-05,Cairo,Control panel,Direct,2,2650,1850
+2025-08-08,Cairo,Centrifugal pump,Distributor,4,4172.93,3100.0
+2025-08-09,Alexandria,Centrifugal pump,Distributor,3,4151.17,3100.0
+2025-08-09,Cairo,Control panel,Direct,4,2671.8,1863.32
+2025-08-09,Cairo,Centrifugal pump,Distributor,4,4192.57,3100.0
+2025-08-09,Upper Egypt,Centrifugal pump,Online,2,4302.96,3100.0
+2025-08-11,Alexandria,Control panel,Distributor,4,2635.16,1863.32
+2025-08-11,Delta,Centrifugal pump,Distributor,3,4195.44,3100.0
+2025-08-12,Alexandria,Control panel,Distributor,3,2656.24,1863.32
+2025-08-12,Cairo,Control panel,Direct,1,2626.63,1863.32
+2025-08-12,Delta,Service contract,Direct,2,1417.19,900.0
+2025-08-13,Delta,Service contract,Online,3,1479.36,900.0
+2025-08-14,Alexandria,Screw compressor,Direct,3,11699.97,8900.0
+2025-08-14,Cairo,Service contract,Direct,4,1478.25,900.0
+2025-08-15,Alexandria,Control panel,Online,4,2694.35,1863.32
+2025-08-15,Alexandria,Service contract,Direct,1,1442.44,900.0
+2025-08-15,Cairo,Control panel,Distributor,2,2703.92,1863.32
+2025-08-18,Alexandria,Screw compressor,Distributor,1,12032.88,8900.0
+2025-08-21,Delta,Control panel,Direct,3,2637.4,1863.32
+2025-08-22,Cairo,Control panel,Online,1,2676.08,1863.32
+2025-08-23,Cairo,Control panel,Direct,3,2619.66,1863.32
+2025-08-25,Delta,Centrifugal pump,Online,2,4104.68,3100.0
+2025-08-26,Cairo,Screw compressor,Online,3,12105.83,8900.0
+2025-08-27,Alexandria,Screw compressor,Direct,4,11952.72,8900.0
+2025-08-27,Cairo,Screw compressor,Direct,2,11509.71,8900.0
+2025-09-01,Cairo,Service contract,Direct,2,1432.76,900.0
+2025-09-01,Delta,Screw compressor,Online,2,11784.11,8900.0
+2025-09-05,Cairo,Centrifugal pump,Direct,1,4251.54,3100.0
+2025-09-05,Cairo,Centrifugal pump,Distributor,2,4077.48,3100.0
+2025-09-09,Delta,Centrifugal pump,Direct,2,4182.75,3100.0
+2025-09-10,Cairo,Control panel,Direct,4,2679.54,1866.65
+2025-09-11,Alexandria,Screw compressor,Distributor,2,11612.04,8900.0
+2025-09-11,Cairo,Centrifugal pump,Direct,1,4111.4,3100.0
+2025-09-11,Cairo,Service contract,Direct,1,1482.14,900.0
+2025-09-11,Upper Egypt,Service contract,Direct,3,1458.8,900.0
+2025-09-15,Alexandria,Service contract,Distributor,1,1419.25,900.0
+2025-09-15,Alexandria,Centrifugal pump,Distributor,3,4170.73,3100.0
+2025-09-17,Alexandria,Centrifugal pump,Online,2,4280.97,3100.0
+2025-09-24,Alexandria,Screw compressor,Online,1,11745.37,8900.0
+2025-09-24,Delta,Service contract,Direct,2,1421.63,900.0
+2025-09-27,Cairo,Screw compressor,Online,1,11685.03,8900.0
+2025-09-27,Delta,Control panel,Direct,2,2628.33,1866.65
+2025-09-28,Alexandria,Centrifugal pump,Direct,1,4190.44,3100.0
+2025-09-28,Alexandria,Control panel,Direct,1,2720.13,1866.65
+2025-09-28,Cairo,Service contract,Distributor,2,1440.26,900.0
+2025-09-28,Cairo,Service contract,Direct,4,1412.91,900.0
+2025-10-01,Cairo,Control panel,Direct,4,2621.16,1869.98
+2025-10-03,Cairo,Centrifugal pump,Distributor,1,4199.39,3100.0
+2025-10-03,Delta,Centrifugal pump,Distributor,2,4253.49,3100.0
+2025-10-03,Upper Egypt,Service contract,Distributor,2,1483.84,900.0
+2025-10-04,Cairo,Control panel,Distributor,2,2663.78,1869.98
+2025-10-09,Upper Egypt,Centrifugal pump,Distributor,2,4290.87,3100.0
+2025-10-11,Cairo,Centrifugal pump,Distributor,4,4219.31,3100.0
+2025-10-11,Cairo,Service contract,Online,4,1481.49,900.0
+2025-10-11,Cairo,Centrifugal pump,Online,4,4296.94,3100.0
+2025-10-13,Alexandria,Service contract,Online,2,1432.82,900.0
+2025-10-13,Alexandria,Screw compressor,Direct,2,11447.41,8900.0
+2025-10-13,Cairo,Service contract,Direct,4,1489.42,900.0
+2025-10-13,Delta,Screw compressor,Distributor,3,11601.77,8900.0
+2025-10-13,Upper Egypt,Screw compressor,Distributor,3,11733.48,8900.0
+2025-10-14,Delta,Screw compressor,Distributor,3,11576.15,8900.0
+2025-10-14,Upper Egypt,Centrifugal pump,Direct,2,4150.93,3100.0
+2025-10-15,Alexandria,Service contract,Direct,4,1435.28,900.0
+2025-10-16,Alexandria,Screw compressor,Distributor,3,11591.13,8900.0
+2025-10-19,Alexandria,Screw compressor,Distributor,4,12075.48,8900.0
+2025-10-19,Cairo,Control panel,Direct,1,2608.9,1869.98
+2025-10-21,Cairo,Control panel,Direct,1,2677.92,1869.98
+2025-10-22,Alexandria,Control panel,Distributor,3,2658.27,1869.98
+2025-10-22,Cairo,Control panel,Distributor,2,2597.77,1869.98
+2025-10-22,Cairo,Screw compressor,Direct,1,11839.53,8900.0
+2025-10-23,Delta,Centrifugal pump,Distributor,4,4246.21,3100.0
+2025-10-23,Delta,Screw compressor,Direct,1,11955.11,8900.0
+2025-10-24,Alexandria,Control panel,Distributor,2,2599.52,1869.98
+2025-10-24,Delta,Service contract,Distributor,3,1450.39,900.0
+2025-10-26,Cairo,Centrifugal pump,Distributor,3,4234.25,3100.0
+2025-11-01,Cairo,Screw compressor,Distributor,2,11918.04,8900.0
+2025-11-02,Delta,Control panel,Direct,3,2600.51,1873.31
+2025-11-04,Delta,Control panel,Distributor,1,2598.25,1873.31
+2025-11-06,Alexandria,Service contract,Direct,4,1433.96,900.0
+2025-11-06,Alexandria,Screw compressor,Distributor,2,11592.41,8900.0
+2025-11-06,Cairo,Screw compressor,Distributor,3,11936.61,8900.0
+2025-11-06,Cairo,Control panel,Direct,1,2712.74,1873.31
+2025-11-07,Alexandria,Control panel,Direct,1,2586.25,1873.31
+2025-11-07,Alexandria,Screw compressor,Direct,4,12116.17,8900.0
+2025-11-07,Upper Egypt,Control panel,Direct,2,2633.45,1873.31
+2025-11-08,Alexandria,Screw compressor,Direct,4,11947.86,8900.0
+2025-11-09,Alexandria,Service contract,Distributor,1,1431.2,900.0
+2025-11-09,Cairo,Service contract,Distributor,2,1452.73,900.0
+2025-11-10,Alexandria,Service contract,Online,1,1421.16,900.0
+2025-11-11,Cairo,Screw compressor,Distributor,1,11458.79,8900.0
+2025-11-14,Upper Egypt,Service contract,Distributor,4,1459.89,900.0
+2025-11-15,Cairo,Screw compressor,Direct,1,11934.56,8900.0
+2025-11-15,Upper Egypt,Control panel,Direct,1,2660.3,1873.31
+2025-11-17,Cairo,Screw compressor,Online,2,11748.94,8900.0
+2025-11-17,Delta,Service contract,Distributor,3,1463.89,900.0
+2025-11-18,Cairo,Centrifugal pump,Direct,3,4248.11,3100.0
+2025-11-20,Alexandria,Control panel,Online,3,2576.58,1873.31
+2026-04-11,Delta,Centrifugal pump,Online,three,4200,3100
+2025-11-20,Cairo,Centrifugal pump,Direct,1,4148.05,3100.0
+2025-11-21,Cairo,Control panel,Distributor,3,2571.76,1873.31
+2025-11-21,Delta,Screw compressor,Direct,3,11835.11,8900.0
+2025-11-24,Delta,Service contract,Direct,2,1488.92,900.0
+2025-11-26,Cairo,Control panel,Direct,1,2705.89,1873.31
+2025-11-27,Cairo,Control panel,Direct,3,2712.09,1873.31
+2025-11-28,Delta,Control panel,Distributor,3,2656.03,1873.31
+2025-12-02,Cairo,Centrifugal pump,Direct,2,4295.68,3100.0
+2025-12-04,Cairo,Service contract,Direct,2,1467.14,900.0
+2025-12-05,Alexandria,Centrifugal pump,Distributor,4,4157.08,3100.0
+2025-12-06,Cairo,Service contract,Direct,1,1485.61,900.0
+2025-12-09,Upper Egypt,Centrifugal pump,Online,3,4225.0,3100.0
+2025-12-10,Cairo,Control panel,Online,3,2663.9,1876.64
+2025-12-10,Delta,Centrifugal pump,Online,2,4158.56,3100.0
+2025-12-10,Upper Egypt,Centrifugal pump,Direct,1,4275.45,3100.0
+2025-12-12,Delta,Service contract,Direct,1,1432.25,900.0
+2025-12-13,Cairo,Screw compressor,Direct,3,12055.96,8900.0
+2025-12-14,Upper Egypt,Centrifugal pump,Direct,2,4315.56,3100.0
+2025-12-15,Cairo,Screw compressor,Distributor,4,11912.5,8900.0
+2025-12-17,Alexandria,Control panel,Direct,1,2712.23,1876.64
+2025-12-17,Delta,Control panel,Distributor,1,2590.66,1876.64
+2025-12-21,Delta,Control panel,Distributor,1,2671.14,1876.64
+2025-12-24,Delta,Screw compressor,Distributor,4,11515.56,8900.0
+2025-12-25,Alexandria,Service contract,Distributor,3,1488.23,900.0
+2025-12-26,Alexandria,Control panel,Direct,3,2715.71,1876.64
+2025-12-26,Cairo,Screw compressor,Direct,2,11990.63,8900.0
+2025-12-27,Cairo,Control panel,Distributor,3,2662.71,1876.64
+2026-01-01,Cairo,Control panel,Direct,3,2624.46,1879.97
+2026-01-02,Alexandria,Control panel,Direct,4,2643.66,1879.97
+2026-01-03,Alexandria,Screw compressor,Direct,2,11835.85,8900.0
+2026-01-03,Delta,Screw compressor,Direct,2,11561.02,8900.0
+2026-01-06,Cairo,Screw compressor,Direct,2,11531.59,8900.0
+2026-01-07,Cairo,Service contract,Distributor,1,1443.88,900.0
+2026-01-10,Delta,Centrifugal pump,Direct,4,4244.62,3100.0
+2026-01-14,Cairo,Centrifugal pump,Direct,1,4243.35,3100.0
+2026-01-14,Cairo,Service contract,Distributor,2,1420.93,900.0
+2026-01-15,Cairo,Service contract,Direct,4,1410.73,900.0
+2026-01-16,Alexandria,Centrifugal pump,Online,3,4266.08,3100.0
+2026-01-16,Cairo,Screw compressor,Direct,4,12026.38,8900.0
+2026-01-16,Delta,Centrifugal pump,Distributor,2,4281.32,3100.0
+2026-01-17,Alexandria,Service contract,Direct,2,1432.26,900.0
+2026-01-17,Alexandria,Screw compressor,Distributor,1,11713.19,8900.0
+2026-01-18,Cairo,Control panel,Direct,1,2683.51,1879.97
+2026-01-18,Upper Egypt,Control panel,Direct,2,2647.59,1879.97
+2026-01-20,Cairo,Service contract,Distributor,3,1470.28,900.0
+2026-01-20,Cairo,Control panel,Direct,1,2606.07,1879.97
+2026-01-21,Cairo,Service contract,Direct,4,1462.96,900.0
+2026-01-22,Alexandria,Screw compressor,Distributor,1,11524.67,8900.0
+2026-01-22,Upper Egypt,Centrifugal pump,Direct,2,4076.35,3100.0
+2026-01-23,Alexandria,Control panel,Online,1,2696.17,1879.97
+2026-01-25,Upper Egypt,Screw compressor,Direct,1,11944.09,8900.0
+2026-01-27,Delta,Centrifugal pump,Online,3,4114.19,3100.0
+2026-01-27,Upper Egypt,Control panel,Direct,2,2576.78,1879.97
+2026-02-03,Delta,Centrifugal pump,Online,3,4197.76,3100.0
+2026-02-04,Cairo,Service contract,Direct,3,1406.6,900.0
+2026-02-04,Cairo,Control panel,Direct,2,2663.35,1883.3
+2026-02-08,Alexandria,Control panel,Online,3,2581.59,1883.3
+2026-02-09,Cairo,Centrifugal pump,Direct,3,4273.54,3100.0
+2026-02-09,Cairo,Control panel,Direct,4,2659.56,1883.3
+2026-02-10,Alexandria,Service contract,Direct,1,1484.12,900.0
+2026-02-12,Cairo,Centrifugal pump,Distributor,2,4230.09,3100.0
+2026-02-12,Upper Egypt,Control panel,Online,1,2620.55,1883.3
+2026-02-13,Cairo,Control panel,Distributor,4,2604.2,1883.3
+2026-02-13,Delta,Centrifugal pump,Distributor,2,4107.69,3100.0
+2026-02-14,Cairo,Control panel,Direct,1,2682.82,1883.3
+2026-02-14,Cairo,Screw compressor,Direct,3,12080.98,8900.0
+2026-02-15,Cairo,Centrifugal pump,Direct,1,4201.1,3100.0
+2026-02-16,Delta,Control panel,Direct,1,2714.69,1883.3
+2026-02-17,Alexandria,Centrifugal pump,Distributor,2,4298.94,3100.0
+2026-02-18,Alexandria,Screw compressor,Direct,2,12086.0,8900.0
+2026-02-18,Cairo,Service contract,Distributor,2,1409.9,900.0
+2026-02-18,Upper Egypt,Control panel,Direct,4,2725.86,1883.3
+2026-02-20,Cairo,Service contract,Direct,2,1455.78,900.0
+2026-02-23,Cairo,Centrifugal pump,Direct,2,4208.91,3100.0
+2026-02-23,Delta,Service contract,Online,2,1454.9,900.0
+2026-02-25,Delta,Control panel,Distributor,3,2643.33,1883.3
+2026-02-25,Upper Egypt,Screw compressor,Direct,4,12037.16,8900.0
+2026-02-27,Delta,Service contract,Direct,2,1432.46,900.0
+2026-02-28,Cairo,Centrifugal pump,Direct,4,4246.71,3100.0
+2026-03-02,Alexandria,Centrifugal pump,Direct,1,4270.59,3100.0
+2026-03-04,Alexandria,Service contract,Online,4,1472.7,900.0
+2026-03-06,Cairo,Service contract,Distributor,2,1436.42,900.0
+2026-03-06,Cairo,Service contract,Direct,1,1439.66,900.0
+2026-03-06,Cairo,Control panel,Distributor,3,2642.4,1886.63
+2026-03-07,Cairo,Control panel,Distributor,2,2713.23,1886.63
+2026-03-07,Cairo,Screw compressor,Distributor,4,11794.57,8900.0
+2026-03-08,Upper Egypt,Screw compressor,Direct,1,11807.4,8900.0
+2026-03-10,Cairo,Screw compressor,Direct,3,12120.05,8900.0
+2026-03-11,Delta,Service contract,Distributor,3,1438.5,900.0
+2026-03-14,Alexandria,Screw compressor,Direct,3,11763.48,8900.0
+2026-03-16,Alexandria,Screw compressor,Distributor,3,11630.24,8900.0
+2026-03-16,Delta,Service contract,Distributor,2,1419.03,900.0
+2026-03-17,Alexandria,Screw compressor,Online,4,11987.51,8900.0
+2026-03-17,Alexandria,Centrifugal pump,Online,4,4099.62,3100.0
+2026-03-17,Cairo,Centrifugal pump,Direct,2,4257.46,3100.0
+2026-03-18,Delta,Screw compressor,Distributor,4,11981.49,8900.0
+2026-03-19,Cairo,Centrifugal pump,Online,3,4272.49,3100.0
+2026-05-02,,Service contract,Direct,1,1450,900
+2026-03-19,Delta,Control panel,Distributor,4,2724.28,1886.63
+2026-03-22,Alexandria,Control panel,Distributor,1,2713.96,1886.63
+2026-03-22,Delta,Control panel,Online,1,2677.64,1886.63
+2026-03-24,Alexandria,Control panel,Direct,3,2697.14,1886.63
+2026-03-24,Delta,Control panel,Direct,1,2684.8,1886.63
+2026-03-25,Cairo,Screw compressor,Direct,3,11490.85,8900.0
+2026-03-26,Cairo,Screw compressor,Direct,1,11700.23,8900.0
+2026-03-26,Cairo,Screw compressor,Direct,1,12043.19,8900.0
+2026-04-03,Cairo,Centrifugal pump,Distributor,4,4223.07,3100.0
+2026-04-03,Cairo,Service contract,Distributor,2,1424.73,900.0
+2026-04-04,Upper Egypt,Screw compressor,Online,1,11804.98,8900.0
+2026-04-05,Cairo,Screw compressor,Distributor,1,11953.48,8900.0
+2026-04-05,Delta,Service contract,Online,1,1421.55,900.0
+2026-04-06,Delta,Centrifugal pump,Direct,1,4093.4,3100.0
+2026-04-07,Upper Egypt,Service contract,Direct,2,1478.28,900.0
+2026-04-09,Cairo,Control panel,Online,4,2645.96,1889.96
+2026-04-09,Delta,Centrifugal pump,Distributor,3,4283.27,3100.0
+2026-04-09,Upper Egypt,Service contract,Direct,2,1451.39,900.0
+2026-04-11,Alexandria,Screw compressor,Distributor,3,12148.56,8900.0
+2026-04-11,Cairo,Service contract,Distributor,2,1472.81,900.0
+2026-04-12,Alexandria,Control panel,Distributor,1,2586.2,1889.96
+2026-04-14,Alexandria,Centrifugal pump,Online,3,4206.87,3100.0
+2026-04-15,Alexandria,Service contract,Direct,4,1464.81,900.0
+2026-04-17,Alexandria,Service contract,Distributor,4,1440.56,900.0
+2026-04-18,Alexandria,Screw compressor,Direct,2,11641.13,8900.0
+2026-04-19,Cairo,Screw compressor,Distributor,1,12000.58,8900.0
+2026-04-19,Delta,Service contract,Distributor,4,1410.52,900.0
+2026-04-19,Delta,Service contract,Direct,3,1481.66,900.0
+2026-04-20,Alexandria,Service contract,Distributor,3,1458.1,900.0
+2026-04-20,Cairo,Screw compressor,Direct,1,11720.31,8900.0
+2026-04-20,Cairo,Control panel,Direct,4,2721.08,1889.96
+2026-04-21,Alexandria,Centrifugal pump,Direct,1,4162.37,3100.0
+2026-04-21,Delta,Service contract,Distributor,3,1443.53,900.0
+2026-04-22,Cairo,Centrifugal pump,Direct,1,4265.55,3100.0
+2026-04-23,Cairo,Centrifugal pump,Online,4,4130.27,3100.0
+2026-04-23,Delta,Screw compressor,Direct,1,11676.57,8900.0
+2026-04-25,Cairo,Service contract,Direct,4,1422.06,900.0
+2026-04-25,Cairo,Centrifugal pump,Online,3,4294.03,3100.0
+2026-04-27,Delta,Service contract,Direct,4,1450.59,900.0
+2026-05-01,Alexandria,Service contract,Direct,2,1440.16,900.0
+2026-05-03,Alexandria,Centrifugal pump,Direct,3,4269.92,3100.0
+2026-05-03,Cairo,Service contract,Direct,1,1456.69,900.0
+2026-05-03,Delta,Control panel,Distributor,2,2685.83,1893.29
+2026-05-04,Cairo,Control panel,Direct,3,2701.36,1893.29
+2026-05-04,Delta,Screw compressor,Direct,4,11653.0,8900.0
+2026-05-07,Cairo,Centrifugal pump,Direct,2,4119.15,3100.0
+2026-05-08,Cairo,Centrifugal pump,Distributor,1,4075.92,3100.0
+2026-05-09,Cairo,Service contract,Direct,1,1413.33,900.0
+2026-05-09,Upper Egypt,Screw compressor,Online,4,11759.69,8900.0
+2026-05-12,Cairo,Control panel,Online,1,2722.94,1893.29
+2026-05-12,Delta,Centrifugal pump,Direct,3,4231.81,3100.0
+2026-05-13,Alexandria,Service contract,Direct,4,1414.42,900.0
+2026-05-13,Cairo,Centrifugal pump,Direct,2,4118.02,3100.0
+2026-05-13,Cairo,Control panel,Direct,3,2624.95,1893.29
+2026-05-13,Delta,Control panel,Direct,1,2699.82,1893.29
+2026-05-15,Cairo,Centrifugal pump,Direct,4,4298.72,3100.0
+2026-05-15,Upper Egypt,Centrifugal pump,Direct,1,4298.07,3100.0
+2026-05-18,Delta,Service contract,Distributor,4,1478.23,900.0
+2026-05-19,Cairo,Service contract,Direct,3,1430.13,900.0
+2026-05-20,Delta,Screw compressor,Distributor,2,11652.67,8900.0
+2026-05-21,Cairo,Service contract,Distributor,4,1409.37,900.0
+2026-05-22,Alexandria,Centrifugal pump,Direct,1,4136.65,3100.0
+2026-05-23,Alexandria,Screw compressor,Direct,1,11541.22,8900.0
+2026-05-23,Upper Egypt,Screw compressor,Distributor,2,12010.25,8900.0
+2026-05-24,Alexandria,Screw compressor,Direct,1,12140.31,8900.0
+2026-05-27,Upper Egypt,Control panel,Distributor,2,2684.62,1893.29
+2026-05-28,Cairo,Service contract,Online,2,1438.28,900.0
+2026-06-01,Cairo,Service contract,Direct,2,1437.24,900.0
+2026-06-03,Alexandria,Centrifugal pump,Direct,3,4308.46,3100.0
+2026-06-03,Cairo,Screw compressor,Direct,1,11643.11,8900.0
+2026-06-06,Cairo,Centrifugal pump,Online,4,4154.18,3100.0
+2026-06-07,Cairo,Screw compressor,Online,2,11539.4,8900.0
+2026-06-08,Delta,Screw compressor,Direct,3,11812.48,8900.0
+2026-06-09,Alexandria,Control panel,Direct,3,2724.68,1896.62
+2026-06-09,Alexandria,Centrifugal pump,Direct,2,4312.12,3100.0
+2026-06-10,Alexandria,Control panel,Direct,3,2690.01,1896.62
+2026-06-10,Cairo,Screw compressor,Direct,1,11660.1,8900.0
+2026-06-10,Cairo,Centrifugal pump,Direct,3,4247.06,3100.0
+2026-06-10,Cairo,Service contract,Distributor,3,1472.72,900.0
+2026-06-11,Cairo,Screw compressor,Distributor,4,11471.92,8900.0
+2026-06-11,Delta,Screw compressor,Direct,1,11769.37,8900.0
+2026-06-13,Alexandria,Centrifugal pump,Distributor,1,4136.46,3100.0
+2026-06-15,Upper Egypt,Service contract,Direct,3,1429.82,900.0
+2026-06-16,Alexandria,Centrifugal pump,Direct,2,4148.52,3100.0
+2026-06-16,Delta,Screw compressor,Direct,1,11776.14,8900.0
+2026-06-17,Cairo,Centrifugal pump,Direct,3,4075.43,3100.0
+2026-06-20,Alexandria,Screw compressor,Direct,3,11881.73,8900.0
+2026-06-21,Cairo,Screw compressor,Distributor,4,11698.4,8900.0
+2026-06-22,Delta,Control panel,Distributor,1,2603.91,1896.62
+2026-06-23,Delta,Control panel,Direct,3,2653.47,1896.62
+2026-06-24,Alexandria,Screw compressor,Direct,4,12016.26,8900.0
+2026-06-25,Cairo,Service contract,Distributor,3,1412.45,900.0
+2026-07-01,Cairo,Service contract,Direct,1,1459.6,900.0
+2026-07-02,Alexandria,Control panel,Online,3,2574.84,1899.95
+2026-07-02,Cairo,Control panel,Direct,3,2721.79,1899.95
+2026-07-03,Cairo,Centrifugal pump,Direct,1,4139.44,3100.0
+2026-07-03,Cairo,Service contract,Distributor,1,1448.2,900.0
+2026-06-18,Cairo,Screw compressor,Distributor,0,11800,8900
+2026-07-03,Delta,Control panel,Direct,3,2597.35,1899.95
+2026-07-03,Upper Egypt,Control panel,Online,3,2617.74,1899.95
+2026-07-05,Cairo,Screw compressor,Direct,2,12008.01,8900.0
+2026-07-06,Alexandria,Service contract,Direct,3,1408.56,900.0
+2026-07-06,Cairo,Centrifugal pump,Distributor,4,4238.81,3100.0
+2026-07-06,Cairo,Centrifugal pump,Direct,4,4193.83,3100.0
+2026-07-07,Cairo,Service contract,Direct,1,1446.92,900.0
+2026-07-07,Cairo,Centrifugal pump,Distributor,4,4158.9,3100.0
+2026-07-07,Upper Egypt,Screw compressor,Distributor,4,11803.45,8900.0
+2026-07-10,Delta,Service contract,Distributor,4,1477.95,900.0
+2026-07-13,Delta,Service contract,Direct,2,1460.22,900.0
+2026-07-16,Alexandria,Screw compressor,Direct,1,11859.56,8900.0
+2026-07-16,Alexandria,Centrifugal pump,Online,2,4238.51,3100.0
+2026-07-16,Alexandria,Centrifugal pump,Distributor,1,4098.88,3100.0
+2026-07-16,Cairo,Control panel,Direct,3,2596.5,1899.95
+2026-07-16,Upper Egypt,Control panel,Online,2,2710.8,1899.95
+2026-07-18,Alexandria,Screw compressor,Online,1,11593.43,8900.0
+2026-07-18,Cairo,Centrifugal pump,Distributor,2,4256.64,3100.0
+2026-07-19,Alexandria,Control panel,Distributor,3,2585.43,1899.95
+2026-07-19,Cairo,Screw compressor,Direct,2,11990.8,8900.0
+2026-07-19,Delta,Service contract,Direct,1,1490.27,900.0
+2026-07-20,Alexandria,Screw compressor,Distributor,1,11540.02,8900.0
+2026-07-20,Delta,Control panel,Direct,4,2603.8,1899.95
+2026-07-21,Cairo,Screw compressor,Online,2,12030.46,8900.0
+2026-07-22,Cairo,Screw compressor,Direct,1,11821.08,8900.0
+2026-07-23,Delta,Screw compressor,Distributor,2,12018.02,8900.0
+2026-07-25,Delta,Control panel,Direct,1,2721.77,1899.95
+2026-07-26,Delta,Screw compressor,Direct,1,11523.53,8900.0
+2026-07-26,Delta,Screw compressor,Distributor,4,11972.82,8900.0
+2026-08-02,Cairo,Control panel,Direct,3,2596.93,1903.28
+2026-08-02,Cairo,Service contract,Distributor,3,1471.99,900.0
+2026-08-03,Alexandria,Service contract,Online,4,1444.92,900.0
+2026-08-04,Cairo,Control panel,Direct,1,2667.33,1903.28
+2026-08-04,Delta,Service contract,Direct,3,1463.31,900.0
+2026-08-04,Delta,Centrifugal pump,Distributor,1,4284.5,3100.0
+2026-08-05,Cairo,Control panel,Direct,2,2669.74,1903.28
+2026-08-05,Delta,Service contract,Direct,4,1492.94,900.0
+2026-08-07,Cairo,Control panel,Distributor,4,2626.71,1903.28
+2026-08-08,Delta,Service contract,Direct,4,1462.0,900.0
+2026-08-08,Delta,Screw compressor,Direct,2,11973.51,8900.0
+2026-08-10,Delta,Control panel,Direct,3,2648.16,1903.28
+2026-08-11,Cairo,Service contract,Distributor,3,1481.29,900.0
+2026-08-11,Delta,Control panel,Direct,1,2647.48,1903.28
+2026-08-11,Delta,Control panel,Online,4,2625.37,1903.28
+2026-08-11,Upper Egypt,Service contract,Distributor,1,1416.52,900.0
+2026-08-12,Alexandria,Screw compressor,Direct,2,11883.91,8900.0
+2026-08-12,Delta,Screw compressor,Direct,3,11849.17,8900.0
+2026-08-13,Cairo,Service contract,Online,1,1455.0,900.0
+2026-08-14,Cairo,Service contract,Direct,3,1435.72,900.0
+2026-08-15,Upper Egypt,Control panel,Online,2,2656.88,1903.28
+2026-08-16,Alexandria,Control panel,Distributor,2,2660.42,1903.28
+2026-08-18,Cairo,Screw compressor,Direct,1,11713.25,8900.0
+2026-08-18,Delta,Screw compressor,Direct,2,11879.23,8900.0
+2026-08-19,Cairo,Service contract,Distributor,4,1470.47,900.0
+2026-08-20,Alexandria,Control panel,Direct,2,2606.5,1903.28
+2026-08-21,Alexandria,Control panel,Direct,3,2699.12,1903.28
+2026-08-25,Alexandria,Service contract,Direct,1,1480.84,900.0
+2026-08-25,Alexandria,Centrifugal pump,Direct,1,4254.37,3100.0
+2026-08-25,Cairo,Control panel,Distributor,4,2584.28,1903.28
+2026-08-26,Cairo,Control panel,Direct,1,2717.72,1903.28
+2026-08-26,Cairo,Centrifugal pump,Distributor,1,4286.13,3100.0
+2026-08-28,Alexandria,Service contract,Direct,3,1444.26,900.0
+2026-08-28,Cairo,Centrifugal pump,Distributor,2,4160.5,3100.0
+2026-08-28,Cairo,Screw compressor,Direct,1,11893.66,8900.0
+2026-08-28,Upper Egypt,Centrifugal pump,Distributor,2,4193.78,3100.0
+2026-09-01,Alexandria,Service contract,Direct,3,1437.91,900.0
+2026-09-02,Alexandria,Screw compressor,Distributor,4,11821.47,8900.0
+2026-09-02,Delta,Control panel,Distributor,4,2589.7,1906.61
+2026-09-03,Delta,Service contract,Online,3,1474.51,900.0
+2026-09-04,Alexandria,Service contract,Direct,3,1408.72,900.0
+2026-09-04,Cairo,Service contract,Distributor,1,1454.6,900.0
+2026-09-04,Delta,Control panel,Direct,4,2671.29,1906.61
+2026-09-05,Alexandria,Screw compressor,Distributor,4,11665.25,8900.0
+2026-09-05,Alexandria,Control panel,Distributor,4,2608.23,1906.61
+2026-09-05,Cairo,Screw compressor,Distributor,3,11524.79,8900.0
+2026-09-06,Alexandria,Service contract,Distributor,3,1451.4,900.0
+2026-09-06,Delta,Service contract,Distributor,1,1462.32,900.0
+2026-09-08,Cairo,Screw compressor,Direct,4,11547.27,8900.0
+2026-09-10,Cairo,Centrifugal pump,Online,3,4308.11,3100.0
+2026-09-10,Cairo,Control panel,Direct,1,2626.5,1906.61
+2026-09-11,Cairo,Control panel,Distributor,4,2595.87,1906.61
+2026-09-12,Cairo,Control panel,Direct,1,2671.64,1906.61
+2026-09-12,Upper Egypt,Screw compressor,Direct,2,11938.55,8900.0
+2026-09-12,Upper Egypt,Control panel,Direct,4,2716.05,1906.61
+2026-09-14,Delta,Screw compressor,Online,4,11574.64,8900.0
+2026-09-15,Cairo,Service contract,Distributor,1,1465.27,900.0
+2026-09-16,Cairo,Service contract,Online,1,1416.36,900.0
+2026-09-16,Cairo,Screw compressor,Direct,2,11597.19,8900.0
+2026-09-20,Delta,Screw compressor,Distributor,4,11659.69,8900.0
+2026-09-22,Delta,Service contract,Direct,3,1461.01,900.0
+2026-09-22,Upper Egypt,Screw compressor,Direct,3,11561.69,8900.0
+2026-09-23,Cairo,Control panel,Online,4,2668.3,1906.61
+2026-09-23,Delta,Centrifugal pump,Distributor,4,4271.83,3100.0
+2026-09-24,Alexandria,Service contract,Online,1,1492.51,900.0
+2026-09-24,Alexandria,Service contract,Direct,4,1433.61,900.0
+2026-09-24,Cairo,Centrifugal pump,Direct,4,4157.98,3100.0
+2026-09-25,Alexandria,Control panel,Distributor,3,2637.69,1906.61
+2026-09-28,Cairo,Centrifugal pump,Distributor,4,4108.45,3100.0

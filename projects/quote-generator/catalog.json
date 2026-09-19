@@ -1,0 +1,68 @@
+{
+  "currency": "USD",
+  "vat_percent": 14.0,
+  "quote_valid_days": 30,
+  "rounding": {
+    "line_decimals": 2,
+    "total_decimals": 2
+  },
+  "margin_floor_percent": 12.0,
+  "quantity_breaks": [
+    {"min_quantity": 1, "discount_percent": 0.0},
+    {"min_quantity": 3, "discount_percent": 4.0},
+    {"min_quantity": 6, "discount_percent": 7.5},
+    {"min_quantity": 12, "discount_percent": 11.0}
+  ],
+  "customer_tiers": {
+    "standard": 0.0,
+    "partner": 3.0,
+    "distributor": 6.5
+  },
+  "products": [
+    {
+      "code": "PMP-100",
+      "name": "Centrifugal pump, 5.5 kW",
+      "list_price": 4200.0,
+      "cost": 3100.0,
+      "lead_time_days": 21,
+      "options": [
+        {"code": "STN", "name": "Stainless steel impeller", "price": 640.0, "cost": 480.0},
+        {"code": "VFD", "name": "Variable frequency drive", "price": 980.0, "cost": 720.0},
+        {"code": "SEAL2", "name": "Double mechanical seal", "price": 410.0, "cost": 300.0}
+      ]
+    },
+    {
+      "code": "CMP-220",
+      "name": "Screw compressor, 22 kW",
+      "list_price": 11800.0,
+      "cost": 8900.0,
+      "lead_time_days": 35,
+      "options": [
+        {"code": "DRY", "name": "Integrated refrigerant dryer", "price": 2150.0, "cost": 1600.0},
+        {"code": "TANK", "name": "500 L receiver tank", "price": 890.0, "cost": 620.0},
+        {"code": "REM", "name": "Remote monitoring module", "price": 1240.0, "cost": 830.0}
+      ]
+    },
+    {
+      "code": "PNL-040",
+      "name": "Control panel, 40 A",
+      "list_price": 2650.0,
+      "cost": 1850.0,
+      "lead_time_days": 14,
+      "options": [
+        {"code": "HMI", "name": "7 inch HMI touchscreen", "price": 720.0, "cost": 510.0},
+        {"code": "UPS", "name": "Panel UPS, 1 kVA", "price": 540.0, "cost": 390.0}
+      ]
+    },
+    {
+      "code": "SRV-INS",
+      "name": "Installation and commissioning",
+      "list_price": 1450.0,
+      "cost": 900.0,
+      "lead_time_days": 0,
+      "options": [
+        {"code": "TRN", "name": "Operator training, one day", "price": 380.0, "cost": 220.0}
+      ]
+    }
+  ]
+}
