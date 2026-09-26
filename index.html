@@ -46,13 +46,13 @@ h2{font-size:28px;margin:0 0 8px}.lead{color:var(--grey);margin:0 0 26px;font-si
 .proof h4{margin:0 0 8px}.proof p{margin:0;color:var(--grey)}
 details{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px}summary{cursor:pointer;font-weight:600}
 footer{padding:28px 0;color:var(--grey);font-size:14px}
-@media(max-width:800px){.hero{grid-template-columns:1fr}.hero h1{font-size:30px}.grid,.steps,.proof{grid-template-columns:1fr}.nav a{margin-left:10px}}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero h1{font-size:30px}.grid,.steps,.proof{grid-template-columns:1fr}.nav{flex-direction:column;align-items:flex-start;gap:6px}.nav a{margin:0 14px 4px 0;display:inline-block}}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <div class="nav"><span class="brand">Melad Fekry · Automation Engineer</span><nav><a href="#services">Services</a><a href="#proof">Proof</a><a href="#how">How it works</a><a href="#faq">FAQ</a></nav></div>
+    <div class="nav"><span class="brand">Melad Fekry · Automation Engineer</span><nav><a href="#services">Services</a><a href="case-studies.html">Case studies</a><a href="#proof">Proof</a><a href="#how">How it works</a><a href="#faq">FAQ</a></nav></div>
     <div class="hero">
       <div>
         <h1>Automation that survives real use, not just the demo.</h1>
@@ -61,7 +61,7 @@ footer{padding:28px 0;color:var(--grey);font-size:14px}
         <a class="btn alt" href="#services">What I build</a>
       </div>
       <div class="photo">
-        <img src="img/photo.jpg" alt="Melad Fekry, automation engineer" width="220" height="220">
+        <img src="img/photo.jpg?v=20260926" alt="Melad Fekry, automation engineer" width="220" height="220">
         <div class="badge">12 years engineering</div>
       </div>
     </div>
@@ -87,6 +87,7 @@ footer{padding:28px 0;color:var(--grey);font-size:14px}
     <div><h4>300+ record dataset with source trace</h4><p>A nonprofit organisation dataset collected from public sources, each value traceable to its source page, website links checked, duplicates removed, gaps reported instead of guessed.</p></div>
     <div><h4>A multi-agent AI system in production</h4><p>My own system, running daily: Claude and OpenAI models orchestrating scraping, scoring and reporting with budgets, rate limits, retries and verified outputs. It is where the guardrails I build for clients were tested first.</p></div>
   </div>
+  <p class="lead" style="margin:24px 0 0">Want to see the method in full? <a href="case-studies.html">Three worked case studies</a> show the data, the figures and every check.</p>
 </div></section>
 
 <section id="how"><div class="wrap">

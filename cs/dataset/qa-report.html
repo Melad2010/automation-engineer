@@ -1,0 +1,1560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QA report: Verified company dataset with a written QA report</title>
+<meta name="description" content="Every check, count and limit behind the Verified company dataset with a written QA report sample.">
+<style>
+:root{--navy:#0e2a47;--ink:#141c26;--grey:#606e80;--line:#e3e9f0;--bg:#f5f8fb;--green:#1dbf73;--amber:#f5a623;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.55}
+a{color:var(--navy)}img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{background:var(--navy);color:#fff}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.nav .brand{font-weight:700;letter-spacing:.2px}
+.nav a{color:#c8d2de;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{padding:56px 0 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center}
+.hero h1{font-size:40px;line-height:1.15;margin:0 0 14px}
+.hero p{color:#c8d2de;font-size:18px;margin:0 0 22px}
+.btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:13px 20px;border-radius:8px;margin:6px 8px 6px 0}
+.btn.alt{background:#fff;color:var(--navy)}
+.photo{display:flex;flex-direction:column;align-items:center;text-align:center}
+.photo img{width:220px;height:220px;border-radius:50%;object-fit:cover;border:8px solid var(--green)}
+.photo .badge{background:var(--amber);color:var(--ink);font-weight:600;border-radius:20px;padding:6px 16px;margin-top:14px;display:inline-block}
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+h2{font-size:28px;margin:0 0 8px}.lead{color:var(--grey);margin:0 0 26px;font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.card{border:1px solid var(--line);border-radius:14px;padding:22px;background:#fff;display:flex;flex-direction:column}
+.card img{border-radius:10px;margin-bottom:14px}
+.card h3{margin:0 0 6px;font-size:20px}.card p{margin:0 0 12px;color:var(--grey)}
+.card ul{margin:0 0 14px;padding-left:18px;color:var(--ink)}.card li{margin:3px 0}
+.card .from{font-weight:700;margin-bottom:12px}.card .btn{margin-top:auto;align-self:flex-start}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{background:var(--bg);border-radius:14px;padding:20px}.step b{display:block;font-size:26px;color:var(--green)}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.proof div{border:1px solid var(--line);border-radius:14px;padding:18px}
+.proof h4{margin:0 0 8px}.proof p{margin:0;color:var(--grey)}
+details{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px}summary{cursor:pointer;font-weight:600}
+footer{padding:28px 0;color:var(--grey);font-size:14px}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero h1{font-size:30px}.grid,.steps,.proof{grid-template-columns:1fr}.nav{flex-direction:column;align-items:flex-start;gap:6px}.nav a{margin:0 14px 4px 0;display:inline-block}}.tag{display:inline-block;background:var(--bg);color:var(--navy);font-weight:600;border-radius:20px;padding:4px 12px;font-size:13px;margin-bottom:10px}.honest{background:#fff8e6;border:1px solid #f0d48f;border-radius:10px;padding:10px 14px;color:#5c4400;font-size:15px;margin:12px 0 24px}figure{margin:0 0 24px}figure img{border:1px solid var(--line);border-radius:10px;width:100%;height:auto}figcaption{color:var(--grey);font-size:14px;margin-top:6px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}.cs-text h3{font-size:17px;margin:16px 0 6px}.cs-text p{margin:0 0 8px}.dl{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px}.dl a{border:1px solid var(--line);border-radius:8px;padding:8px 12px;text-decoration:none;font-weight:600;font-size:14px;background:#fff}.toc{margin-top:18px}.toc a{color:#fff;margin-right:18px;font-weight:600}.cta-row{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}.cta-row span{color:var(--grey)}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0 20px}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--bg)}code{background:var(--bg);padding:1px 5px;border-radius:4px;font-size:90%}.qa h1{font-size:28px}.qa h2{font-size:21px;margin-top:28px}@media(max-width:800px){.grid2{grid-template-columns:1fr}.toc a{display:inline-block;margin:4px 14px 4px 0}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="nav"><span class="brand">Melad Fekry · Automation Engineer</span><nav><a href="../../index.html">Home</a><a href="../../case-studies.html">Case studies</a><a href="../../index.html#services">Services</a><a href="../../index.html#faq">FAQ</a></nav></div></div></header>
+<section class="qa"><div class="wrap"><p><a href="../../case-studies.html#dataset">Back to the case study</a></p><h1>QA report: UK engineering and industrial companies</h1>
+<p>Sample dataset built from open Wikidata data (CC0). Query run 2026-09-26T10:07:21Z; website checks run 2026-09-26T10:07:49Z to 2026-09-26T10:25:53Z. The exact query, industry codes and run times are in sources.md.</p>
+<h2>1. Summary</h2>
+<ul>
+<li>Rows found: 232 company and website pairs (229 companies).</li>
+<li>Kept out of the final list: 24 out of scope and 3 duplicates. Every one stays in the QA_Audit sheet with its reason.</li>
+<li>Final list: 205 rows, one per company.</li>
+<li>Final status 2xx or 3xx after redirects (the brief's definition): 156 of 205 (76.1%). 4 of these land on a domain unrelated to the company, so the list does not count them as live.</li>
+<li>Websites live: 152 of 205 (74.1%). Unverified: 34 (16.6%). Not working: 19 (9.3%).</li>
+<li>Spot check against live Wikidata: names 20/20, websites 20/20.</li>
+<li>Rows in the final list with a review note: 44 (kept, see section 9).</li>
+</ul>
+<h2>2. Row funnel</h2>
+<p>Each row has one primary reason. Company-level checks run first, then website checks, then duplicates: dissolved company, HQ outside the UK, website end date, URL format, same company, same website domain.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Company and website pairs found</td>
+<td>232</td>
+</tr>
+<tr>
+<td>Company dissolved per Wikidata (14 companies)</td>
+<td>14</td>
+</tr>
+<tr>
+<td>HQ recorded outside the UK (6 companies)</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Website statement has an end date (1 company)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Invalid website URL</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Duplicate: same company, another website</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Duplicate: same website domain</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Final list</td>
+<td>205</td>
+</tr>
+</tbody>
+</table></div>
+<h2>3. Scope checks</h2>
+<p>A dissolution date (P576) means the company no longer exists, so its website link often points to a successor or to an unrelated page. A company whose every recorded headquarters is outside the UK does not fit the brief, even when its country field says United Kingdom. A website statement with an end date (P582) is a former address, so the company has no current website on record. The note column shows where each address leads today, from the website check.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Company</th>
+<th>QID</th>
+<th>Reason</th>
+<th>Website on Wikidata</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R001</td>
+<td>Sinclair Research</td>
+<td>Q4409</td>
+<td>company dissolved (2025) per Wikidata</td>
+<td>https://sinclair-research.co.uk</td>
+<td>now 200 at https://sinclair-research.co.uk</td>
+</tr>
+<tr>
+<td>R003</td>
+<td>Invensys</td>
+<td>Q211464</td>
+<td>company dissolved (2014) per Wikidata</td>
+<td>http://www.invensys.com</td>
+<td>now 200 at https://www.se.com/ww/en/</td>
+</tr>
+<tr>
+<td>R006</td>
+<td>WAGO GmbH &amp; Co. KG</td>
+<td>Q314448</td>
+<td>headquarters recorded outside the UK</td>
+<td>https://www.wago.com/de</td>
+<td>HQ: Minden (Q3846; town/city; outside UK: Q183)</td>
+</tr>
+<tr>
+<td>R007</td>
+<td>WAGO GmbH &amp; Co. KG</td>
+<td>Q314448</td>
+<td>headquarters recorded outside the UK</td>
+<td>https://www.wago.com/global</td>
+<td>HQ: Minden (Q3846; town/city; outside UK: Q183)</td>
+</tr>
+<tr>
+<td>R009</td>
+<td>Amplifon</td>
+<td>Q477222</td>
+<td>headquarters recorded outside the UK</td>
+<td>https://www.amplifon.com</td>
+<td>HQ: Milan (Q490; town/city; outside UK: Q38)</td>
+</tr>
+<tr>
+<td>R010</td>
+<td>Amstrad</td>
+<td>Q478825</td>
+<td>company dissolved (2008) per Wikidata</td>
+<td>http://www.amstrad.com</td>
+<td>now 200 at https://amstrad.com/</td>
+</tr>
+<tr>
+<td>R013</td>
+<td>Lucas Industries</td>
+<td>Q574425</td>
+<td>company dissolved (1996) per Wikidata</td>
+<td>http://www.lucas.info</td>
+<td>now unverified_http_only at https://www.lucas.info</td>
+</tr>
+<tr>
+<td>R015</td>
+<td>Corus</td>
+<td>Q708240</td>
+<td>company dissolved (2007) per Wikidata</td>
+<td>http://www.corusgroup.com</td>
+<td>now dns_error at https://www.corusgroup.com</td>
+</tr>
+<tr>
+<td>R021</td>
+<td>Imperial Chemical Industries</td>
+<td>Q899151</td>
+<td>company dissolved (2008) per Wikidata</td>
+<td>http://www.ici.com</td>
+<td>now unverified_http_only at https://www.ici.com</td>
+</tr>
+<tr>
+<td>R022</td>
+<td>The BOC Group</td>
+<td>Q900198</td>
+<td>company dissolved (2006) per Wikidata</td>
+<td>https://www.boconline.co.uk/en/index.html</td>
+<td>now 200 at https://www.bocgases.co.uk/</td>
+</tr>
+<tr>
+<td>R029</td>
+<td>Atkins</td>
+<td>Q1510450</td>
+<td>website statement has an end date (2023)</td>
+<td>http://www.atkinsglobal.com</td>
+<td>now unverified_http_only at https://www.atkinsglobal.com</td>
+</tr>
+<tr>
+<td>R033</td>
+<td>GMV Innovating Solutions</td>
+<td>Q1550912</td>
+<td>headquarters recorded outside the UK</td>
+<td>http://www.gmv.com</td>
+<td>HQ: Tres Cantos (Q910410; not a town/city; outside UK: Q29)</td>
+</tr>
+<tr>
+<td>R054</td>
+<td>Westland Helicopters</td>
+<td>Q3125008</td>
+<td>company dissolved (2000) per Wikidata</td>
+<td>http://www.agustawestland.com</td>
+<td>now unverified_http_only at https://www.agustawestland.com</td>
+</tr>
+<tr>
+<td>R066</td>
+<td>Chloride Group</td>
+<td>Q4036151</td>
+<td>company dissolved (2010) per Wikidata</td>
+<td>http://www.chloridepower.com</td>
+<td>now unverified_http_only at https://www.chloridepower.com</td>
+</tr>
+<tr>
+<td>R091</td>
+<td>Consett Iron Company</td>
+<td>Q5163174</td>
+<td>company dissolved (1980) per Wikidata</td>
+<td>http://www.dmm.org.uk/company/c002.htm</td>
+<td>now unverified_http_only at https://www.dmm.org.uk/company/c002.htm</td>
+</tr>
+<tr>
+<td>R106</td>
+<td>Joseph Gillott</td>
+<td>Q6283454</td>
+<td>company dissolved (1961) per Wikidata</td>
+<td>https://williammitchellcalligraphy.co.uk/product-category/joseph-gillott-range</td>
+<td>now 200 at https://williammitchellcalligraphy.co.uk/product-category/joseph-gillott-range/</td>
+</tr>
+<tr>
+<td>R120</td>
+<td>Plessey</td>
+<td>Q7204713</td>
+<td>company dissolved (1989) per Wikidata</td>
+<td>https://plesseysemiconductors.com</td>
+<td>now 200 at https://plessey.com/</td>
+</tr>
+<tr>
+<td>R159</td>
+<td>Av8er Limited</td>
+<td>Q22101868</td>
+<td>company dissolved (2011) per Wikidata</td>
+<td>http://www.av8er.com</td>
+<td>now 200 at https://forsale.dynadot.com/av8er.com?drefid=2071</td>
+</tr>
+<tr>
+<td>R167</td>
+<td>PEAK</td>
+<td>Q25345806</td>
+<td>headquarters recorded outside the UK</td>
+<td>http://www.oldworldind.com</td>
+<td>HQ: Northbrook (Q570986; town/city; outside UK: Q30)</td>
+</tr>
+<tr>
+<td>R177</td>
+<td>PayFit</td>
+<td>Q55835167</td>
+<td>headquarters recorded outside the UK</td>
+<td>https://payfit.com</td>
+<td>HQ: Paris (Q90; town/city; outside UK: Q142)</td>
+</tr>
+<tr>
+<td>R178</td>
+<td>PayFit</td>
+<td>Q55835167</td>
+<td>headquarters recorded outside the UK</td>
+<td>https://payfit.com/es</td>
+<td>HQ: Paris (Q90; town/city; outside UK: Q142)</td>
+</tr>
+<tr>
+<td>R179</td>
+<td>PayFit</td>
+<td>Q55835167</td>
+<td>headquarters recorded outside the UK</td>
+<td>https://payfit.com/fr</td>
+<td>HQ: Paris (Q90; town/city; outside UK: Q142)</td>
+</tr>
+<tr>
+<td>R184</td>
+<td>Orbex</td>
+<td>Q60775638</td>
+<td>company dissolved (2026) per Wikidata</td>
+<td>https://orbex.space</td>
+<td>now 502 at https://orbex.space</td>
+</tr>
+<tr>
+<td>R207</td>
+<td>PrintPlast</td>
+<td>Q139578378</td>
+<td>headquarters recorded outside the UK</td>
+<td>https://www.printplast.com</td>
+<td>HQ: Istanbul (Q406; town/city; outside UK: Q43)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>4. Duplicates</h2>
+<p>Rows are sorted with in-scope rows first, then by QID number (older items first), then preferring a home page over a sub-page and https over http. The first row is kept; the rest get duplicate_of. The website domain is the host name without a leading www.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Company</th>
+<th>QID</th>
+<th>Website</th>
+<th>duplicate_of</th>
+<th>Reason</th>
+<th>Counted as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R007</td>
+<td>WAGO GmbH &amp; Co. KG</td>
+<td>Q314448</td>
+<td>https://www.wago.com/global</td>
+<td>Q314448</td>
+<td>same company, another website (kept row R006)</td>
+<td>already out of scope</td>
+</tr>
+<tr>
+<td>R081</td>
+<td>BAE Systems Submarines</td>
+<td>Q4834529</td>
+<td>http://www.baesystems.com/Businesses/SubmarineSolutions/index.htm</td>
+<td>Q739416</td>
+<td>same website domain as BAE Systems (kept row R017)</td>
+<td>counted as duplicate</td>
+</tr>
+<tr>
+<td>R178</td>
+<td>PayFit</td>
+<td>Q55835167</td>
+<td>https://payfit.com/es</td>
+<td>Q55835167</td>
+<td>same company, another website (kept row R177)</td>
+<td>already out of scope</td>
+</tr>
+<tr>
+<td>R179</td>
+<td>PayFit</td>
+<td>Q55835167</td>
+<td>https://payfit.com/fr</td>
+<td>Q55835167</td>
+<td>same company, another website (kept row R177)</td>
+<td>already out of scope</td>
+</tr>
+<tr>
+<td>R188</td>
+<td>Rolls-Royce Group</td>
+<td>Q85622509</td>
+<td>http://www.rolls-royce.com</td>
+<td>Q243278</td>
+<td>same website domain as Rolls-Royce (kept row R004)</td>
+<td>counted as duplicate</td>
+</tr>
+<tr>
+<td>R228</td>
+<td>Optima</td>
+<td>Q141270986</td>
+<td>https://www.optima-yachts.com</td>
+<td>Q141267444</td>
+<td>same website domain as Optima (kept row R224)</td>
+<td>counted as duplicate</td>
+</tr>
+</tbody>
+</table></div>
+<p>A domain duplicate is not always the same legal entity. A parent and its subsidiary can share one website. They are flagged so the client can choose, not merged.</p>
+<h2>5. URL normalisation and format check</h2>
+<p>Every website value was trimmed; scheme and host were lower-cased; default ports, trailing slashes, fragments and tracking parameters (utm_*, gclid, fbclid) were removed; a missing scheme would get http://. The host must be a valid domain name with a real top-level label.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Change applied</th>
+<th>Rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host lower-cased</td>
+<td>1</td>
+</tr>
+<tr>
+<td>tracking parameters removed</td>
+<td>1</td>
+</tr>
+<tr>
+<td>trailing slash removed</td>
+<td>127</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Invalid URLs: 0.</li>
+<li>Hosts starting with www.: 183 (www. is ignored when comparing domains).</li>
+</ul>
+<h2>6. Link health</h2>
+<p>Method: one HEAD request per website with a 10 s timeout (for connecting and for each read). If HEAD failed or returned a 4xx/5xx code (405 included), a GET request followed. Redirects were followed by hand, up to 10 hops, so every hop counted against the limit of 1 request per second across the whole run. User-Agent: "portfolio-sample/1.0 (data quality demo; website link check)". Websites that timed out were checked again once after the full pass. Certificate failures got one extra GET with relaxed TLS settings, as a diagnostic only; it does not change the result.</p>
+<p>Network note. Before the check, two plain-HTTP canary requests (example.com and example.org, which normally answer 200) were redirected to an unrelated page. Plain-HTTP traffic was being intercepted on the checking network, so a plain-HTTP answer would have come from the network, not from the website. Every http:// address, and every http:// redirect hop, was therefore requested over https:// with the same host, path and query. 123 of the 231 checked addresses start with http://. A site that could only be tested over plain HTTP is reported as unverified, not as dead. A domain that does not resolve fails the same way on both schemes, so it is still reported as not resolving. Canary results: http://example.com/: HTTP 307 redirect to an unrelated site; http://example.org/: HTTP 307 redirect to an unrelated site.</p>
+<ul>
+<li>Unique URLs checked: 231; HTTP requests sent: 439; time: 1084.4 s.</li>
+<li>Final list rows checked over https:// instead of http://: 109.</li>
+<li>Final list rows that needed the GET fallback: 53.</li>
+<li>URLs retried after a timeout: 10; answered on the retry: 0.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Final list rows</th>
+<th>Share of final list</th>
+<th>All checked URLs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Live (2xx or 3xx on the company's own or a related domain)</td>
+<td>152</td>
+<td>74.1%</td>
+<td>166</td>
+</tr>
+<tr>
+<td>Server refused the automated check (401, 403 or 429)</td>
+<td>12</td>
+<td>5.9%</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Not verifiable here: the plain-HTTP site could not be tested from the checking network</td>
+<td>18</td>
+<td>8.8%</td>
+<td>24</td>
+</tr>
+<tr>
+<td>Lands on a domain unrelated to the company name after redirects</td>
+<td>4</td>
+<td>2.0%</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Page not found (404 or 410)</td>
+<td>2</td>
+<td>1.0%</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Server error (5xx)</td>
+<td>0</td>
+<td>0.0%</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Timed out on both checks</td>
+<td>2</td>
+<td>1.0%</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Domain name does not resolve</td>
+<td>11</td>
+<td>5.4%</td>
+<td>12</td>
+</tr>
+<tr>
+<td>Connection refused or reset</td>
+<td>1</td>
+<td>0.5%</td>
+<td>1</td>
+</tr>
+<tr>
+<td>TLS or certificate error</td>
+<td>2</td>
+<td>1.0%</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Redirect loop or too many redirects</td>
+<td>1</td>
+<td>0.5%</td>
+<td>1</td>
+</tr>
+</tbody>
+</table></div>
+<p>A 401, 403 or 429 answer means the server is online but refused an automated request. These sites were not opened in a browser, so they are reported as unverified, not as dead.</p>
+<p>Three rules sit on top of the raw status. Each affected row names its rule in the outcome_rule column of QA_Audit, and the raw code stays in website_status.</p>
+<ol>
+<li>A 405 or 406 answer to the GET request usually comes from a request filter, so it is grouped with refused (2 rows).</li>
+<li>When the https:// stand-in for an http:// address was answered directly with an error, the plain-HTTP site itself was not tested, so the row is unverified (2 rows). When the site redirected first and the target then failed, the failure stands.</li>
+<li>A 2xx or 3xx answer that lands on a domain sharing no word or initials with the company name is not counted as live (4 rows). The address may have lapsed, or the firm may have been bought; either way the link does not reach a site that can be tied to the company. Their pages were not opened.</li>
+</ol>
+<p>Final list rows whose website is not live (53; unverified first, then not working):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Company</th>
+<th>QID</th>
+<th>Website</th>
+<th>Status</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access IS</td>
+<td>Q4672441</td>
+<td>http://www.access-is.com</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>Accu Limited</td>
+<td>Q139659372</td>
+<td>https://accu.co.uk</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>GKN Aerospace</td>
+<td>Q121362615</td>
+<td>https://www.gknaerospace.com</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>Hifigear</td>
+<td>Q5753373</td>
+<td>http://www.hifigear.co.uk</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>IMI plc</td>
+<td>Q3146728</td>
+<td>http://www.imiplc.com</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>Kitronik</td>
+<td>Q114355773</td>
+<td>https://kitronik.co.uk</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>Premier Farnell</td>
+<td>Q7240299</td>
+<td>https://www.farnell.com</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>Rolls-Royce</td>
+<td>Q243278</td>
+<td>https://www.rolls-royce.com</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>Russell Hobbs</td>
+<td>Q3051064</td>
+<td>https://uk.russellhobbs.com</td>
+<td>405</td>
+<td>HTTP 405 to an automated GET, a code that usually comes from a request filter</td>
+</tr>
+<tr>
+<td>Schreiber Furniture</td>
+<td>Q29025129</td>
+<td>http://www.argos.co.uk/schreiber</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>Tata Chemicals Europe</td>
+<td>Q2926607</td>
+<td>http://www.tatachemicals.com/europe/index.html</td>
+<td>406</td>
+<td>HTTP 406 to an automated GET, a code that usually comes from a request filter</td>
+</tr>
+<tr>
+<td>The Milliput Company</td>
+<td>Q117476867</td>
+<td>https://www.milliput.com</td>
+<td>403</td>
+<td>server answered but refused the automated request</td>
+</tr>
+<tr>
+<td>Airbus Operations Limited</td>
+<td>Q4698478</td>
+<td>http://www.airbus.com/company/worldwide-presence/airbus-in-uk</td>
+<td>404</td>
+<td>HTTPS answered 404 directly; plain HTTP could not be tested</td>
+</tr>
+<tr>
+<td>Barclay Curle</td>
+<td>Q807945</td>
+<td>http://www.seawindmarine.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network; relaxed TLS answered 200</td>
+</tr>
+<tr>
+<td>Bristol Spaceplanes</td>
+<td>Q18110773</td>
+<td>http://www.bristolspaceplanes.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>Cape plc</td>
+<td>Q5035198</td>
+<td>http://www.capeplc.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network; relaxed TLS answered 200</td>
+</tr>
+<tr>
+<td>Charter International</td>
+<td>Q5086734</td>
+<td>http://www.charter.ie</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network; relaxed TLS answered unverified_http_only</td>
+</tr>
+<tr>
+<td>Dorman Long</td>
+<td>Q5298065</td>
+<td>http://www.dormanlongtechnology.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>Flint &amp; Neill</td>
+<td>Q15995071</td>
+<td>http://www.flintneill.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>Herbert Johnson</td>
+<td>Q39072123</td>
+<td>http://www.herbert-johnson.co.uk</td>
+<td>404</td>
+<td>HTTPS answered 404 directly; plain HTTP could not be tested</td>
+</tr>
+<tr>
+<td>Johnson Matthey Battery Systems</td>
+<td>Q4830412</td>
+<td>http://www.axeon.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>Laird plc</td>
+<td>Q6474102</td>
+<td>http://www.laird-plc.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>Larmar Engineering</td>
+<td>Q15825306</td>
+<td>http://www.larmar.co.uk</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network; relaxed TLS answered 200</td>
+</tr>
+<tr>
+<td>Liberty House Group</td>
+<td>Q24957727</td>
+<td>http://www.libertyhousegroup.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>Medway Microlights</td>
+<td>Q6807410</td>
+<td>http://ravenmad.co.uk</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network; relaxed TLS answered 200</td>
+</tr>
+<tr>
+<td>Morgan Est</td>
+<td>Q6911654</td>
+<td>http://www.morganest.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>Outreach Ltd</td>
+<td>Q28401772</td>
+<td>http://www.outreachltd.co.uk</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>Turbo-Union</td>
+<td>Q3542259</td>
+<td>http://www.turbounion.co.uk</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network; relaxed TLS answered 200</td>
+</tr>
+<tr>
+<td>Wellstream</td>
+<td>Q7981773</td>
+<td>http://www.wellstream.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network; relaxed TLS answered 200</td>
+</tr>
+<tr>
+<td>YASA Motors</td>
+<td>Q19903825</td>
+<td>http://www.yasamotors.com</td>
+<td>unverified_http_only</td>
+<td>HTTPS attempt failed; plain HTTP could not be tested from the checking network</td>
+</tr>
+<tr>
+<td>British Polar Engines</td>
+<td>Q4970620</td>
+<td>http://www.britishpolarengines.co.uk</td>
+<td>200</td>
+<td>lands on orinnas.com, a domain unrelated to the company name, after 1 redirect; the address may have lapsed or the firm may have been acquired</td>
+</tr>
+<tr>
+<td>Fascia Graphics</td>
+<td>Q50413661</td>
+<td>https://www.fasciagraphics.co.uk</td>
+<td>200</td>
+<td>lands on ccldesign.com, a domain unrelated to the company name, after 1 redirect; the address may have lapsed or the firm may have been acquired</td>
+</tr>
+<tr>
+<td>The Churchill Machine Tool Company</td>
+<td>Q5118205</td>
+<td>http://www.churchill-grinders.co.uk</td>
+<td>200</td>
+<td>lands on medsnj.com, a domain unrelated to the company name, after 2 redirects; the address may have lapsed or the firm may have been acquired</td>
+</tr>
+<tr>
+<td>Wavegen</td>
+<td>Q7975354</td>
+<td>http://www.wavegen.co.uk</td>
+<td>200</td>
+<td>lands on kubet.free, a domain unrelated to the company name, after 2 redirects; the address may have lapsed or the firm may have been acquired</td>
+</tr>
+<tr>
+<td>British Constructional Steelwork Association</td>
+<td>Q10682915</td>
+<td>http://www.steelconstruction.org/bcsa.html</td>
+<td>404</td>
+<td>HTTP 404 at https://bcsa.org.uk/bcsa.html</td>
+</tr>
+<tr>
+<td>Sofa Workshop</td>
+<td>Q7553564</td>
+<td>http://www.sofaworkshop.com</td>
+<td>404</td>
+<td>HTTP 404 at https://sofaworkshop.com/</td>
+</tr>
+<tr>
+<td>Hermes (Seven Seas Yachts)</td>
+<td>Q141267419</td>
+<td>https://www.hermes-craft.com</td>
+<td>timeout</td>
+<td>timed out on both checks</td>
+</tr>
+<tr>
+<td>SatixFy</td>
+<td>Q111234887</td>
+<td>https://www.satixfy.com</td>
+<td>timeout</td>
+<td>timed out on both checks</td>
+</tr>
+<tr>
+<td>Aero Engine Controls</td>
+<td>Q4688133</td>
+<td>http://www.aeroenginecontrols.com</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>APPH</td>
+<td>Q4653384</td>
+<td>http://www.apph.co.uk</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Avian Limited</td>
+<td>Q4828552</td>
+<td>http://www.avian.hanggliding.dk</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Cobham Limited</td>
+<td>Q5138896</td>
+<td>https://www.cobham.com</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Forth Dimension Displays</td>
+<td>Q5472588</td>
+<td>http://www.forthdd.com</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Lithgows</td>
+<td>Q1746543</td>
+<td>http://www.lithgows.co.uk</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>McTay Marine</td>
+<td>Q6802713</td>
+<td>http://www.mctaymarineservices.com</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Rolls-Royce Controls and Data Services</td>
+<td>Q18645656</td>
+<td>http://controlsdata.com</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Short Brothers</td>
+<td>Q1656412</td>
+<td>http://www.belfast.aero.bombardier.com</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Stoneybridge Structures</td>
+<td>Q117448276</td>
+<td>https://www.stoneybridge.co.uk</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Tomkins plc</td>
+<td>Q7819001</td>
+<td>http://www.tomkins.co.uk</td>
+<td>dns_error</td>
+<td>domain name does not resolve</td>
+</tr>
+<tr>
+<td>Reaction Engines Limited</td>
+<td>Q1688976</td>
+<td>https://www.reactionengines.co.uk</td>
+<td>connection_refused</td>
+<td>connection refused or reset</td>
+</tr>
+<tr>
+<td>LabMinds</td>
+<td>Q63341746</td>
+<td>https://www.labminds.com</td>
+<td>ssl_error</td>
+<td>certificate or TLS failure; relaxed TLS answered unverified_http_only</td>
+</tr>
+<tr>
+<td>Spacebit</td>
+<td>Q115001043</td>
+<td>https://spacebit.com</td>
+<td>ssl_error</td>
+<td>certificate or TLS failure; relaxed TLS answered unverified_http_only</td>
+</tr>
+<tr>
+<td>Herd &amp; McKenzie Shipbuilders</td>
+<td>Q16993938</td>
+<td>http://www.buckieshipyard.com/index.htm</td>
+<td>too_many_redirects</td>
+<td>redirect loop or too many redirects</td>
+</tr>
+</tbody>
+</table></div>
+<p>Final list rows whose website redirects to another domain (21). A related domain usually means a rename and the Wikidata value needs an update. An unrelated one is not counted as live (rule 3):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Company</th>
+<th>QID</th>
+<th>Website on Wikidata</th>
+<th>Where it lands now</th>
+<th>Counted as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Access IS</td>
+<td>Q4672441</td>
+<td>http://www.access-is.com</td>
+<td>https://www.hidglobal.com/access-is?utm_source=access-is.com&amp;utm_campaign=access-is.com&amp;utm_medium=301</td>
+<td>Refused the check (401/403/429)</td>
+</tr>
+<tr>
+<td>Amey Ltd</td>
+<td>Q4745963</td>
+<td>https://www.amey.co.uk</td>
+<td>https://www.amey.com/uk</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>British Constructional Steelwork Association</td>
+<td>Q10682915</td>
+<td>http://www.steelconstruction.org/bcsa.html</td>
+<td>https://bcsa.org.uk/bcsa.html</td>
+<td>Page not found (404/410)</td>
+</tr>
+<tr>
+<td>British Polar Engines</td>
+<td>Q4970620</td>
+<td>http://www.britishpolarengines.co.uk</td>
+<td>https://orinnas.com/</td>
+<td>not live: unrelated domain</td>
+</tr>
+<tr>
+<td>Engineered Arts</td>
+<td>Q50190391</td>
+<td>https://www.engineeredarts.co.uk</td>
+<td>https://engineeredarts.com</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Fascia Graphics</td>
+<td>Q50413661</td>
+<td>https://www.fasciagraphics.co.uk</td>
+<td>https://www.ccldesign.com/Chippenham</td>
+<td>not live: unrelated domain</td>
+</tr>
+<tr>
+<td>Fine Tubes</td>
+<td>Q5450102</td>
+<td>http://www.finetubes.com</td>
+<td>https://www.finetubes.co.uk/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Herd &amp; McKenzie Shipbuilders</td>
+<td>Q16993938</td>
+<td>http://www.buckieshipyard.com/index.htm</td>
+<td>https://obinsj.com/</td>
+<td>Redirect loop</td>
+</tr>
+<tr>
+<td>Hield</td>
+<td>Q3135297</td>
+<td>http://www.hield.co.uk</td>
+<td>https://www.hield.com/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Land Instruments International</td>
+<td>Q6483908</td>
+<td>http://www.landinst.com</td>
+<td>https://www.ametek-land.com/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Lusso Stone</td>
+<td>Q113883069</td>
+<td>https://www.lusso.com</td>
+<td>https://www.lussostone.com</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Numatic International</td>
+<td>Q4045548</td>
+<td>https://numatic.co.uk</td>
+<td>https://numatic.com/uk/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Roksan Audio</td>
+<td>Q7360085</td>
+<td>http://www.roksan.co.uk</td>
+<td>https://www.roksan.com/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>SC Nutra</td>
+<td>Q136231004</td>
+<td>https://www.sweetcures.co.uk</td>
+<td>https://www.scnutra.co.uk/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Smiths Group</td>
+<td>Q2295406</td>
+<td>http://smiths-group.com</td>
+<td>https://www.smiths.com/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Space Forge</td>
+<td>Q113289169</td>
+<td>https://www.spaceforge.co.uk</td>
+<td>https://www.spaceforge.com/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Telespazio VEGA UK</td>
+<td>Q7696844</td>
+<td>https://www.telespazio-vega.com</td>
+<td>https://telespazio.co.uk/en/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>The Churchill Machine Tool Company</td>
+<td>Q5118205</td>
+<td>http://www.churchill-grinders.co.uk</td>
+<td>https://medsnj.com/</td>
+<td>not live: unrelated domain</td>
+</tr>
+<tr>
+<td>Ultra Electronics</td>
+<td>Q7880445</td>
+<td>http://www.ultra-electronics.com</td>
+<td>https://www.cobhamultra.com/</td>
+<td>live (related domain)</td>
+</tr>
+<tr>
+<td>Wavegen</td>
+<td>Q7975354</td>
+<td>http://www.wavegen.co.uk</td>
+<td>https://kubet.free/</td>
+<td>not live: unrelated domain</td>
+</tr>
+<tr>
+<td>Westley Richards</td>
+<td>Q7989044</td>
+<td>https://www.westleyrichards.co.uk</td>
+<td>https://www.westleyrichards.com/</td>
+<td>live (related domain)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>7. Field coverage (final list)</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Rows with a value (of 205)</th>
+<th>Share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Company name</td>
+<td>205</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Official website</td>
+<td>205</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>Industry</td>
+<td>205</td>
+<td>100.0%</td>
+</tr>
+<tr>
+<td>HQ town or city in the UK</td>
+<td>173</td>
+<td>84.4%</td>
+</tr>
+<tr>
+<td>Founding year</td>
+<td>178</td>
+<td>86.8%</td>
+</tr>
+<tr>
+<td>Website live</td>
+<td>152</td>
+<td>74.1%</td>
+</tr>
+</tbody>
+</table></div>
+<p>hq_city holds only headquarters that Wikidata records as a UK town, city or other settlement. 184 rows have some HQ value; the rest of those record a county, a region or the country itself (see hq_note in QA_Audit). Founding year is the earliest inception year (P571).</p>
+<h2>8. Spot check (20 random rows against live Wikidata)</h2>
+<p>The sample was drawn from the final list with a fixed seed (20260926). All 20 items were re-fetched in one wbgetentities call to the Wikidata API, a different service from the query endpoint. Name uses the same language order (en, en-gb, mul). Website counts as a match when the dataset URL is among the item's current website values after the same normalisation.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>QID</th>
+<th>Name in dataset</th>
+<th>Name on Wikidata now</th>
+<th>Name match</th>
+<th>Website in dataset</th>
+<th>Website match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q479220</td>
+<td>Citect</td>
+<td>Citect</td>
+<td>yes</td>
+<td>https://sw.aveva.com/monitor-and-control/hmi-supervisory-and-control/citect-scada</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q791296</td>
+<td>Avon Rubber</td>
+<td>Avon Rubber</td>
+<td>yes</td>
+<td>https://www.avon-protection.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q848977</td>
+<td>Harland and Wolff</td>
+<td>Harland and Wolff</td>
+<td>yes</td>
+<td>https://www.harland-wolff.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q1536957</td>
+<td>Monitor Audio</td>
+<td>Monitor Audio</td>
+<td>yes</td>
+<td>http://www.monitoraudio.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q1947611</td>
+<td>Morgan Crucible</td>
+<td>Morgan Crucible</td>
+<td>yes</td>
+<td>http://www.morganadvancedmaterials.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q2061530</td>
+<td>Swan Hunter</td>
+<td>Swan Hunter</td>
+<td>yes</td>
+<td>https://swanhunter.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q3373916</td>
+<td>Peco</td>
+<td>Peco</td>
+<td>yes</td>
+<td>https://www.peco-uk.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q4672441</td>
+<td>Access IS</td>
+<td>Access IS</td>
+<td>yes</td>
+<td>http://www.access-is.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q4681201</td>
+<td>Addis Housewares</td>
+<td>Addis Housewares</td>
+<td>yes</td>
+<td>https://www.addis.co.uk</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q4813024</td>
+<td>Atelier One</td>
+<td>Atelier One</td>
+<td>yes</td>
+<td>https://atelierone.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q6773469</td>
+<td>Marshall Aerospace and Defence Group</td>
+<td>Marshall Aerospace and Defence Group</td>
+<td>yes</td>
+<td>http://www.marshalladg.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q7294156</td>
+<td>Rapid Electronics</td>
+<td>Rapid Electronics</td>
+<td>yes</td>
+<td>http://www.rapidonline.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q10298933</td>
+<td>Hunslet Engine Company</td>
+<td>Hunslet Engine Company</td>
+<td>yes</td>
+<td>https://www.hunsletengine.co.uk</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q15825306</td>
+<td>Larmar Engineering</td>
+<td>Larmar Engineering</td>
+<td>yes</td>
+<td>http://www.larmar.co.uk</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q29025129</td>
+<td>Schreiber Furniture</td>
+<td>Schreiber Furniture</td>
+<td>yes</td>
+<td>http://www.argos.co.uk/schreiber</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q63341746</td>
+<td>LabMinds</td>
+<td>LabMinds</td>
+<td>yes</td>
+<td>https://www.labminds.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q134561853</td>
+<td>Le Breton Engineering</td>
+<td>Le Breton Engineering</td>
+<td>yes</td>
+<td>https://www.lebretonengineering.co.uk</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q138639365</td>
+<td>FUBYTE</td>
+<td>FUBYTE</td>
+<td>yes</td>
+<td>https://fubyte.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q141158773</td>
+<td>Hedon</td>
+<td>Hedon</td>
+<td>yes</td>
+<td>https://hedon.com</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>Q141267419</td>
+<td>Hermes (Seven Seas Yachts)</td>
+<td>Hermes (Seven Seas Yachts)</td>
+<td>yes</td>
+<td>https://www.hermes-craft.com</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table></div>
+<p>Result: 20/20 rows matched on both name and website. No mismatch found.</p>
+<h2>9. Rows flagged on review (kept in the list)</h2>
+<p>These rows stay in the Data sheet with a review_note so the client can decide. Automatic notes: the website is a registry or social page; the website domain shares no word or initials with the company name; the website now redirects to another domain; two rows share a name; the Wikidata description says defunct or former while no dissolution date exists; the description says distributor or retailer; the description names another nationality and no UK link. Manual notes come from reading every row's Wikidata description and cite that description.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Company</th>
+<th>QID</th>
+<th>Website</th>
+<th>Review note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2M Group</td>
+<td>Q105467706</td>
+<td>https://www.2m-holdings.com</td>
+<td>described as 'UK domiciled international chemical services and distribution company': a distributor or retailer, not a manufacturer</td>
+</tr>
+<tr>
+<td>Accu Limited</td>
+<td>Q139659372</td>
+<td>https://accu.co.uk</td>
+<td>described as 'British online supplier of precision engineering components and fasteners': a distributor or retailer, not a manufacturer</td>
+</tr>
+<tr>
+<td>Amey Ltd</td>
+<td>Q4745963</td>
+<td>https://www.amey.co.uk</td>
+<td>website now redirects to another domain (amey.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Barclay Curle</td>
+<td>Q807945</td>
+<td>http://www.seawindmarine.com</td>
+<td>website domain does not match the company name; check it is the company's own site</td>
+</tr>
+<tr>
+<td>British Constructional Steelwork Association</td>
+<td>Q10682915</td>
+<td>http://www.steelconstruction.org/bcsa.html</td>
+<td>website domain does not match the company name; check it is the company's own site | Not a company: a trade association. Wikidata describes it as: 'trade association for the UK and Ireland structural steel industry'.</td>
+</tr>
+<tr>
+<td>British Polar Engines</td>
+<td>Q4970620</td>
+<td>http://www.britishpolarengines.co.uk</td>
+<td>lands on orinnas.com, a domain unrelated to the company name, after 1 redirect; the address may have lapsed or the firm may have been acquired; check before use</td>
+</tr>
+<tr>
+<td>Cape plc</td>
+<td>Q5035198</td>
+<td>http://www.capeplc.com</td>
+<td>Industry tag (chemical industry) does not match the description. Wikidata describes it as: 'construction company listed in the Alternative Investment Market under ticker CIU'.</td>
+</tr>
+<tr>
+<td>Citect</td>
+<td>Q479220</td>
+<td>https://sw.aveva.com/monitor-and-control/hmi-supervisory-and-control/citect-scada</td>
+<td>website domain does not match the company name; check it is the company's own site</td>
+</tr>
+<tr>
+<td>Engineered Arts</td>
+<td>Q50190391</td>
+<td>https://www.engineeredarts.co.uk</td>
+<td>website now redirects to another domain (engineeredarts.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Fascia Graphics</td>
+<td>Q50413661</td>
+<td>https://www.fasciagraphics.co.uk</td>
+<td>lands on ccldesign.com, a domain unrelated to the company name, after 1 redirect; the address may have lapsed or the firm may have been acquired; check before use</td>
+</tr>
+<tr>
+<td>Fine Tubes</td>
+<td>Q5450102</td>
+<td>http://www.finetubes.com</td>
+<td>website now redirects to another domain (finetubes.co.uk) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>FKI</td>
+<td>Q5426025</td>
+<td>http://www.fki.co.uk</td>
+<td>described as 'former British manufacturing company', but Wikidata has no dissolution date; check it still trades</td>
+</tr>
+<tr>
+<td>FUBYTE</td>
+<td>Q138639365</td>
+<td>https://fubyte.com</td>
+<td>Sector does not fit: a business services firm. Wikidata describes it as: 'Technical Growth &amp; Automation Partner for Startups, Scale-Ups &amp; SMEs - Website: https://fubyte.com/'.</td>
+</tr>
+<tr>
+<td>Herd &amp; McKenzie Shipbuilders</td>
+<td>Q16993938</td>
+<td>http://www.buckieshipyard.com/index.htm</td>
+<td>website domain does not match the company name; check it is the company's own site</td>
+</tr>
+<tr>
+<td>Hield</td>
+<td>Q3135297</td>
+<td>http://www.hield.co.uk</td>
+<td>website now redirects to another domain (hield.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Hifigear</td>
+<td>Q5753373</td>
+<td>http://www.hifigear.co.uk</td>
+<td>described as 'hi-fi and home cinema retailer formed in 2003 in Gloucester, UK': a distributor or retailer, not a manufacturer</td>
+</tr>
+<tr>
+<td>Hygena</td>
+<td>Q3143843</td>
+<td>https://www.socooc.com</td>
+<td>website domain does not match the company name; check it is the company's own site</td>
+</tr>
+<tr>
+<td>J Hudson &amp; Co</td>
+<td>Q5479677</td>
+<td>https://www.acmewhistles.co.uk</td>
+<td>website domain does not match the company name; check it is the company's own site</td>
+</tr>
+<tr>
+<td>Johnson Matthey Battery Systems</td>
+<td>Q4830412</td>
+<td>http://www.axeon.com</td>
+<td>website domain does not match the company name; check it is the company's own site</td>
+</tr>
+<tr>
+<td>Laird plc</td>
+<td>Q6474102</td>
+<td>http://www.laird-plc.com</td>
+<td>described as 'defunct British technology company', but Wikidata has no dissolution date; check it still trades</td>
+</tr>
+<tr>
+<td>Land Instruments International</td>
+<td>Q6483908</td>
+<td>http://www.landinst.com</td>
+<td>website now redirects to another domain (ametek-land.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Larmar Engineering</td>
+<td>Q15825306</td>
+<td>http://www.larmar.co.uk</td>
+<td>described as 'defunct English motor vehicle manufacturer', but Wikidata has no dissolution date; check it still trades</td>
+</tr>
+<tr>
+<td>Lusso Stone</td>
+<td>Q113883069</td>
+<td>https://www.lusso.com</td>
+<td>website now redirects to another domain (lussostone.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Matrix Games</td>
+<td>Q1993220</td>
+<td>http://www.matrixgames.com</td>
+<td>Sector does not fit an engineering or industrial brief. Wikidata describes it as: 'publisher of PC games'.</td>
+</tr>
+<tr>
+<td>Medway Microlights</td>
+<td>Q6807410</td>
+<td>http://ravenmad.co.uk</td>
+<td>website domain does not match the company name; check it is the company's own site</td>
+</tr>
+<tr>
+<td>Netcall</td>
+<td>Q65281058</td>
+<td>https://www.netcall.com</td>
+<td>Sector does not fit: a software company. Wikidata describes it as: 'software company that provides software services to the healthcare, public, and private sectors'.</td>
+</tr>
+<tr>
+<td>Numatic International</td>
+<td>Q4045548</td>
+<td>https://numatic.co.uk</td>
+<td>website now redirects to another domain (numatic.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Ozone Gliders</td>
+<td>Q28131492</td>
+<td>http://flyozone.com</td>
+<td>described as 'French aircraft manufacturer'; check the UK headquarters (recorded: Edinburgh (Q23436; town/city; UK); basis: P159 HQ)</td>
+</tr>
+<tr>
+<td>Premier Farnell</td>
+<td>Q7240299</td>
+<td>https://www.farnell.com</td>
+<td>described as 'High-service electronics components distributor': a distributor or retailer, not a manufacturer</td>
+</tr>
+<tr>
+<td>Rapid Electronics</td>
+<td>Q7294156</td>
+<td>http://www.rapidonline.com</td>
+<td>described as 'UK distributor of electronic components and educational products': a distributor or retailer, not a manufacturer</td>
+</tr>
+<tr>
+<td>Roksan Audio</td>
+<td>Q7360085</td>
+<td>http://www.roksan.co.uk</td>
+<td>website now redirects to another domain (roksan.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>SC Nutra</td>
+<td>Q136231004</td>
+<td>https://www.sweetcures.co.uk</td>
+<td>website domain does not match the company name; check it is the company's own site | website now redirects to another domain (scnutra.co.uk) that matches the company name; likely a rename, update the website value | Sector does not fit: a vitamins and supplements company. Wikidata describes it as: 'UK vitamins and supplements company based in York'.</td>
+</tr>
+<tr>
+<td>Schreiber Furniture</td>
+<td>Q29025129</td>
+<td>http://www.argos.co.uk/schreiber</td>
+<td>website domain does not match the company name; check it is the company's own site | Wikidata description is unrelated text; the item needs a fix. Wikidata describes it as: 'arban And Rural Cities of Sindh'.</td>
+</tr>
+<tr>
+<td>Short Brothers</td>
+<td>Q1656412</td>
+<td>http://www.belfast.aero.bombardier.com</td>
+<td>website domain does not match the company name; check it is the company's own site</td>
+</tr>
+<tr>
+<td>Smiths Group</td>
+<td>Q2295406</td>
+<td>http://smiths-group.com</td>
+<td>website now redirects to another domain (smiths.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Space Forge</td>
+<td>Q113289169</td>
+<td>https://www.spaceforge.co.uk</td>
+<td>website now redirects to another domain (spaceforge.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Starship Technologies</td>
+<td>Q25245388</td>
+<td>http://www.starship.xyz</td>
+<td>described as 'Estonian company that performs last-mile deliveries using robots'; check the UK headquarters (recorded: London (Q84; town/city; UK); San Francisco (Q62; town/city; outside UK: Q30); basis: P159 HQ)</td>
+</tr>
+<tr>
+<td>Sun Chemical (United Kingdom)</td>
+<td>Q30255999</td>
+<td>https://find-and-update.company-information.service.gov.uk/company/02647054</td>
+<td>website is a third-party page (find-and-update.company-information.service.gov.uk), not the company's own site</td>
+</tr>
+<tr>
+<td>Telespazio VEGA UK</td>
+<td>Q7696844</td>
+<td>https://www.telespazio-vega.com</td>
+<td>website now redirects to another domain (telespazio.co.uk) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>The Churchill Machine Tool Company</td>
+<td>Q5118205</td>
+<td>http://www.churchill-grinders.co.uk</td>
+<td>lands on medsnj.com, a domain unrelated to the company name, after 2 redirects; the address may have lapsed or the firm may have been acquired; check before use</td>
+</tr>
+<tr>
+<td>Ultra Electronics</td>
+<td>Q7880445</td>
+<td>http://www.ultra-electronics.com</td>
+<td>website now redirects to another domain (cobhamultra.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+<tr>
+<td>Velcro</td>
+<td>Q207649</td>
+<td>http://velcro.com</td>
+<td>described as 'Swiss corporation behind popular hook-and-loop fastener and its registered trademark'; check the UK headquarters (recorded: Manchester (Q48370; town/city; outside UK: Q30); United Kingdom (Q145; not a town/city; UK); basis: P159 HQ)</td>
+</tr>
+<tr>
+<td>Wavegen</td>
+<td>Q7975354</td>
+<td>http://www.wavegen.co.uk</td>
+<td>lands on kubet.free, a domain unrelated to the company name, after 2 redirects; the address may have lapsed or the firm may have been acquired; check before use</td>
+</tr>
+<tr>
+<td>Westley Richards</td>
+<td>Q7989044</td>
+<td>https://www.westleyrichards.co.uk</td>
+<td>website now redirects to another domain (westleyrichards.com) that matches the company name; likely a rename, update the website value</td>
+</tr>
+</tbody>
+</table></div>
+<h2>10. Limits</h2>
+<ul>
+<li>Wikidata is edited by volunteers. It covers notable companies, not every UK firm, and a company without an industry code (P452) cannot match the filter.</li>
+<li>Industry codes are Wikidata's own. Some fit loosely; section 9 flags the clearest cases.</li>
+<li>A live website shows the address works today. It does not prove the company still trades.</li>
+<li>Only the listed home page was requested, once per check. No pages were crawled and no content was read.</li>
+<li>Plain HTTP could not be tested from the checking network (section 6). Sites that work only over plain HTTP are marked unverified; a re-run from another network would settle them.</li>
+<li>Results can change: the query service can lag live Wikidata by minutes, and websites change daily.</li>
+</ul>
+<h2>11. Reproduce</h2>
+<p>Run <code>python build_dataset.py</code> in this folder (Python 3.10 with pandas, requests, openpyxl, matplotlib). <code>python build_dataset.py --reuse</code> rebuilds every output from the raw/ files without new requests.</p></div></section>
+<footer><div class="wrap">Orders, messages and files go through Fiverr only. <a href="https://www.fiverr.com/meladfekry" rel="noopener">fiverr.com/meladfekry</a></div></footer>
+</body>
+</html>

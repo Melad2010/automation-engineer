@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QA report: Earthquake catalogue analysis, Southern California 2021 to 2025</title>
+<meta name="description" content="Every check, count and limit behind the Earthquake catalogue analysis, Southern California 2021 to 2025 sample.">
+<style>
+:root{--navy:#0e2a47;--ink:#141c26;--grey:#606e80;--line:#e3e9f0;--bg:#f5f8fb;--green:#1dbf73;--amber:#f5a623;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.55}
+a{color:var(--navy)}img{max-width:100%;display:block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{background:var(--navy);color:#fff}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0}
+.nav .brand{font-weight:700;letter-spacing:.2px}
+.nav a{color:#c8d2de;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{padding:56px 0 48px;display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center}
+.hero h1{font-size:40px;line-height:1.15;margin:0 0 14px}
+.hero p{color:#c8d2de;font-size:18px;margin:0 0 22px}
+.btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;font-weight:700;padding:13px 20px;border-radius:8px;margin:6px 8px 6px 0}
+.btn.alt{background:#fff;color:var(--navy)}
+.photo{display:flex;flex-direction:column;align-items:center;text-align:center}
+.photo img{width:220px;height:220px;border-radius:50%;object-fit:cover;border:8px solid var(--green)}
+.photo .badge{background:var(--amber);color:var(--ink);font-weight:600;border-radius:20px;padding:6px 16px;margin-top:14px;display:inline-block}
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+h2{font-size:28px;margin:0 0 8px}.lead{color:var(--grey);margin:0 0 26px;font-size:17px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.card{border:1px solid var(--line);border-radius:14px;padding:22px;background:#fff;display:flex;flex-direction:column}
+.card img{border-radius:10px;margin-bottom:14px}
+.card h3{margin:0 0 6px;font-size:20px}.card p{margin:0 0 12px;color:var(--grey)}
+.card ul{margin:0 0 14px;padding-left:18px;color:var(--ink)}.card li{margin:3px 0}
+.card .from{font-weight:700;margin-bottom:12px}.card .btn{margin-top:auto;align-self:flex-start}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{background:var(--bg);border-radius:14px;padding:20px}.step b{display:block;font-size:26px;color:var(--green)}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.proof div{border:1px solid var(--line);border-radius:14px;padding:18px}
+.proof h4{margin:0 0 8px}.proof p{margin:0;color:var(--grey)}
+details{border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin-bottom:10px}summary{cursor:pointer;font-weight:600}
+footer{padding:28px 0;color:var(--grey);font-size:14px}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.hero h1{font-size:30px}.grid,.steps,.proof{grid-template-columns:1fr}.nav{flex-direction:column;align-items:flex-start;gap:6px}.nav a{margin:0 14px 4px 0;display:inline-block}}.tag{display:inline-block;background:var(--bg);color:var(--navy);font-weight:600;border-radius:20px;padding:4px 12px;font-size:13px;margin-bottom:10px}.honest{background:#fff8e6;border:1px solid #f0d48f;border-radius:10px;padding:10px 14px;color:#5c4400;font-size:15px;margin:12px 0 24px}figure{margin:0 0 24px}figure img{border:1px solid var(--line);border-radius:10px;width:100%;height:auto}figcaption{color:var(--grey);font-size:14px;margin-top:6px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px}.cs-text h3{font-size:17px;margin:16px 0 6px}.cs-text p{margin:0 0 8px}.dl{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 8px}.dl a{border:1px solid var(--line);border-radius:8px;padding:8px 12px;text-decoration:none;font-weight:600;font-size:14px;background:#fff}.toc{margin-top:18px}.toc a{color:#fff;margin-right:18px;font-weight:600}.cta-row{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}.cta-row span{color:var(--grey)}.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0 20px}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--bg)}code{background:var(--bg);padding:1px 5px;border-radius:4px;font-size:90%}.qa h1{font-size:28px}.qa h2{font-size:21px;margin-top:28px}@media(max-width:800px){.grid2{grid-template-columns:1fr}.toc a{display:inline-block;margin:4px 14px 4px 0}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="nav"><span class="brand">Melad Fekry · Automation Engineer</span><nav><a href="../../index.html">Home</a><a href="../../case-studies.html">Case studies</a><a href="../../index.html#services">Services</a><a href="../../index.html#faq">FAQ</a></nav></div></div></header>
+<section class="qa"><div class="wrap"><p><a href="../../case-studies.html#seismic">Back to the case study</a></p><h1>QA report: Southern California earthquakes, 2021 to 2025</h1>
+<p>Every number below comes from <code>analysis.py</code> and is stored in <code>results.json</code>. Each excluded row is listed in <code>data/exclusions.csv</code> with its reason.</p>
+<h2>1. Retrieval</h2>
+<ul>
+<li>Source: USGS ComCat through the FDSN event service (version 2.7.0). Box 32 to 36.5 N, 121 to 114 W. Start 2021-01-01, end 2026-01-01 (UTC). Magnitude 1.5 and above. All event types requested.</li>
+<li>10 half-year queries, each sized first with the service's count endpoint. The largest held 3,403 rows, below the cap of 20,000 per query. No query needed splitting.</li>
+<li>Rows returned equal the count endpoint for every query: yes. File hashes match the download manifest: yes.</li>
+<li>Rows downloaded: 19,442.</li>
+</ul>
+<h2>2. Cleaning steps</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Rows in</th>
+<th>Removed</th>
+<th>Rows out</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unreadable time or coordinates</td>
+<td>19,442</td>
+<td>0</td>
+<td>19,442</td>
+</tr>
+<tr>
+<td>Outside 2021-01-01 to 2025-12-31 (UTC)</td>
+<td>19,442</td>
+<td>0</td>
+<td>19,442</td>
+</tr>
+<tr>
+<td>Outside the study box</td>
+<td>19,442</td>
+<td>0</td>
+<td>19,442</td>
+</tr>
+<tr>
+<td>Duplicate event id (older update dropped)</td>
+<td>19,442</td>
+<td>0</td>
+<td>19,442</td>
+</tr>
+<tr>
+<td>Not an earthquake (event type)</td>
+<td>19,442</td>
+<td>966</td>
+<td>18,476</td>
+</tr>
+<tr>
+<td>Missing magnitude</td>
+<td>18,476</td>
+<td>0</td>
+<td>18,476</td>
+</tr>
+<tr>
+<td>Missing depth</td>
+<td>18,476</td>
+<td>0</td>
+<td>18,476</td>
+</tr>
+<tr>
+<td>Magnitude below the 1.5 query floor</td>
+<td>18,476</td>
+<td>0</td>
+<td>18,476</td>
+</tr>
+<tr>
+<td>Cross-network duplicate (same event reported twice)</td>
+<td>18,476</td>
+<td>5</td>
+<td>18,471</td>
+</tr>
+</tbody>
+</table></div>
+<p>Final catalogue: 18,471 earthquakes. Excluded in total: 971 rows.</p>
+<h2>3. Event types</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Event type</th>
+<th>Rows</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>earthquake</td>
+<td>18,476</td>
+<td>kept</td>
+</tr>
+<tr>
+<td>quarry blast</td>
+<td>950</td>
+<td>removed</td>
+</tr>
+<tr>
+<td>explosion</td>
+<td>12</td>
+<td>removed</td>
+</tr>
+<tr>
+<td>mining explosion</td>
+<td>2</td>
+<td>removed</td>
+</tr>
+<tr>
+<td>sonic boom</td>
+<td>1</td>
+<td>removed</td>
+</tr>
+<tr>
+<td>other event</td>
+<td>1</td>
+<td>removed</td>
+</tr>
+</tbody>
+</table></div>
+<p>The service also lists "eq" as an earthquake label. It would be kept, but it does not occur in this data.</p>
+<h2>4. Duplicates</h2>
+<ul>
+<li>Duplicate event ids: 0.</li>
+<li>Detector test on a known positive: a copy of event ci40226423, shifted by 0.8 s and 0.01 deg latitude (about 1.1 km) and given another network, was found: yes. A copy shifted by 30 s was left alone: yes.</li>
+<li>Cross-network duplicates. Rule: different network, within 2 s and 10 km; keep the regional-network solution (ci, nc, nn), else the one with more stations. Pairs found: 5. Events removed: 5. The removed pairs are at most 0.65 s and 5.1 km apart. The closest remaining cross-network pair within 50 km is 8.7 s apart. With the 10 km limit, any time window from 0.65 s to 8.7 s removes the same 5 events.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Time (UTC)</th>
+<th>Kept</th>
+<th>M kept</th>
+<th>Removed</th>
+<th>Removed net</th>
+<th>M removed</th>
+<th>dt (s)</th>
+<th>Distance (km)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021-06-12T04:41:37.860Z</td>
+<td>ci39936232</td>
+<td>3.61</td>
+<td>ew1623472898</td>
+<td>ew</td>
+<td>4.1407</td>
+<td>0.65</td>
+<td>4.5</td>
+</tr>
+<tr>
+<td>2021-06-20T07:36:24.650Z</td>
+<td>ci39713383</td>
+<td>2.46</td>
+<td>us7000eeln</td>
+<td>us</td>
+<td>2.2</td>
+<td>0.51</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>2024-05-05T07:27:14.810Z</td>
+<td>ci37651516</td>
+<td>2.59</td>
+<td>us6000mwfl</td>
+<td>us</td>
+<td>2.2</td>
+<td>0.53</td>
+<td>5.1</td>
+</tr>
+<tr>
+<td>2024-08-07T04:54:23.770Z</td>
+<td>ci37680324</td>
+<td>2.75</td>
+<td>us6000niie</td>
+<td>us</td>
+<td>2.6</td>
+<td>0.35</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>2024-11-17T09:32:58.680Z</td>
+<td>ci40794535</td>
+<td>2.82</td>
+<td>us7000ns9c</td>
+<td>us</td>
+<td>2.7</td>
+<td>0.40</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Same-network near-coincident pairs. Rule: same network, within 0.2 s and 2 km; flagged and kept. Pairs flagged: 7. They may be one earthquake entered twice, but the network kept both, so they stay in the catalogue with a flag column. The next same-network pair within 3 km is 0.55 s apart. Removing one event of each flagged pair changes b by -0.0002.</li>
+</ul>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Time (UTC)</th>
+<th>Event A</th>
+<th>M A</th>
+<th>Event B</th>
+<th>M B</th>
+<th>dt (s)</th>
+<th>Distance (km)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021-06-07T21:37:28.640Z</td>
+<td>ci39928800</td>
+<td>2.24</td>
+<td>ci39928808</td>
+<td>2.32</td>
+<td>0.000</td>
+<td>0.34</td>
+</tr>
+<tr>
+<td>2021-06-13T04:43:52.870Z</td>
+<td>ci39703015</td>
+<td>1.51</td>
+<td>ci39703007</td>
+<td>1.6</td>
+<td>0.010</td>
+<td>0.12</td>
+</tr>
+<tr>
+<td>2025-03-27T14:23:10.980Z</td>
+<td>ci40911535</td>
+<td>1.79</td>
+<td>ci40911543</td>
+<td>1.8</td>
+<td>0.040</td>
+<td>0.66</td>
+</tr>
+<tr>
+<td>2025-11-29T13:58:30.990Z</td>
+<td>ci10208414</td>
+<td>1.64</td>
+<td>ci10208422</td>
+<td>1.61</td>
+<td>0.050</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>2025-04-14T17:10:54.830Z</td>
+<td>ci40926031</td>
+<td>2.33</td>
+<td>ci37715548</td>
+<td>2.41</td>
+<td>0.070</td>
+<td>0.40</td>
+</tr>
+<tr>
+<td>2023-03-26T07:47:59.500Z</td>
+<td>ci40190015</td>
+<td>1.67</td>
+<td>ci40190023</td>
+<td>1.8</td>
+<td>0.110</td>
+<td>0.63</td>
+</tr>
+<tr>
+<td>2025-04-14T17:11:55.650Z</td>
+<td>ci40926047</td>
+<td>2.13</td>
+<td>ci37715580</td>
+<td>2.1</td>
+<td>0.160</td>
+<td>1.19</td>
+</tr>
+</tbody>
+</table></div>
+<h2>5. Missing values</h2>
+<ul>
+<li>Rows with no magnitude: 0. Rows with no depth: 0.</li>
+</ul>
+<h2>6. Magnitude types and networks</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>magType</th>
+<th>Events</th>
+<th>Min</th>
+<th>Max</th>
+<th>Reported to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ml</td>
+<td>17,017</td>
+<td>1.5</td>
+<td>4.6</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>md</td>
+<td>1,258</td>
+<td>1.5</td>
+<td>2.96</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>mw</td>
+<td>170</td>
+<td>3.32</td>
+<td>5.25</td>
+<td>0.01</td>
+</tr>
+<tr>
+<td>mh</td>
+<td>19</td>
+<td>1.5</td>
+<td>2.9</td>
+<td>0.1</td>
+</tr>
+<tr>
+<td>mlr</td>
+<td>7</td>
+<td>3.45</td>
+<td>3.58</td>
+<td>0.01</td>
+</tr>
+</tbody>
+</table></div>
+<p>Magnitude type by network:</p>
+<ul>
+<li>ml: ci 16,862, nn 119, nc 30, us 6</li>
+<li>md: nc 1,258</li>
+<li>mw: ci 157, nc 13</li>
+<li>mh: ci 17, nc 2</li>
+<li>
+<p>mlr: ci 7</p>
+</li>
+<li>
+<p>Networks in the final catalogue: ci 17,043, nc 1,303, nn 119, us 6. The nc events lie between 34.80 and 36.50 N and between 119.56 and 121.00 W, the north-west part of the box. mw values run from M3.32 to M5.25.</p>
+</li>
+</ul>
+<h2>7. Review status and depth</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Reviewed</th>
+<th>Automatic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021</td>
+<td>4,830</td>
+<td>16</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>3,162</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>3,111</td>
+<td>5</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>4,186</td>
+<td>15</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>3,071</td>
+<td>69</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>111 events are automatic, meaning no analyst has reviewed them yet; 69 of them are from 2025. They are kept. Section 8 gives b without them.</li>
+<li>Depth: median 7.68 km, 95% of events shallower than 16.65 km, range -1.96 to 36.67 km.</li>
+<li>201 events have a negative depth, meaning above the location datum. ComCat depths can be relative to the WGS84 geoid, mean sea level or the average station elevation, depending on the network.</li>
+<li>23 events have a depth of exactly 0 km (nn 19, ci 4), which looks like a fixed depth. They are kept.</li>
+<li>Most common exact depths before the type filter: -0.82 km: 176 rows (quarry blast 176); -0.79 km: 136 rows (quarry blast 134, earthquake 2); -0.25 km: 57 rows (quarry blast 55, earthquake 2); -0.20 km: 49 rows (quarry blast 48, earthquake 1); -0.51 km: 42 rows (quarry blast 41, earthquake 1). The two largest spikes are 99% non-earthquake events. Many rows sharing one exact depth suggests a fixed depth; the type filter removes them.</li>
+<li>2 events are deeper than 30 km. None is excluded.</li>
+</ul>
+<h2>8. Magnitude of completeness and b-value</h2>
+<p>Binning: magnitudes rounded to the nearest 0.1, half up (a 1.5 bin holds 1.45 to 1.549).</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Bin</th>
+<th>Events in bin</th>
+<th>Events at or above</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.5</td>
+<td>1,858</td>
+<td>18,471</td>
+</tr>
+<tr>
+<td>1.6</td>
+<td>3,219</td>
+<td>16,613</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>2,524</td>
+<td>13,394</td>
+</tr>
+<tr>
+<td>1.8</td>
+<td>2,139</td>
+<td>10,870</td>
+</tr>
+<tr>
+<td>1.9</td>
+<td>1,738</td>
+<td>8,731</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>1,359</td>
+<td>6,993</td>
+</tr>
+<tr>
+<td>2.1</td>
+<td>1,055</td>
+<td>5,634</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>909</td>
+<td>4,579</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>713</td>
+<td>3,670</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>563</td>
+<td>2,957</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>464</td>
+<td>2,394</td>
+</tr>
+<tr>
+<td>2.6</td>
+<td>398</td>
+<td>1,930</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>The 1.5 bin holds 1,858 events. It is half a bin, because the query starts at 1.5, so this bin only holds 1.50 to 1.549. It is left out of the search for the peak.</li>
+<li>Maximum curvature: the most populated full bin is 1.6 (3,219 events). With the usual +0.2 correction, Mc = 1.8.</li>
+<li>Caution: this peak sits at the first full bin, so the 1.5 floor limits what the method can see. The supplementary download below checks it.</li>
+<li>Supplementary check, calendar year 2023, all magnitudes: 14,601 rows, 13,958 earthquakes from M-0.50 to M5.08. Its peak bin is 0.9, so maximum curvature gives Mc = 1.1. But b is still rising at 1.1: it is 0.830 there against 0.940 at 1.8. The b-value stability method finds the first stable Mc at 1.5 (b = 0.922). So maximum curvature alone would set Mc too low for these data. Mc = 1.8 lies on the stable part of the curve, 0.3 above the first stable value.</li>
+<li>On the main data, the b-value stability method can only start at the first full bin (1.6); it finds a stable Mc at 1.6.</li>
+<li>The same check confirms the download: 3,260 event ids at M1.5 and above in the check file, 3,260 in the 2023 part of the main download, 3,260 in both.</li>
+</ul>
+<p>b-value stability on the 2023 check data (Cao and Gao 2002; Woessner and Wiemer 2005):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Mc</th>
+<th>Events</th>
+<th>b</th>
+<th>Shi-Bolt error</th>
+<th>Mean b, Mc to Mc+0.5</th>
+<th>Stable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.9</td>
+<td>9,209</td>
+<td>0.769</td>
+<td>0.007</td>
+<td>0.839</td>
+<td>no</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>8,020</td>
+<td>0.803</td>
+<td>0.008</td>
+<td>0.865</td>
+<td>no</td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>6,869</td>
+<td>0.830</td>
+<td>0.009</td>
+<td>0.887</td>
+<td>no</td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>5,818</td>
+<td>0.854</td>
+<td>0.010</td>
+<td>0.904</td>
+<td>no</td>
+</tr>
+<tr>
+<td>1.3</td>
+<td>4,892</td>
+<td>0.877</td>
+<td>0.012</td>
+<td>0.919</td>
+<td>no</td>
+</tr>
+<tr>
+<td>1.4</td>
+<td>4,096</td>
+<td>0.901</td>
+<td>0.013</td>
+<td>0.927</td>
+<td>no</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>3,394</td>
+<td>0.922</td>
+<td>0.015</td>
+<td>0.935</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>1.6</td>
+<td>2,784</td>
+<td>0.937</td>
+<td>0.017</td>
+<td>0.940</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>2,237</td>
+<td>0.935</td>
+<td>0.019</td>
+<td>0.942</td>
+<td>yes</td>
+</tr>
+</tbody>
+</table></div>
+<p>b-value, maximum likelihood (Aki-Utsu, bin width 0.1): b = 0.946 ± 0.009 (Shi and Bolt 1982), from 10,870 events at or above Mc = 1.8. Mean magnitude 2.2092. a-value 5.738.</p>
+<p>b-value, least squares on log10 of the cumulative counts, 36 bins from M1.8 to M5.3: b = 1.077 (R squared 0.993). Maximum likelihood minus least squares: -0.131. Using only bins with 10 or more events gives b = 1.033. Least squares over M1.8 to M3.2 only gives b = 0.944. Least squares gives every bin the same weight, so a few large events count as much as thousands of small ones. That is why the maximum likelihood value is the one reported.</p>
+<p>Why the two estimates differ. The table compares the observed cumulative counts with the maximum likelihood line.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>At or above M</th>
+<th>Observed</th>
+<th>Predicted by the fit</th>
+<th>Chance of this few or fewer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3.0</td>
+<td>779</td>
+<td>796.9</td>
+<td>0.270</td>
+</tr>
+<tr>
+<td>3.5</td>
+<td>276</td>
+<td>268.3</td>
+<td>0.695</td>
+</tr>
+<tr>
+<td>4.0</td>
+<td>74</td>
+<td>90.3</td>
+<td>0.045</td>
+</tr>
+<tr>
+<td>4.5</td>
+<td>16</td>
+<td>30.4</td>
+<td>0.003</td>
+</tr>
+<tr>
+<td>5.0</td>
+<td>4</td>
+<td>10.2</td>
+<td>0.025</td>
+</tr>
+</tbody>
+</table></div>
+<p>From M4.0 up, there are fewer events than the maximum likelihood line predicts. From M3.3 up the preferred magnitude gradually switches from ml to mw (table below), and the catalogue covers only five years. Either can produce this shortfall; this data cannot separate them. The shortfall is what lifts the least-squares slope. Five thresholds were examined, so the chance values are a guide, not a formal test.</p>
+<p>Magnitude type by magnitude band (events at or above Mc):</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Magnitude band</th>
+<th>Events</th>
+<th>Types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.8 to 2.4</td>
+<td>8,476</td>
+<td>ml 7,841, md 633, mh 2</td>
+</tr>
+<tr>
+<td>2.5 to 2.9</td>
+<td>1,615</td>
+<td>ml 1,499, md 114, mh 2</td>
+</tr>
+<tr>
+<td>3.0 to 3.2</td>
+<td>347</td>
+<td>ml 345, md 2</td>
+</tr>
+<tr>
+<td>3.3 to 3.4</td>
+<td>156</td>
+<td>ml 149, mw 7</td>
+</tr>
+<tr>
+<td>3.5 to 3.9</td>
+<td>202</td>
+<td>ml 101, mw 94, mlr 7</td>
+</tr>
+<tr>
+<td>4.0 to 5.3</td>
+<td>74</td>
+<td>mw 69, ml 5</td>
+</tr>
+</tbody>
+</table></div>
+<p>Other checks at the same Mc:</p>
+<ul>
+<li>Truncated fit over M1.8 to M3.2, the range before any mw value appears: b = 0.952 ± 0.012 (10,438 events). This agrees with the full fit within its error, so the mw switch and the tail do not drive the reported value.</li>
+<li>Exact discrete likelihood over the full range, as a check of the formula: b = 0.947.</li>
+<li>ml events only would give b = 0.998, but this is biased high: 59% of events at M3.5 and above carry mw, so the subset loses most of its tail. It is shown only to explain why it is not used.</li>
+<li>Unbinned magnitudes (0.01 steps) of the same events: b = 0.950.</li>
+<li>Bootstrap, 2000 resamples: 95% range 0.929 to 0.963, spread 0.009, close to the Shi and Bolt error.</li>
+<li>Reviewed events only: b = 0.945 (10,811 events).</li>
+<li>2023 check file at its first stable Mc = 1.5: b = 0.922 ± 0.015 (3,394 events). At Mc = 1.8: b = 0.940 ± 0.022.</li>
+</ul>
+<p>Stability of b as Mc moves:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Mc</th>
+<th>Events at or above</th>
+<th>b</th>
+<th>Shi-Bolt error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.6</td>
+<td>16,613</td>
+<td>0.936</td>
+<td>0.007</td>
+</tr>
+<tr>
+<td>1.7</td>
+<td>13,394</td>
+<td>0.937</td>
+<td>0.008</td>
+</tr>
+<tr>
+<td>1.8</td>
+<td>10,870</td>
+<td>0.946</td>
+<td>0.009</td>
+</tr>
+<tr>
+<td>1.9</td>
+<td>8,731</td>
+<td>0.945</td>
+<td>0.010</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>6,993</td>
+<td>0.942</td>
+<td>0.011</td>
+</tr>
+<tr>
+<td>2.1</td>
+<td>5,634</td>
+<td>0.943</td>
+<td>0.012</td>
+</tr>
+<tr>
+<td>2.2</td>
+<td>4,579</td>
+<td>0.954</td>
+<td>0.014</td>
+</tr>
+<tr>
+<td>2.3</td>
+<td>3,670</td>
+<td>0.954</td>
+<td>0.015</td>
+</tr>
+<tr>
+<td>2.4</td>
+<td>2,957</td>
+<td>0.958</td>
+<td>0.017</td>
+</tr>
+<tr>
+<td>2.5</td>
+<td>2,394</td>
+<td>0.970</td>
+<td>0.019</td>
+</tr>
+<tr>
+<td>2.6</td>
+<td>1,930</td>
+<td>0.979</td>
+<td>0.021</td>
+</tr>
+<tr>
+<td>2.7</td>
+<td>1,532</td>
+<td>0.974</td>
+<td>0.023</td>
+</tr>
+<tr>
+<td>2.8</td>
+<td>1,224</td>
+<td>0.975</td>
+<td>0.026</td>
+</tr>
+</tbody>
+</table></div>
+<p>Subsets:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Subset (Mc fixed)</th>
+<th>Events</th>
+<th>b</th>
+<th>Shi-Bolt error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>azimuthal gap 180° or less (inside the network)</td>
+<td>10,525</td>
+<td>0.949</td>
+<td>0.009</td>
+</tr>
+<tr>
+<td>azimuthal gap above 180° (network edges)</td>
+<td>341</td>
+<td>0.855</td>
+<td>0.042</td>
+</tr>
+<tr>
+<td>network ci only</td>
+<td>10,020</td>
+<td>0.943</td>
+<td>0.009</td>
+</tr>
+<tr>
+<td>network nc only (mostly md magnitudes)</td>
+<td>794</td>
+<td>0.978</td>
+<td>0.031</td>
+</tr>
+<tr>
+<td>reviewed events only</td>
+<td>10,811</td>
+<td>0.945</td>
+<td>0.009</td>
+</tr>
+<tr>
+<td>one event of each flagged same-network pair removed</td>
+<td>10,865</td>
+<td>0.946</td>
+<td>0.009</td>
+</tr>
+<tr>
+<td>2021</td>
+<td>2,767</td>
+<td>0.960</td>
+<td>0.018</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>1,887</td>
+<td>1.004</td>
+<td>0.022</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>1,811</td>
+<td>0.940</td>
+<td>0.022</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>2,497</td>
+<td>0.884</td>
+<td>0.018</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>1,908</td>
+<td>0.964</td>
+<td>0.021</td>
+</tr>
+</tbody>
+</table></div>
+<p>Level check: b = 0.95 is within 0.1 of 1.0, the value usually found in California. The deeper checks above were run because the two estimators disagreed, not because of the level. For Mc from 1.6 to 2.5, b runs from 0.936 to 0.970. By year it runs from 0.884 to 1.004.</p>
+<h2>9. Largest events (from the data)</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Date (UTC)</th>
+<th>M</th>
+<th>Type</th>
+<th>Depth (km)</th>
+<th>ComCat place</th>
+<th>Event id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2021-06-05</td>
+<td>5.25</td>
+<td>mw</td>
+<td>5.8</td>
+<td>11km W of Calipatria, CA</td>
+<td>ci39919392</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2024-08-07</td>
+<td>5.22</td>
+<td>mw</td>
+<td>11.6</td>
+<td>24 km SW of Lamont, CA</td>
+<td>ci40865184</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2025-04-14</td>
+<td>5.21</td>
+<td>mw</td>
+<td>14.3</td>
+<td>5 km S of Julian, CA</td>
+<td>ci40925991</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2023-08-20</td>
+<td>5.08</td>
+<td>mw</td>
+<td>4.8</td>
+<td>7 km SE of Ojai, CA</td>
+<td>ci39645386</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2024-07-29</td>
+<td>4.87</td>
+<td>mw</td>
+<td>7.3</td>
+<td>22 km ENE of Barstow, CA</td>
+<td>ci40675215</td>
+</tr>
+</tbody>
+</table></div>
+<h2>10. Monthly counts</h2>
+<ul>
+<li>18,471 earthquakes over 60 months. Median 268 per month, mean 307.9.</li>
+<li>Busiest month: 2021-06 with 1,387 events. Quietest month: 2023-09 with 179 events.</li>
+<li>Per year: 2021 4,846, 2022 3,168, 2023 3,116, 2024 4,201, 2025 3,140.</li>
+</ul>
+<h2>11. City markers</h2>
+<ul>
+<li>Los Angeles: marker 34.0522 N, 118.2437 W. 3 ComCat place labels name this city (distances 1, 2, 4 km). The median position they imply is 0.5 km from the marker.</li>
+<li>San Diego: marker 32.7157 N, 117.1611 W. No place label in this data names the city, so the label check cannot run. Plausibility only: the marker is 1.1 km from the Natural Earth coastline and 20.7 km from the Baja California boundary.</li>
+<li>Palm Springs: marker 33.8303 N, 116.5453 W. 3 ComCat place labels name this city (distances 1, 8, 8 km). The median position they imply is 1.6 km from the marker.</li>
+</ul>
+<h2>12. Figures</h2>
+<ul>
+<li>figures/fig_a_epicentre_density.png: 1600 x 1000 px, white corners: yes, smallest text 15.3 px, missing glyph warnings: 0</li>
+<li>figures/fig_b_frequency_magnitude.png: 1600 x 1000 px, white corners: yes, smallest text 18.1 px, missing glyph warnings: 0</li>
+<li>figures/fig_c_depth.png: 1600 x 1000 px, white corners: yes, smallest text 18.1 px, missing glyph warnings: 0</li>
+<li>figures/fig_d_monthly_counts.png: 1600 x 1000 px, white corners: yes, smallest text 18.1 px, missing glyph warnings: 0</li>
+</ul>
+<h2>13. Limits</h2>
+<ul>
+<li>Mixed magnitude scales. Most events use ml, the north-west corner uses md from the Northern California network, and larger events use mw. Different magnitude types need not agree, and this analysis did not compare them event by event. Section 8 gives b by subset and by magnitude range.</li>
+<li>Network changes. The catalogue joins solutions from several networks. Station coverage can change over time; beyond the 2023 completeness check, this was not tested.</li>
+<li>The box is a rectangle. Admin-1 units it touches: Arizona, Baja California, California, Nevada, Sonora. It also covers offshore water. Events located from outside the network (azimuthal gap above 180°) give b = 0.855, against 0.949 inside it. A lower b is what missed small events would produce. They are 3.1% of the events at or above Mc, and leaving them out moves b by +0.003. Completeness was not mapped, and one Mc is used for the whole box.</li>
+<li>Aftershocks and swarms are not removed (no declustering). Right after a large event, small events are hard to detect, so counts in the first hours can be too low even above Mc. This was not corrected.</li>
+<li>111 automatic solutions may still change after review.</li>
+<li>Depth is the least constrained location value, datums differ by network, and some depths are fixed.</li>
+<li>Times are UTC. Magnitudes are rounded to 0.1 before binning, half up.</li>
+</ul></div></section>
+<footer><div class="wrap">Orders, messages and files go through Fiverr only. <a href="https://www.fiverr.com/meladfekry" rel="noopener">fiverr.com/meladfekry</a></div></footer>
+</body>
+</html>

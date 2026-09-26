@@ -1,0 +1,1508 @@
+{
+  "study": {
+    "region": "Southern California box",
+    "lat": [
+      32.0,
+      36.5
+    ],
+    "lon": [
+      -121.0,
+      -114.0
+    ],
+    "start_utc": "2021-01-01T00:00:00Z",
+    "end_utc_exclusive": "2026-01-01T00:00:00Z",
+    "min_magnitude": 1.5,
+    "bin_width": 0.1
+  },
+  "retrieval": {
+    "files": [
+      {
+        "file": "raw/usgs_socal_2021H1.csv.gz",
+        "rows": 3403,
+        "manifest_rows": 3403,
+        "count_endpoint": 3403,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2021H2.csv.gz",
+        "rows": 1678,
+        "manifest_rows": 1678,
+        "count_endpoint": 1678,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2022H1.csv.gz",
+        "rows": 1816,
+        "manifest_rows": 1816,
+        "count_endpoint": 1816,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2022H2.csv.gz",
+        "rows": 1561,
+        "manifest_rows": 1561,
+        "count_endpoint": 1561,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2023H1.csv.gz",
+        "rows": 1646,
+        "manifest_rows": 1646,
+        "count_endpoint": 1646,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2023H2.csv.gz",
+        "rows": 1614,
+        "manifest_rows": 1614,
+        "count_endpoint": 1614,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2024H1.csv.gz",
+        "rows": 1978,
+        "manifest_rows": 1978,
+        "count_endpoint": 1978,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2024H2.csv.gz",
+        "rows": 2435,
+        "manifest_rows": 2435,
+        "count_endpoint": 2435,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2025H1.csv.gz",
+        "rows": 1717,
+        "manifest_rows": 1717,
+        "count_endpoint": 1717,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      },
+      {
+        "file": "raw/usgs_socal_2025H2.csv.gz",
+        "rows": 1594,
+        "manifest_rows": 1594,
+        "count_endpoint": 1594,
+        "max_allowed": 20000,
+        "sha256_matches_manifest": true
+      }
+    ],
+    "rows_downloaded": 19442,
+    "all_rows_equal_count": true,
+    "all_below_cap": true,
+    "all_hashes_match": true,
+    "largest_chunk_rows": 3403,
+    "cap": 20000,
+    "queries_split": 0,
+    "service_version": "2.7.0"
+  },
+  "depth_spikes_before_type_filter": [
+    {
+      "depth_km": -0.82,
+      "count": 176,
+      "types": {
+        "quarry blast": 176
+      }
+    },
+    {
+      "depth_km": -0.79,
+      "count": 136,
+      "types": {
+        "quarry blast": 134,
+        "earthquake": 2
+      }
+    },
+    {
+      "depth_km": -0.25,
+      "count": 57,
+      "types": {
+        "quarry blast": 55,
+        "earthquake": 2
+      }
+    },
+    {
+      "depth_km": -0.2,
+      "count": 49,
+      "types": {
+        "quarry blast": 48,
+        "earthquake": 1
+      }
+    },
+    {
+      "depth_km": -0.51,
+      "count": 42,
+      "types": {
+        "quarry blast": 41,
+        "earthquake": 1
+      }
+    }
+  ],
+  "cleaning": {
+    "steps": [
+      {
+        "step": "Unreadable time or coordinates",
+        "rows_in": 19442,
+        "removed": 0,
+        "rows_out": 19442
+      },
+      {
+        "step": "Outside 2021-01-01 to 2025-12-31 (UTC)",
+        "rows_in": 19442,
+        "removed": 0,
+        "rows_out": 19442
+      },
+      {
+        "step": "Outside the study box",
+        "rows_in": 19442,
+        "removed": 0,
+        "rows_out": 19442
+      },
+      {
+        "step": "Duplicate event id (older update dropped)",
+        "rows_in": 19442,
+        "removed": 0,
+        "rows_out": 19442
+      },
+      {
+        "step": "Not an earthquake (event type)",
+        "rows_in": 19442,
+        "removed": 966,
+        "rows_out": 18476
+      },
+      {
+        "step": "Missing magnitude",
+        "rows_in": 18476,
+        "removed": 0,
+        "rows_out": 18476
+      },
+      {
+        "step": "Missing depth",
+        "rows_in": 18476,
+        "removed": 0,
+        "rows_out": 18476
+      },
+      {
+        "step": "Magnitude below the 1.5 query floor",
+        "rows_in": 18476,
+        "removed": 0,
+        "rows_out": 18476
+      },
+      {
+        "step": "Cross-network duplicate (same event reported twice)",
+        "rows_in": 18476,
+        "removed": 5,
+        "rows_out": 18471
+      }
+    ],
+    "rows_downloaded": 19442,
+    "rows_excluded": 971,
+    "catalogue_rows": 18471,
+    "exclusions_by_reason": {
+      "non_earthquake_type:quarry blast": 950,
+      "non_earthquake_type:explosion": 12,
+      "cross_network_duplicate": 5,
+      "non_earthquake_type:mining explosion": 2,
+      "non_earthquake_type:sonic boom": 1,
+      "non_earthquake_type:other event": 1
+    }
+  },
+  "event_types": {
+    "all_rows": {
+      "earthquake": 18476,
+      "quarry blast": 950,
+      "explosion": 12,
+      "mining explosion": 2,
+      "sonic boom": 1,
+      "other event": 1
+    },
+    "kept_as_earthquake": [
+      "earthquake"
+    ],
+    "removed_non_earthquake": 966,
+    "removed_by_type": {
+      "quarry blast": 950,
+      "explosion": 12,
+      "mining explosion": 2,
+      "sonic boom": 1,
+      "other event": 1
+    }
+  },
+  "duplicates": {
+    "duplicate_ids": 0,
+    "detector_self_test": {
+      "base_event": "ci40226423",
+      "twin_offset": "0.8 s and 0.01 deg latitude (about 1.1 km)",
+      "twin_detected": true,
+      "far_copy_offset": "30 s",
+      "far_copy_detected": false,
+      "passed": true
+    },
+    "cross_network": {
+      "rule": "different network, within 2 s and 10 km; keep the regional-network solution (ci, nc, nn), else the one with more stations",
+      "pairs_found": 5,
+      "events_removed": 5,
+      "next_closest_cross_network_dt_s": 8.73,
+      "pairs": [
+        {
+          "kept_id": "ci39936232",
+          "kept_net": "ci",
+          "kept_mag": 3.61,
+          "dropped_id": "ew1623472898",
+          "dropped_net": "ew",
+          "dropped_mag": 4.1407,
+          "dropped_status": "automatic",
+          "dt_s": 0.651,
+          "dist_km": 4.53,
+          "time_utc": "2021-06-12T04:41:37.860Z",
+          "place": "14km WSW of Niland, CA"
+        },
+        {
+          "kept_id": "ci39713383",
+          "kept_net": "ci",
+          "kept_mag": 2.46,
+          "dropped_id": "us7000eeln",
+          "dropped_net": "us",
+          "dropped_mag": 2.2,
+          "dropped_status": "reviewed",
+          "dt_s": 0.506,
+          "dist_km": 0.53,
+          "time_utc": "2021-06-20T07:36:24.650Z",
+          "place": "20km W of Searles Valley, CA"
+        },
+        {
+          "kept_id": "ci37651516",
+          "kept_net": "ci",
+          "kept_mag": 2.59,
+          "dropped_id": "us6000mwfl",
+          "dropped_net": "us",
+          "dropped_mag": 2.2,
+          "dropped_status": "reviewed",
+          "dt_s": 0.531,
+          "dist_km": 5.14,
+          "time_utc": "2024-05-05T07:27:14.810Z",
+          "place": "14 km WSW of Delta, B.C., MX"
+        },
+        {
+          "kept_id": "ci37680324",
+          "kept_net": "ci",
+          "kept_mag": 2.75,
+          "dropped_id": "us6000niie",
+          "dropped_net": "us",
+          "dropped_mag": 2.6,
+          "dropped_status": "reviewed",
+          "dt_s": 0.355,
+          "dist_km": 1.22,
+          "time_utc": "2024-08-07T04:54:23.770Z",
+          "place": "23 km NW of Grapevine, CA"
+        },
+        {
+          "kept_id": "ci40794535",
+          "kept_net": "ci",
+          "kept_mag": 2.82,
+          "dropped_id": "us7000ns9c",
+          "dropped_net": "us",
+          "dropped_mag": 2.7,
+          "dropped_status": "reviewed",
+          "dt_s": 0.399,
+          "dist_km": 1.0,
+          "time_utc": "2024-11-17T09:32:58.680Z",
+          "place": "6 km NW of Fontana, CA"
+        }
+      ]
+    },
+    "same_network": {
+      "rule": "same network, within 0.2 s and 2 km; flagged and kept",
+      "pairs_flagged": 7,
+      "pairs": [
+        {
+          "id_a": "ci39928800",
+          "id_b": "ci39928808",
+          "net": "ci",
+          "mag_a": 2.24,
+          "mag_b": 2.32,
+          "nst_a": 48.0,
+          "nst_b": 63.0,
+          "dt_s": 0.0,
+          "dist_km": 0.34,
+          "time_utc": "2021-06-07T21:37:28.640Z"
+        },
+        {
+          "id_a": "ci39703015",
+          "id_b": "ci39703007",
+          "net": "ci",
+          "mag_a": 1.51,
+          "mag_b": 1.6,
+          "nst_a": 47.0,
+          "nst_b": 43.0,
+          "dt_s": 0.01,
+          "dist_km": 0.12,
+          "time_utc": "2021-06-13T04:43:52.870Z"
+        },
+        {
+          "id_a": "ci40911535",
+          "id_b": "ci40911543",
+          "net": "ci",
+          "mag_a": 1.79,
+          "mag_b": 1.8,
+          "nst_a": 78.0,
+          "nst_b": 38.0,
+          "dt_s": 0.04,
+          "dist_km": 0.66,
+          "time_utc": "2025-03-27T14:23:10.980Z"
+        },
+        {
+          "id_a": "ci10208414",
+          "id_b": "ci10208422",
+          "net": "ci",
+          "mag_a": 1.64,
+          "mag_b": 1.61,
+          "nst_a": 20.0,
+          "nst_b": 16.0,
+          "dt_s": 0.05,
+          "dist_km": 0.1,
+          "time_utc": "2025-11-29T13:58:30.990Z"
+        },
+        {
+          "id_a": "ci40926031",
+          "id_b": "ci37715548",
+          "net": "ci",
+          "mag_a": 2.33,
+          "mag_b": 2.41,
+          "nst_a": 24.0,
+          "nst_b": 28.0,
+          "dt_s": 0.07,
+          "dist_km": 0.4,
+          "time_utc": "2025-04-14T17:10:54.830Z"
+        },
+        {
+          "id_a": "ci40190015",
+          "id_b": "ci40190023",
+          "net": "ci",
+          "mag_a": 1.67,
+          "mag_b": 1.8,
+          "nst_a": 75.0,
+          "nst_b": 29.0,
+          "dt_s": 0.11,
+          "dist_km": 0.63,
+          "time_utc": "2023-03-26T07:47:59.500Z"
+        },
+        {
+          "id_a": "ci40926047",
+          "id_b": "ci37715580",
+          "net": "ci",
+          "mag_a": 2.13,
+          "mag_b": 2.1,
+          "nst_a": 17.0,
+          "nst_b": 8.0,
+          "dt_s": 0.16,
+          "dist_km": 1.19,
+          "time_utc": "2025-04-14T17:11:55.650Z"
+        }
+      ],
+      "next_same_network_dt_s_within_3km": 0.55
+    }
+  },
+  "missing": {
+    "magnitude": 0,
+    "depth": 0
+  },
+  "magnitude_types": [
+    {
+      "magType": "ml",
+      "count": 17017,
+      "min": 1.5,
+      "max": 4.6,
+      "share_second_decimal_zero": 0.115
+    },
+    {
+      "magType": "md",
+      "count": 1258,
+      "min": 1.5,
+      "max": 2.96,
+      "share_second_decimal_zero": 0.113
+    },
+    {
+      "magType": "mw",
+      "count": 170,
+      "min": 3.32,
+      "max": 5.25,
+      "share_second_decimal_zero": 0.088
+    },
+    {
+      "magType": "mh",
+      "count": 19,
+      "min": 1.5,
+      "max": 2.9,
+      "share_second_decimal_zero": 1.0
+    },
+    {
+      "magType": "mlr",
+      "count": 7,
+      "min": 3.45,
+      "max": 3.58,
+      "share_second_decimal_zero": 0.0
+    }
+  ],
+  "networks": {
+    "ci": 17043,
+    "nc": 1303,
+    "nn": 119,
+    "us": 6
+  },
+  "network_extent": {
+    "ci": {
+      "lat_min": 32.0,
+      "lat_max": 36.5,
+      "lon_min": -120.85,
+      "lon_max": -114.79
+    },
+    "nc": {
+      "lat_min": 34.8,
+      "lat_max": 36.5,
+      "lon_min": -121.0,
+      "lon_max": -119.56
+    },
+    "nn": {
+      "lat_min": 35.35,
+      "lat_max": 36.5,
+      "lon_min": -117.83,
+      "lon_max": -114.0
+    },
+    "us": {
+      "lat_min": 32.17,
+      "lat_max": 34.47,
+      "lon_min": -119.91,
+      "lon_max": -117.7
+    }
+  },
+  "magtype_by_network": {
+    "ci": {
+      "ml": 16862,
+      "mw": 157,
+      "mh": 17,
+      "mlr": 7
+    },
+    "nc": {
+      "md": 1258,
+      "ml": 30,
+      "mw": 13,
+      "mh": 2
+    },
+    "nn": {
+      "ml": 119
+    },
+    "us": {
+      "ml": 6
+    }
+  },
+  "status": {
+    "total": {
+      "reviewed": 18360,
+      "automatic": 111
+    },
+    "by_year": {
+      "2021": {
+        "automatic": 16,
+        "reviewed": 4830
+      },
+      "2022": {
+        "automatic": 6,
+        "reviewed": 3162
+      },
+      "2023": {
+        "automatic": 5,
+        "reviewed": 3111
+      },
+      "2024": {
+        "automatic": 15,
+        "reviewed": 4186
+      },
+      "2025": {
+        "automatic": 69,
+        "reviewed": 3071
+      }
+    }
+  },
+  "depth": {
+    "n": 18471,
+    "min_km": -1.96,
+    "max_km": 36.67,
+    "mean_km": 8.25,
+    "median_km": 7.68,
+    "p90_km": 14.73,
+    "d95_km": 16.65,
+    "above_datum_count": 201,
+    "above_datum_share": 0.0109,
+    "exactly_zero_count": 23,
+    "exactly_zero_by_network": {
+      "nn": 19,
+      "ci": 4
+    },
+    "deeper_than_20km": 304,
+    "deeper_than_30km": 2,
+    "most_common_values": [
+      {
+        "depth_km": 7.45,
+        "count": 29
+      },
+      {
+        "depth_km": 11.06,
+        "count": 28
+      },
+      {
+        "depth_km": 2.66,
+        "count": 27
+      },
+      {
+        "depth_km": 7.41,
+        "count": 26
+      },
+      {
+        "depth_km": 0.0,
+        "count": 25
+      }
+    ]
+  },
+  "magnitude_range": {
+    "min": 1.5,
+    "max": 5.25
+  },
+  "completeness": {
+    "method": "maximum curvature on 0.1 magnitude bins, then +0.2 (Woessner and Wiemer 2005)",
+    "binning": "magnitudes rounded to the nearest 0.1, half up (a 1.5 bin holds 1.45 to 1.549)",
+    "partial_first_bin": {
+      "bin": 1.5,
+      "count": 1858,
+      "reason": "the query starts at 1.5, so this bin only holds 1.50 to 1.549"
+    },
+    "mc_maxc": 1.6,
+    "correction": 0.2,
+    "mc": 1.8,
+    "mode_count": 3219,
+    "mode_at_first_full_bin": true,
+    "mbs": {
+      "method": "b-value stability (Cao and Gao 2002; Woessner and Wiemer 2005): first Mc where the mean b over Mc to Mc + 0.5 is within the Shi and Bolt error of b(Mc)",
+      "start": 1.6,
+      "mc_mbs": 1.6,
+      "rows": [
+        {
+          "mc": 1.6,
+          "n": 16613,
+          "b": 0.936342,
+          "sigma_shi_bolt": 0.007093,
+          "b_mean_next_05": 0.941551,
+          "stable": true
+        },
+        {
+          "mc": 1.7,
+          "n": 13394,
+          "b": 0.937445,
+          "sigma_shi_bolt": 0.007884,
+          "b_mean_next_05": 0.94456,
+          "stable": true
+        },
+        {
+          "mc": 1.8,
+          "n": 10870,
+          "b": 0.945688,
+          "sigma_shi_bolt": 0.00887,
+          "b_mean_next_05": 0.947273,
+          "stable": true
+        },
+        {
+          "mc": 1.9,
+          "n": 8731,
+          "b": 0.945156,
+          "sigma_shi_bolt": 0.009845,
+          "b_mean_next_05": 0.949404,
+          "stable": true
+        },
+        {
+          "mc": 2.0,
+          "n": 6993,
+          "b": 0.941522,
+          "sigma_shi_bolt": 0.010852,
+          "b_mean_next_05": 0.953478,
+          "stable": false
+        },
+        {
+          "mc": 2.1,
+          "n": 5634,
+          "b": 0.94315,
+          "sigma_shi_bolt": 0.012041,
+          "b_mean_next_05": 0.959737,
+          "stable": false
+        },
+        {
+          "mc": 2.2,
+          "n": 4579,
+          "b": 0.954399,
+          "sigma_shi_bolt": 0.013575,
+          "b_mean_next_05": 0.964902,
+          "stable": true
+        },
+        {
+          "mc": 2.3,
+          "n": 3670,
+          "b": 0.953722,
+          "sigma_shi_bolt": 0.015015,
+          "b_mean_next_05": 0.968338,
+          "stable": true
+        }
+      ]
+    },
+    "fmd_first_bins": [
+      {
+        "mag": 1.5,
+        "incremental": 1858,
+        "cumulative": 18471
+      },
+      {
+        "mag": 1.6,
+        "incremental": 3219,
+        "cumulative": 16613
+      },
+      {
+        "mag": 1.7,
+        "incremental": 2524,
+        "cumulative": 13394
+      },
+      {
+        "mag": 1.8,
+        "incremental": 2139,
+        "cumulative": 10870
+      },
+      {
+        "mag": 1.9,
+        "incremental": 1738,
+        "cumulative": 8731
+      },
+      {
+        "mag": 2.0,
+        "incremental": 1359,
+        "cumulative": 6993
+      },
+      {
+        "mag": 2.1,
+        "incremental": 1055,
+        "cumulative": 5634
+      },
+      {
+        "mag": 2.2,
+        "incremental": 909,
+        "cumulative": 4579
+      },
+      {
+        "mag": 2.3,
+        "incremental": 713,
+        "cumulative": 3670
+      },
+      {
+        "mag": 2.4,
+        "incremental": 563,
+        "cumulative": 2957
+      },
+      {
+        "mag": 2.5,
+        "incremental": 464,
+        "cumulative": 2394
+      },
+      {
+        "mag": 2.6,
+        "incremental": 398,
+        "cumulative": 1930
+      }
+    ]
+  },
+  "b_value": {
+    "maximum_likelihood": {
+      "method": "Aki-Utsu: b = log10(e) / (mean(M) - (Mc - 0.05)); uncertainty by Shi and Bolt (1982), constant 2.30 (ln 10)",
+      "mc": 1.8,
+      "n": 10870,
+      "mean_mag": 2.209236,
+      "b": 0.945688,
+      "sigma_shi_bolt": 0.00887,
+      "sigma_aki": 0.009071,
+      "a": 5.738468
+    },
+    "least_squares": {
+      "method": "ordinary least squares on log10 N(>=M), 0.1 bins from Mc to the largest event",
+      "b": 1.07699,
+      "a": 6.089716,
+      "r2": 0.993367,
+      "n_bins": 36,
+      "m_from": 1.8,
+      "m_to": 5.3,
+      "slope_std_error": 0.015093,
+      "note": "points of a cumulative curve are not independent, so this error is too small"
+    },
+    "least_squares_bins_with_10_or_more": {
+      "b": 1.03336,
+      "n_bins": 30,
+      "m_to": 4.7
+    },
+    "difference_ml_minus_ls": -0.131302,
+    "continuous_check": {
+      "b": 0.950218,
+      "note": "unbinned 0.01 magnitudes of the same events, lower edge Mc - 0.055"
+    },
+    "bootstrap": {
+      "n": 2000,
+      "seed": 20260926,
+      "mean": 0.945666,
+      "std": 0.008745,
+      "ci95_low": 0.928684,
+      "ci95_high": 0.962914
+    },
+    "stability_vs_mc": [
+      {
+        "mc": 1.6,
+        "n": 16613,
+        "b": 0.936342,
+        "sigma_shi_bolt": 0.007093
+      },
+      {
+        "mc": 1.7,
+        "n": 13394,
+        "b": 0.937445,
+        "sigma_shi_bolt": 0.007884
+      },
+      {
+        "mc": 1.8,
+        "n": 10870,
+        "b": 0.945688,
+        "sigma_shi_bolt": 0.00887
+      },
+      {
+        "mc": 1.9,
+        "n": 8731,
+        "b": 0.945156,
+        "sigma_shi_bolt": 0.009845
+      },
+      {
+        "mc": 2.0,
+        "n": 6993,
+        "b": 0.941522,
+        "sigma_shi_bolt": 0.010852
+      },
+      {
+        "mc": 2.1,
+        "n": 5634,
+        "b": 0.94315,
+        "sigma_shi_bolt": 0.012041
+      },
+      {
+        "mc": 2.2,
+        "n": 4579,
+        "b": 0.954399,
+        "sigma_shi_bolt": 0.013575
+      },
+      {
+        "mc": 2.3,
+        "n": 3670,
+        "b": 0.953722,
+        "sigma_shi_bolt": 0.015015
+      },
+      {
+        "mc": 2.4,
+        "n": 2957,
+        "b": 0.958472,
+        "sigma_shi_bolt": 0.016728
+      },
+      {
+        "mc": 2.5,
+        "n": 2394,
+        "b": 0.969599,
+        "sigma_shi_bolt": 0.018834
+      },
+      {
+        "mc": 2.6,
+        "n": 1930,
+        "b": 0.979078,
+        "sigma_shi_bolt": 0.021171
+      },
+      {
+        "mc": 2.7,
+        "n": 1532,
+        "b": 0.974142,
+        "sigma_shi_bolt": 0.023219
+      },
+      {
+        "mc": 2.8,
+        "n": 1224,
+        "b": 0.975012,
+        "sigma_shi_bolt": 0.025582
+      },
+      {
+        "mc": 2.9,
+        "n": 973,
+        "b": 0.970641,
+        "sigma_shi_bolt": 0.02778
+      },
+      {
+        "mc": 3.0,
+        "n": 779,
+        "b": 0.97287,
+        "sigma_shi_bolt": 0.030256
+      }
+    ],
+    "subsets": [
+      {
+        "subset": "azimuthal gap 180° or less (inside the network)",
+        "n": 10525,
+        "b": 0.948891,
+        "sigma_shi_bolt": 0.009068
+      },
+      {
+        "subset": "azimuthal gap above 180° (network edges)",
+        "n": 341,
+        "b": 0.854802,
+        "sigma_shi_bolt": 0.042
+      },
+      {
+        "subset": "network ci only",
+        "n": 10020,
+        "b": 0.942748,
+        "sigma_shi_bolt": 0.009264
+      },
+      {
+        "subset": "network nc only (mostly md magnitudes)",
+        "n": 794,
+        "b": 0.977963,
+        "sigma_shi_bolt": 0.031111
+      },
+      {
+        "subset": "reviewed events only",
+        "n": 10811,
+        "b": 0.944709,
+        "sigma_shi_bolt": 0.00889
+      },
+      {
+        "subset": "one event of each flagged same-network pair removed",
+        "n": 10865,
+        "b": 0.945528,
+        "sigma_shi_bolt": 0.00887
+      }
+    ],
+    "by_year": [
+      {
+        "subset": "2021",
+        "n": 2767,
+        "b": 0.96024,
+        "sigma_shi_bolt": 0.017822
+      },
+      {
+        "subset": "2022",
+        "n": 1887,
+        "b": 1.003507,
+        "sigma_shi_bolt": 0.02249
+      },
+      {
+        "subset": "2023",
+        "n": 1811,
+        "b": 0.940067,
+        "sigma_shi_bolt": 0.021517
+      },
+      {
+        "subset": "2024",
+        "n": 2497,
+        "b": 0.883629,
+        "sigma_shi_bolt": 0.017554
+      },
+      {
+        "subset": "2025",
+        "n": 1908,
+        "b": 0.96364,
+        "sigma_shi_bolt": 0.021061
+      }
+    ],
+    "tail_check": [
+      {
+        "m": 3.0,
+        "observed": 779,
+        "predicted": 796.9,
+        "poisson_p_at_most_observed": 0.27
+      },
+      {
+        "m": 3.5,
+        "observed": 276,
+        "predicted": 268.3,
+        "poisson_p_at_most_observed": 0.695
+      },
+      {
+        "m": 4.0,
+        "observed": 74,
+        "predicted": 90.3,
+        "poisson_p_at_most_observed": 0.045
+      },
+      {
+        "m": 4.5,
+        "observed": 16,
+        "predicted": 30.4,
+        "poisson_p_at_most_observed": 0.003
+      },
+      {
+        "m": 5.0,
+        "observed": 4,
+        "predicted": 10.2,
+        "poisson_p_at_most_observed": 0.025
+      }
+    ],
+    "magtype_by_band": [
+      {
+        "band": "1.8 to 2.4",
+        "n": 8476,
+        "magtypes": {
+          "ml": 7841,
+          "md": 633,
+          "mh": 2
+        }
+      },
+      {
+        "band": "2.5 to 2.9",
+        "n": 1615,
+        "magtypes": {
+          "ml": 1499,
+          "md": 114,
+          "mh": 2
+        }
+      },
+      {
+        "band": "3.0 to 3.2",
+        "n": 347,
+        "magtypes": {
+          "ml": 345,
+          "md": 2
+        }
+      },
+      {
+        "band": "3.3 to 3.4",
+        "n": 156,
+        "magtypes": {
+          "ml": 149,
+          "mw": 7
+        }
+      },
+      {
+        "band": "3.5 to 3.9",
+        "n": 202,
+        "magtypes": {
+          "ml": 101,
+          "mw": 94,
+          "mlr": 7
+        }
+      },
+      {
+        "band": "4.0 to 5.3",
+        "n": 74,
+        "magtypes": {
+          "mw": 69,
+          "ml": 5
+        }
+      }
+    ],
+    "mw_first_bin": 3.3,
+    "truncated_fit_before_mw": {
+      "method": "exact maximum likelihood for 0.1 bins, magnitudes limited to the range",
+      "m_from": 1.8,
+      "m_to": 3.2,
+      "n": 10438,
+      "b": 0.951581,
+      "std_error": 0.012443
+    },
+    "discrete_full_range_check": {
+      "b": 0.946524,
+      "std_error": 0.009209,
+      "n": 10870
+    },
+    "least_squares_straight_part": {
+      "b": 0.943595,
+      "m_from": 1.8,
+      "m_to": 3.2,
+      "n_bins": 15
+    },
+    "ml_only_caveat": {
+      "n": 9940,
+      "b": 0.998055,
+      "mw_share_at_or_above_3_5": 0.5906,
+      "note": "biased high: the subset loses the mw events that make up much of the tail"
+    },
+    "without_automatic_events": {
+      "n": 10811,
+      "b": 0.944709
+    },
+    "without_one_of_each_flagged_pair": {
+      "n": 10865,
+      "b": 0.945528,
+      "change": -0.00016
+    }
+  },
+  "mc_check_2023": {
+    "file": "raw/mc_check_2023_allmag.csv.gz",
+    "rows": 14601,
+    "sha256_matches_manifest": true,
+    "types": {
+      "earthquake": 13958,
+      "quarry blast": 642,
+      "explosion": 1
+    },
+    "earthquakes_with_magnitude": 13958,
+    "mag_min": -0.5,
+    "mag_max": 5.08,
+    "mc_maxc": 0.9,
+    "mc": 1.1,
+    "mode_count": 1189,
+    "b_at_own_mc": {
+      "mc": 1.1,
+      "n": 6869,
+      "b": 0.83033,
+      "sigma_shi_bolt": 0.009131
+    },
+    "b_at_main_mc": {
+      "mc": 1.8,
+      "n": 1811,
+      "b": 0.940067,
+      "sigma_shi_bolt": 0.021517
+    },
+    "mc_mbs": 1.5,
+    "b_at_mbs_mc": {
+      "mc": 1.5,
+      "n": 3394,
+      "b": 0.921823,
+      "sigma_shi_bolt": 0.015311
+    },
+    "mbs_rows": [
+      {
+        "mc": 0.9,
+        "n": 9209,
+        "b": 0.769319,
+        "sigma_shi_bolt": 0.007014,
+        "b_mean_next_05": 0.839174,
+        "stable": false
+      },
+      {
+        "mc": 1.0,
+        "n": 8020,
+        "b": 0.803062,
+        "sigma_shi_bolt": 0.008038,
+        "b_mean_next_05": 0.864592,
+        "stable": false
+      },
+      {
+        "mc": 1.1,
+        "n": 6869,
+        "b": 0.83033,
+        "sigma_shi_bolt": 0.009131,
+        "b_mean_next_05": 0.886947,
+        "stable": false
+      },
+      {
+        "mc": 1.2,
+        "n": 5818,
+        "b": 0.854085,
+        "sigma_shi_bolt": 0.010342,
+        "b_mean_next_05": 0.904393,
+        "stable": false
+      },
+      {
+        "mc": 1.3,
+        "n": 4892,
+        "b": 0.87687,
+        "sigma_shi_bolt": 0.011737,
+        "b_mean_next_05": 0.918723,
+        "stable": false
+      },
+      {
+        "mc": 1.4,
+        "n": 4096,
+        "b": 0.901378,
+        "sigma_shi_bolt": 0.01342,
+        "b_mean_next_05": 0.927319,
+        "stable": false
+      },
+      {
+        "mc": 1.5,
+        "n": 3394,
+        "b": 0.921823,
+        "sigma_shi_bolt": 0.015311,
+        "b_mean_next_05": 0.93468,
+        "stable": true
+      },
+      {
+        "mc": 1.6,
+        "n": 2784,
+        "b": 0.937195,
+        "sigma_shi_bolt": 0.017396,
+        "b_mean_next_05": 0.939569,
+        "stable": true
+      },
+      {
+        "mc": 1.7,
+        "n": 2237,
+        "b": 0.935005,
+        "sigma_shi_bolt": 0.019239,
+        "b_mean_next_05": 0.942013,
+        "stable": true
+      },
+      {
+        "mc": 1.8,
+        "n": 1811,
+        "b": 0.940067,
+        "sigma_shi_bolt": 0.021517,
+        "b_mean_next_05": 0.943823,
+        "stable": true
+      },
+      {
+        "mc": 1.9,
+        "n": 1441,
+        "b": 0.928445,
+        "sigma_shi_bolt": 0.023367,
+        "b_mean_next_05": 0.944861,
+        "stable": true
+      },
+      {
+        "mc": 2.0,
+        "n": 1182,
+        "b": 0.945544,
+        "sigma_shi_bolt": 0.026567,
+        "b_mean_next_05": 0.950348,
+        "stable": true
+      },
+      {
+        "mc": 2.1,
+        "n": 955,
+        "b": 0.951155,
+        "sigma_shi_bolt": 0.029717,
+        "b_mean_next_05": 0.95962,
+        "stable": true
+      },
+      {
+        "mc": 2.2,
+        "n": 767,
+        "b": 0.951861,
+        "sigma_shi_bolt": 0.032967,
+        "b_mean_next_05": 0.964325,
+        "stable": true
+      },
+      {
+        "mc": 2.3,
+        "n": 612,
+        "b": 0.945866,
+        "sigma_shi_bolt": 0.036071,
+        "b_mean_next_05": 0.964954,
+        "stable": true
+      },
+      {
+        "mc": 2.4,
+        "n": 492,
+        "b": 0.946293,
+        "sigma_shi_bolt": 0.039723,
+        "b_mean_next_05": 0.967723,
+        "stable": true
+      },
+      {
+        "mc": 2.5,
+        "n": 401,
+        "b": 0.96137,
+        "sigma_shi_bolt": 0.04477,
+        "b_mean_next_05": 0.977994,
+        "stable": true
+      },
+      {
+        "mc": 2.6,
+        "n": 333,
+        "b": 1.001177,
+        "sigma_shi_bolt": 0.05276,
+        "b_mean_next_05": 0.994996,
+        "stable": true
+      },
+      {
+        "mc": 2.7,
+        "n": 259,
+        "b": 0.979384,
+        "sigma_shi_bolt": 0.056519,
+        "b_mean_next_05": 1.018188,
+        "stable": true
+      },
+      {
+        "mc": 2.8,
+        "n": 202,
+        "b": 0.955637,
+        "sigma_shi_bolt": 0.059444,
+        "b_mean_next_05": 1.044468,
+        "stable": false
+      },
+      {
+        "mc": 2.9,
+        "n": 163,
+        "b": 0.962475,
+        "sigma_shi_bolt": 0.065025,
+        "b_mean_next_05": 1.08904,
+        "stable": false
+      }
+    ],
+    "ids_at_or_above_1_5": 3260,
+    "main_download_ids_2023": 3260,
+    "ids_in_both": 3260,
+    "only_in_check": 0,
+    "only_in_main": 0,
+    "main_clean_earthquakes_2023": 3116,
+    "fmd_around_mode": [
+      {
+        "mag": 0.5,
+        "incremental": 646
+      },
+      {
+        "mag": 0.6,
+        "incremental": 845
+      },
+      {
+        "mag": 0.7,
+        "incremental": 1048
+      },
+      {
+        "mag": 0.8,
+        "incremental": 1123
+      },
+      {
+        "mag": 0.9,
+        "incremental": 1189
+      },
+      {
+        "mag": 1.0,
+        "incremental": 1151
+      },
+      {
+        "mag": 1.1,
+        "incremental": 1051
+      },
+      {
+        "mag": 1.2,
+        "incremental": 926
+      },
+      {
+        "mag": 1.3,
+        "incremental": 796
+      }
+    ]
+  },
+  "largest_events": [
+    {
+      "rank": 1,
+      "id": "ci39919392",
+      "time_utc": "2021-06-05T17:55:58.820Z",
+      "date": "2021-06-05",
+      "mag": 5.25,
+      "magType": "mw",
+      "depth_km": 5.78,
+      "latitude": 33.14,
+      "longitude": -115.6348,
+      "place": "11km W of Calipatria, CA",
+      "net": "ci",
+      "status": "reviewed"
+    },
+    {
+      "rank": 2,
+      "id": "ci40865184",
+      "time_utc": "2024-08-07T04:09:56.760Z",
+      "date": "2024-08-07",
+      "mag": 5.22,
+      "magType": "mw",
+      "depth_km": 11.6,
+      "latitude": 35.109,
+      "longitude": -119.097,
+      "place": "24 km SW of Lamont, CA",
+      "net": "ci",
+      "status": "reviewed"
+    },
+    {
+      "rank": 3,
+      "id": "ci40925991",
+      "time_utc": "2025-04-14T17:08:28.110Z",
+      "date": "2025-04-14",
+      "mag": 5.21,
+      "magType": "mw",
+      "depth_km": 14.29,
+      "latitude": 33.0358,
+      "longitude": -116.5948,
+      "place": "5 km S of Julian, CA",
+      "net": "ci",
+      "status": "reviewed"
+    },
+    {
+      "rank": 4,
+      "id": "ci39645386",
+      "time_utc": "2023-08-20T21:41:00.970Z",
+      "date": "2023-08-20",
+      "mag": 5.08,
+      "magType": "mw",
+      "depth_km": 4.84,
+      "latitude": 34.4085,
+      "longitude": -119.1883,
+      "place": "7 km SE of Ojai, CA",
+      "net": "ci",
+      "status": "reviewed"
+    },
+    {
+      "rank": 5,
+      "id": "ci40675215",
+      "time_utc": "2024-07-29T20:00:52.590Z",
+      "date": "2024-07-29",
+      "mag": 4.87,
+      "magType": "mw",
+      "depth_km": 7.26,
+      "latitude": 34.9503,
+      "longitude": -116.7867,
+      "place": "22 km ENE of Barstow, CA",
+      "net": "ci",
+      "status": "reviewed"
+    }
+  ],
+  "monthly": {
+    "months": 60,
+    "total_events": 18471,
+    "total_at_or_above_mc": 10870,
+    "median_per_month": 268.5,
+    "mean_per_month": 307.9,
+    "median_per_month_at_or_above_mc": 158.5,
+    "busiest_month": "2021-06",
+    "busiest_month_count": 1387,
+    "busiest_month_at_or_above_mc": "2021-06",
+    "busiest_month_at_or_above_mc_count": 760,
+    "quietest_month": "2023-09",
+    "quietest_month_count": 179,
+    "per_year": {
+      "2021": 4846,
+      "2022": 3168,
+      "2023": 3116,
+      "2024": 4201,
+      "2025": 3140
+    },
+    "per_year_at_or_above_mc": {
+      "2021": 2767,
+      "2022": 1887,
+      "2023": 1811,
+      "2024": 2497,
+      "2025": 1908
+    }
+  },
+  "admin1_units_in_box": [
+    "Arizona",
+    "Baja California",
+    "California",
+    "Nevada",
+    "Sonora"
+  ],
+  "cities": {
+    "Los Angeles": {
+      "marker_lat": 34.0522,
+      "marker_lon": -118.2437,
+      "labels_found": 3,
+      "label_distances_km": [
+        1.0,
+        2.0,
+        4.0
+      ],
+      "back_computed_lat": 34.055886,
+      "back_computed_lon": -118.246091,
+      "offset_km": 0.465,
+      "coast_distance_km": 21.76,
+      "baja_california_boundary_distance_km": 198.0
+    },
+    "San Diego": {
+      "marker_lat": 32.7157,
+      "marker_lon": -117.1611,
+      "labels_found": 0,
+      "coast_distance_km": 1.08,
+      "baja_california_boundary_distance_km": 20.74
+    },
+    "Palm Springs": {
+      "marker_lat": 33.8303,
+      "marker_lon": -116.5453,
+      "labels_found": 3,
+      "label_distances_km": [
+        1.0,
+        8.0,
+        8.0
+      ],
+      "back_computed_lat": 33.821442,
+      "back_computed_lon": -116.532294,
+      "offset_km": 1.554,
+      "coast_distance_km": 104.38,
+      "baja_california_boundary_distance_km": 138.99
+    }
+  },
+  "figure_a": {
+    "hex_columns": 140,
+    "hex_rows": 63,
+    "hex_width_deg": 0.05,
+    "hex_width_km": 4.6,
+    "max_events_per_hexagon": 770,
+    "hexagons_with_events": 2815,
+    "km_per_degree_longitude_at_centre": 91.91,
+    "centre_latitude": 34.25,
+    "map_aspect": 1.2098
+  },
+  "figure_c": {
+    "depth_axis_top_km": -3,
+    "depth_axis_bottom_km": 38,
+    "events_outside_axis": 0,
+    "max_per_1km_bin": 1555,
+    "max_per_1km_bin_depth_km": 7.5
+  },
+  "figures": {
+    "fig_a_epicentre_density.png": {
+      "file": "figures/fig_a_epicentre_density.png",
+      "width_px": 1600,
+      "height_px": 1000,
+      "min_text_px": 15.3,
+      "corners_white": true,
+      "missing_glyph_warnings": []
+    },
+    "fig_b_frequency_magnitude.png": {
+      "file": "figures/fig_b_frequency_magnitude.png",
+      "width_px": 1600,
+      "height_px": 1000,
+      "min_text_px": 18.1,
+      "corners_white": true,
+      "missing_glyph_warnings": []
+    },
+    "fig_c_depth.png": {
+      "file": "figures/fig_c_depth.png",
+      "width_px": 1600,
+      "height_px": 1000,
+      "min_text_px": 18.1,
+      "corners_white": true,
+      "missing_glyph_warnings": []
+    },
+    "fig_d_monthly_counts.png": {
+      "file": "figures/fig_d_monthly_counts.png",
+      "width_px": 1600,
+      "height_px": 1000,
+      "min_text_px": 18.1,
+      "corners_white": true,
+      "missing_glyph_warnings": []
+    }
+  },
+  "outputs": {
+    "catalog_clean_rows": 18471,
+    "exclusions_rows": 971
+  },
+  "software": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "matplotlib": "3.10.9",
+    "geopandas": "1.1.3"
+  }
+}
