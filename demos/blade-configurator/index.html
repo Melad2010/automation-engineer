@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Blade Configurator Demo</title>
+<meta name="description" content="A live 3D table tennis blade configurator: real-time materials, price and weight calculated from the model, and high-resolution product renders.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='12' r='11' fill='%23b5121b'/%3E%3Crect x='13' y='21' width='6' height='10' rx='2' fill='%235d4030'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#16191d;--mute:#59606a;--line:#d7dade;--panel:#fafaf9;--chip:#fff;--stage-a:#f6f6f4;--stage-b:#c6c9cd;
+  --red:#b5121b;--red-ink:#fff;--focus:#0b5fff;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:Archivo,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--panel);font-size:15px;line-height:1.4}
+.app{display:grid;grid-template-columns:minmax(0,1fr) 410px;height:100vh;height:100dvh}
+.stage{position:relative;min-height:0;background:radial-gradient(115% 85% at 50% 38%,var(--stage-a) 0%,#e5e6e7 55%,var(--stage-b) 100%);overflow:hidden}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+.brand{position:absolute;left:24px;top:20px;pointer-events:none;max-width:min(270px,calc(100% - 150px))}
+.brand h1{margin:0;font-size:21px;font-weight:700;letter-spacing:-.01em}
+.brand p{margin:2px 0 0;color:var(--mute);font-size:13px}
+.views{position:absolute;left:24px;bottom:20px;display:flex;flex-wrap:wrap;gap:6px;max-width:calc(100% - 48px)}
+.views button,.tool{font:inherit;font-size:13px;padding:7px 12px;border:1px solid rgba(22,25,29,.22);background:rgba(255,255,255,.74);color:var(--ink);border-radius:999px;cursor:pointer}
+.views button:hover,.tool:hover{background:#fff}
+.views button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tool{position:absolute;right:20px;top:20px}
+.fail{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;color:var(--mute)}
+aside{display:flex;flex-direction:column;min-height:0;border-left:1px solid var(--line);background:var(--panel)}
+.options{flex:1;min-height:0;overflow-y:auto;padding:18px 20px 6px}
+fieldset{border:0;padding:0;margin:0 0 16px}
+legend{padding:0;margin-bottom:7px;font-weight:600;font-size:13px;display:flex;justify-content:space-between;width:100%}
+legend span{font-weight:400;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid var(--line);background:var(--chip);border-radius:7px;cursor:pointer;color:var(--ink)}
+.chip:hover{border-color:#8f959c}
+.chip[aria-pressed=true]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.chip i{width:18px;height:18px;border-radius:4px;border:1px solid rgba(0,0,0,.2);display:block;flex:none}
+.chip em{font-style:normal;font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+input[type=text]{width:100%;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink)}
+.note{font-size:12px;color:var(--mute);margin:4px 0 0}
+.disclose{margin:4px 0 14px;font-size:12px;color:var(--mute)}
+.buy{border-top:1px solid var(--line);padding:12px 20px calc(14px + env(safe-area-inset-bottom,0px));background:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.stats b{display:block;font-size:20px;font-weight:700;letter-spacing:-.01em}
+.stats small{color:var(--mute);font-size:12px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn,.actions button{font:inherit;font-weight:600;padding:11px 10px;border-radius:8px;cursor:pointer;border:1px solid var(--ink);background:#fff;color:var(--ink);text-align:center;text-decoration:none;display:inline-block}
+.primary,.actions button.primary{background:var(--red);border-color:var(--red);color:var(--red-ink)}
+.code{margin-top:8px;font:12px "JetBrains Mono",Consolas,monospace;color:var(--mute);word-break:break-all}
+dialog{border:1px solid var(--line);border-radius:12px;max-width:560px;width:calc(100% - 32px);max-height:92dvh;overflow:auto;padding:20px;color:var(--ink);background:#fff}
+dialog::backdrop{background:rgba(20,22,25,.45)}
+dialog h2{margin:0 0 6px;font-size:18px}
+dialog pre{background:#f2f3f4;border-radius:8px;padding:11px;overflow:auto;max-height:44vh;font:12px/1.5 "JetBrains Mono",Consolas,monospace}
+.checker{margin:12px 0;border-radius:8px;overflow:hidden;background:repeating-conic-gradient(#e9eaec 0 25%,#fff 0 50%) 0 0/22px 22px}
+.checker img{display:block;width:100%;height:auto}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.row form{margin:0}
+.row button{font:inherit;font-weight:600;padding:11px 16px;border-radius:8px;border:1px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr;grid-template-rows:58vh auto;height:auto;min-height:100dvh}
+  aside{border-left:0;border-top:1px solid var(--line)}
+  .options{overflow:visible}
+  .brand{left:16px;top:14px;max-width:calc(100% - 130px)}.tool{right:16px;top:14px}
+  .views{left:16px;right:16px;bottom:12px;max-width:none;flex-wrap:nowrap;overflow-x:auto;gap:4px;scrollbar-width:none}
+  .views button{flex:none;font-size:12px;padding:6px 9px}
+  .brand .hint,.long,.code{display:none}
+  .brand h1{font-size:18px}
+  .brand p{font-size:12px}
+  .buy{position:sticky;bottom:0}
+}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div class="app">
+  <main class="stage" id="stage">
+    <div class="brand"><h1>Blade Configurator</h1><p>Demo for a project brief, built with AI assistance. <span class="hint">Drag to rotate, scroll or pinch to zoom.</span></p></div>
+    <button class="tool" id="share" type="button">Copy link</button>
+    <div class="views" role="group" aria-label="Camera views">
+      <button data-view="hero" aria-pressed="true" type="button">Hero</button>
+      <button data-view="front" aria-pressed="false" type="button">Front</button>
+      <button data-view="back" aria-pressed="false" type="button">Back</button>
+      <button data-view="plies" aria-pressed="false" type="button">Plies</button>
+      <button data-view="handle" aria-pressed="false" type="button">Handle</button>
+      <button id="spin" aria-pressed="false" type="button">Turntable</button>
+    </div>
+  </main>
+  <aside>
+    <div class="options" id="options">
+      <p class="disclose" id="disclose">This page is a demo, not a past client project. The geometry and wood here are procedural. A real build uses your CAD models and photos of your own wood. Prices and densities are sample figures; weight is calculated live from the model's volumes.</p>
+    </div>
+    <div class="buy">
+      <div class="stats">
+        <div><b id="price">€0</b><small>Price</small></div>
+        <div><b id="weight">0 g</b><small>Est. weight</small></div>
+        <div><b id="thick">0 mm</b><small>Blade thickness</small></div>
+      </div>
+      <div class="actions">
+        <button id="render" type="button">Render 3000 px<span class="long"> image</span></button>
+        <button id="cart" class="primary" type="button">Add to cart</button>
+      </div>
+      <div class="code" id="code"></div>
+    </div>
+  </aside>
+</div>
+<dialog id="cartDlg">
+  <h2>What the cart line receives</h2>
+  <p class="note">Nothing is sold on this demo. On a live shop these fields become a WooCommerce cart item, and the server recalculates price and weight before checkout so a browser cannot change them.</p>
+  <pre id="payload"></pre>
+  <form method="dialog" class="row"><button>Close</button></form>
+</dialog>
+<dialog id="shotDlg">
+  <h2>Catalog render</h2>
+  <p class="note" id="shotInfo"></p>
+  <div class="checker"><img id="shotImg" alt="The configured blade rendered on a transparent background"></div>
+  <div class="row"><a class="btn primary" id="shotSave" download>Save PNG</a><form method="dialog"><button>Close</button></form></div>
+</dialog>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {toCreasedNormals} from 'three/addons/utils/BufferGeometryUtils.js';
+
+// ---- Catalog. Sample prices in EUR, densities in g/cm3, ply thickness in mm.
+const WOODS = {
+  limba:  {name:'Limba',  price:0,  handle:0,  density:.55, swatch:['#d9b782','#b18853'], light:'#dfc08c', dark:'#a87d4b', streak:'#8b6238', ring:2.5, xShift:11, d:6,   tilt:.02, warp:.72, contrast:.44, fibre:1,   tone:.34, pore:.9,  poreT:.74, poreLen:24, streakAmt:.34, late:2.2},
+  koto:   {name:'Koto',   price:6,  handle:3,  density:.55, swatch:['#ecd8a8','#cfae76'], light:'#efdcae', dark:'#cca86e', streak:'#b48d57', ring:4.4, xShift:26, d:8,   tilt:.01, warp:.34, contrast:.36, fibre:.8,  tone:.2,  pore:.45, poreT:.8,  poreLen:30, streakAmt:.12, late:2.6},
+  hinoki: {name:'Hinoki', price:24, handle:12, density:.41, swatch:['#f1dcb9','#cfa270'], light:'#f3dfbe', dark:'#c9976a', streak:'#bd8c5c', ring:8.2, xShift:60, d:2,   tilt:0,   warp:.15, contrast:.66, fibre:.5,  tone:.14, pore:0,   poreT:.99, poreLen:30, streakAmt:.04, late:4.6},
+  walnut: {name:'Walnut', price:12, handle:6,  density:.64, swatch:['#6d4a31','#2e1c13'], light:'#80583b', dark:'#2b1a12', streak:'#1b100b', ring:2,   xShift:.6, d:3.2, tilt:.16, warp:1,   contrast:.72, fibre:1.1, tone:.5,  pore:1,   poreT:.71, poreLen:18, streakAmt:.42, late:1.7},
+  ebony:  {name:'Ebony',  price:38, handle:19, density:1.05,swatch:['#3a2c25','#0e0a09'], light:'#3b2d26', dark:'#0d0908', streak:'#5e4231', ring:4.2, xShift:9,  d:4,   tilt:.05, warp:.55, contrast:.74, fibre:.7,  tone:.4,  pore:.6,  poreT:.82, poreLen:34, streakAmt:.3,  late:1.6},
+};
+const ply = (t, density, tone, kind) => ({t, density, tone, kind});
+const FACE = t => ({t, kind:'face'});
+const LAYUPS = {
+  five:   {name:'5-ply wood',   price:0,  plies:[FACE(.6), ply(1,.55,'#d6b27a','end'),  ply(2.6,.38,'#ead6a8','long'), ply(1,.55,'#d6b27a','end'),  FACE(.6)]},
+  seven:  {name:'7-ply stiff',  price:14, plies:[FACE(.5), ply(.6,.7,'#8f6a41','end'),  ply(.9,.55,'#d6b27a','long'), ply(2.6,.38,'#ead6a8','end'), ply(.9,.55,'#d6b27a','long'), ply(.6,.7,'#8f6a41','end'), FACE(.5)]},
+  carbon: {name:'5 + 2 carbon', price:32, plies:[FACE(.6), ply(.25,1.5,'#17181b','carbon'), ply(.8,.55,'#d6b27a','end'), ply(2.7,.38,'#ead6a8','long'), ply(.8,.55,'#d6b27a','end'), ply(.25,1.5,'#17181b','carbon'), FACE(.6)]},
+};
+const HANDLES = {flared:{name:'Flared',price:0}, straight:{name:'Straight',price:0}, anatomic:{name:'Anatomic',price:4}};
+const FINISHES = {
+  oil:   {name:'Natural oil', price:0,  rough:.74, coat:0,   coatRough:.5,  aniso:.45, bump:.016, spec:.8},
+  satin: {name:'Satin seal',  price:7,  rough:.62, coat:.5,  coatRough:.42, aniso:.3,  bump:.012, spec:.6},
+  gloss: {name:'High gloss',  price:15, rough:.6,  coat:1,   coatRough:.04, aniso:.1,  bump:.006, spec:.3},
+};
+const RED = 0xa80f18, BLACK = 0x0d0e10;
+const RUBBERS = {
+  none:  {name:'Bare blade',    price:0},
+  red:   {name:'Red / Black',   price:78, front:RED,   rear:BLACK},
+  black: {name:'Black / Red',   price:78, front:BLACK, rear:RED},
+};
+const BADGES = {
+  none:  {name:'None',  price:0,  grams:0},
+  brass: {name:'Brass', price:11, grams:3, color:0xb8944f, metal:1,  rough:.32, ink:'#2e2009'},
+  black: {name:'Black', price:8,  grams:2, color:0x1b1c1f, metal:.5, rough:.36, ink:'#e4e5e7'},
+};
+const hex = c => '#' + c.toString(16).padStart(6, '0');
+const TABLES = {face:WOODS, layup:LAYUPS, handleShape:HANDLES, handleWood:WOODS, finish:FINISHES, rubber:RUBBERS, badge:BADGES};
+const KEYS = Object.keys(TABLES);
+const state = {face:'limba', layup:'five', handleShape:'flared', handleWood:'walnut', finish:'satin', rubber:'none', badge:'brass', text:'MATCH POINT'};
+
+// ---- Renderer and studio.
+const stage = document.getElementById('stage');
+let renderer;
+try {
+  renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+} catch (e) {
+  const d = document.createElement('div'); d.className = 'fail';
+  d.textContent = 'This demo needs WebGL, which is turned off or unavailable in this browser.';
+  stage.append(d);
+  throw e;
+}
+renderer.setPixelRatio(Math.min(Math.max(devicePixelRatio, 1.5), 2));   // a little supersampling on plain screens keeps the fine grain from shimmering
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.NeutralToneMapping;
+renderer.toneMappingExposure = 1;
+renderer.domElement.setAttribute('role', 'img');
+renderer.domElement.setAttribute('aria-label', '3D preview of the configured blade');
+stage.prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(26, 1, .5, 500);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; controls.dampingFactor = .08; controls.enablePan = false;
+controls.minDistance = 4; controls.maxDistance = 170; controls.maxPolarAngle = Math.PI * .68;
+controls.autoRotateSpeed = 1.4;
+
+function buildStudio() {
+  const s = new THREE.Scene();
+  const dome = new THREE.SphereGeometry(70, 32, 20), col = [], p = dome.attributes.position;
+  for (let i = 0; i < p.count; i++) {
+    const t = p.getY(i) / 70;
+    const v = t > 0 ? THREE.MathUtils.lerp(.5, 1.15, t) : THREE.MathUtils.lerp(.5, .2, -t);
+    col.push(v, v, v);
+  }
+  dome.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+  s.add(new THREE.Mesh(dome, new THREE.MeshBasicMaterial({vertexColors:true, side:THREE.BackSide})));
+  const edge = document.createElement('canvas'); edge.width = edge.height = 128;
+  const eg = edge.getContext('2d'), gx = eg.createLinearGradient(0, 0, 128, 0), gy = eg.createLinearGradient(0, 0, 0, 128);
+  for (const g of [gx, gy]) { g.addColorStop(0, 'rgba(255,255,255,0)'); g.addColorStop(.2, '#fff'); g.addColorStop(.8, '#fff'); g.addColorStop(1, 'rgba(255,255,255,0)'); }
+  eg.fillStyle = gx; eg.fillRect(0, 0, 128, 128);
+  eg.globalCompositeOperation = 'destination-in'; eg.fillStyle = gy; eg.fillRect(0, 0, 128, 128);
+  const soft = new THREE.CanvasTexture(edge);
+  const box = (w, h, pos, i, tilt = 0) => {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({color:new THREE.Color(i, i, i * .98), map:soft, transparent:true, blending:THREE.AdditiveBlending, depthWrite:false, side:THREE.DoubleSide}));
+    m.position.set(...pos); m.lookAt(0, 0, 0); m.rotateZ(tilt); s.add(m);
+  };
+  const at = (az, el, r) => { const a = az * Math.PI / 180, e = el * Math.PI / 180; return [r * Math.sin(a) * Math.cos(e), r * Math.sin(e), r * Math.cos(a) * Math.cos(e)]; };
+  box(60, 40, [0, 44, 20], 5);        // overhead softbox
+  box(18, 70, [-44, 8, 24], 5);       // left strip
+  box(26, 56, [46, 6, 28], 3);        // right fill
+  box(80, 14, [0, -6, -50], 2.4);     // rear rim
+  box(16, 70, [34, 6, -40], 3);       // rear strip
+  box(30, 120, at(-37, -2, 66), 1.7, .3);    // the panel the flat face mirrors in the hero view: gloss shows its edge, satin a soft glow, oil almost nothing
+  box(26, 120, at(17, 0, 66), 1.3, -.16);    // the same for the straight front view
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const env = pmrem.fromScene(s, .012).texture;
+  pmrem.dispose(); soft.dispose();
+  return env;
+}
+scene.environment = buildStudio();
+scene.environmentIntensity = .9;
+
+const LIGHT = [15, 34, 24], FLOOR_Y = -15.2, SHADOW = {size:1024, span:56, x:-5, z:-7};
+const key = new THREE.DirectionalLight(0xfff5ea, 1.1);
+key.position.set(...LIGHT);
+scene.add(key);
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(SHADOW.span, SHADOW.span), new THREE.MeshBasicMaterial({color:0, transparent:true, opacity:.3, depthWrite:false, toneMapped:false}));
+floor.rotation.x = -Math.PI / 2; floor.position.set(SHADOW.x, FLOOR_Y, SHADOW.z); scene.add(floor);
+const blade = new THREE.Group(); scene.add(blade);
+
+// ---- Wood. A slice through cylindrical growth rings, baked on the GPU once per species.
+const WOOD_FRAG = `
+precision highp float;
+varying vec2 vUv;
+uniform vec3 cLight, cDark, cStreak;
+uniform float uSeed, uRing, uXShift, uD, uTilt, uWarp, uContrast, uFibre, uTone, uPore, uPoreT, uPoreLen, uStreak, uLate;
+uniform int uPass;
+float hash(vec2 p){vec3 q=fract(vec3(p.xyx)*.1031);q+=dot(q,q.yzx+33.33);return fract((q.x+q.y)*q.z);}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
+float fbm(vec2 p){float a=.5,s=0.;for(int i=0;i<5;i++){s+=a*vn(p);p=p*2.02+vec2(19.1,7.3);a*=.5;}return s/.96875;}
+void main(){
+  vec2 c=(vUv-.5)*16.;
+  float x=c.x,y=c.y;
+  float w1=fbm(vec2(x*.10+uSeed,y*.035+uSeed*.7))-.5;
+  float w2=fbm(vec2(x*.55+uSeed*2.,y*.12))-.5;
+  float xw=x+uWarp*(w1*6.+w2*1.1);
+  float d=uD+uTilt*y+uWarp*w1*1.4;
+  float r=sqrt((xw+uXShift)*(xw+uXShift)+d*d);
+  float rr=r*uRing+1.8*fbm(vec2(r*.28+uSeed,2.7));
+  float id=floor(rr),ring=rr-id;
+  float strength=.45+.55*hash(vec2(id,uSeed));
+  float late=pow(ring,uLate)*(1.-smoothstep(.94,1.,ring))*strength;
+  float fib=vn(vec2(xw*70.,y*1.6+uSeed))*.5+vn(vec2(xw*190.,y*3.4+uSeed*1.3))*.32+vn(vec2(xw*420.,y*7.+uSeed*1.7))*.18;
+  float tone=fbm(vec2(xw*.22+uSeed*3.,y*.05));
+  float streak=smoothstep(.55,.74,fbm(vec2(xw*1.1+uSeed*5.,y*.045)))*uStreak;
+  vec2 pc=vec2(xw*58.,y*58./uPoreLen);
+  float pn=vn(pc+uSeed)*.62+vn(pc*vec2(2.1,1.7)+uSeed*2.)*.38;
+  float patchy=fbm(vec2(xw*.7+uSeed*4.,y*.14));
+  float pore=smoothstep(uPoreT,uPoreT+.05,pn+.05*(1.-ring)+.16*(patchy-.5));
+  float micro=vn(vec2(rr*9.,y*.35+uSeed))*.6+vn(vec2(rr*23.,y*.6+uSeed))*.4;
+  float t=uContrast*(late+.42*(micro-.5))+uFibre*.38*(fib-.5)+uTone*(tone-.5)*1.4+.18;
+  vec3 col=mix(cLight,cDark,clamp(t,0.,1.));
+  col=mix(col,cStreak,streak);
+  col*=1.-.62*uPore*pore;
+  if(uPass==0){gl_FragColor=vec4(col,1.);return;}
+  float h=.62-.22*late*uContrast+.16*(fib-.5)-.5*uPore*pore;
+  float rough=clamp(.82+.14*(fib-.5)-.16*late+.2*uPore*pore,.45,1.);
+  gl_FragColor=vec4(h,rough,0.,1.);
+}`;
+const BAKE = Math.min(innerWidth < 860 ? 1024 : 2048, renderer.capabilities.maxTextureSize);
+const ANISO = renderer.capabilities.getMaxAnisotropy();
+const bakeUniforms = {cLight:{value:new THREE.Color()}, cDark:{value:new THREE.Color()}, cStreak:{value:new THREE.Color()}, uSeed:{value:0}, uRing:{value:0}, uXShift:{value:0}, uD:{value:0}, uTilt:{value:0}, uWarp:{value:0}, uContrast:{value:0}, uFibre:{value:0}, uTone:{value:0}, uPore:{value:0}, uPoreT:{value:0}, uPoreLen:{value:1}, uStreak:{value:0}, uLate:{value:1}, uPass:{value:0}};
+const bakeScene = new THREE.Scene(), bakeCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+bakeScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
+  vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
+  fragmentShader:WOOD_FRAG, uniforms:bakeUniforms, depthTest:false, depthWrite:false,
+})));
+const woodCache = new Map();
+function woodTextures(id) {
+  if (woodCache.has(id)) return woodCache.get(id);
+  const w = WOODS[id], u = bakeUniforms;
+  u.cLight.value.set(w.light); u.cDark.value.set(w.dark); u.cStreak.value.set(w.streak);
+  u.uSeed.value = Object.keys(WOODS).indexOf(id) * 13.7 + 4.1;
+  u.uRing.value = w.ring; u.uXShift.value = w.xShift; u.uD.value = w.d; u.uTilt.value = w.tilt; u.uWarp.value = w.warp;
+  u.uContrast.value = w.contrast; u.uFibre.value = w.fibre; u.uTone.value = w.tone; u.uPore.value = w.pore;
+  u.uPoreT.value = w.poreT; u.uPoreLen.value = w.poreLen; u.uStreak.value = w.streakAmt; u.uLate.value = w.late;
+  const target = colorSpace => new THREE.WebGLRenderTarget(BAKE, BAKE, {depthBuffer:false, generateMipmaps:true, minFilter:THREE.LinearMipmapLinearFilter, magFilter:THREE.LinearFilter, wrapS:THREE.MirroredRepeatWrapping, wrapT:THREE.MirroredRepeatWrapping, anisotropy:ANISO, colorSpace});
+  const map = target(THREE.SRGBColorSpace), data = target(THREE.NoColorSpace);
+  u.uPass.value = 0; renderer.setRenderTarget(map); renderer.render(bakeScene, bakeCam);
+  u.uPass.value = 1; renderer.setRenderTarget(data); renderer.render(bakeScene, bakeCam);
+  renderer.setRenderTarget(null);
+  const out = {map:map.texture, data:data.texture};
+  woodCache.set(id, out);
+  return out;
+}
+function woodMaterial(id) {
+  const f = FINISHES[state.finish], t = woodTextures(id);
+  return new THREE.MeshPhysicalMaterial({map:t.map, bumpMap:t.data, bumpScale:f.bump, roughnessMap:t.data, roughness:f.rough / .82, metalness:0, clearcoat:f.coat, clearcoatRoughness:f.coatRough, anisotropy:f.aniso, anisotropyRotation:0, specularIntensity:f.spec});
+}
+
+// ---- Geometry, in cm. The ply stack is one outline, head and tail together; two cheeks close the handle over the tail.
+const A = 7.5, B = 7.85, N = 2.32, HEAD_Y = 5, SHOULDER_Y = -3.05, BUTT_Y = -12.85, LEN = SHOULDER_Y - BUTT_Y, CORNER = .42, BEVEL = .035, TEX = 15.75, CHEEK_N = 3.4;
+const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const smax = (a, b, k) => { const h = Math.max(k - Math.abs(a - b), 0) / k; return Math.max(a, b) + h * h * k * .25; };
+const RUBBER_CUT = -6.7;
+const halfStack = () => LAYUPS[state.layup].plies.reduce((n, p) => n + p.t, 0) / 20;
+function headHalf(yl) {
+  const r = Math.abs(yl) / B;
+  if (r >= 1) return 0;
+  const x = A * Math.pow(1 - Math.pow(r, N), 1 / N);
+  return yl < 0 ? x * (1 - .105 * r * r) : x;
+}
+function handleProfile(s) {
+  const c = Math.min(1, Math.max(0, s));
+  let hw = 1.27, ht = 1.12;
+  if (state.handleShape === 'flared') { hw = 1.28 + .4 * Math.pow(c, 1.9); ht = 1.06 + .12 * c; }
+  if (state.handleShape === 'anatomic') { const b = Math.sin(Math.PI * c); hw = 1.24 + .3 * b; ht = 1.04 + .16 * b; }
+  hw += .85 * Math.pow(1 - smooth(-.1, .3, s), 1.2);
+  return [hw, ht];
+}
+function halfWidth(y) {
+  const s = (SHOULDER_Y - y) / LEN;
+  let w = smax(headHalf(y - HEAD_Y), handleProfile(s)[0], 1.7);
+  const d = BUTT_Y + CORNER - y;
+  if (d > 0) w -= CORNER - Math.sqrt(Math.max(0, CORNER * CORNER - d * d));
+  return w;
+}
+function bladeOutline() {
+  const ys = [], right = [];
+  for (let i = 0; i <= 10; i++) ys.push(BUTT_Y + CORNER * (1 - Math.cos(i / 10 * Math.PI / 2)));
+  for (let i = 1; i <= 90; i++) ys.push(BUTT_Y + CORNER + (HEAD_Y - B - BUTT_Y - CORNER) * i / 90);
+  for (let i = 119; i >= 0; i--) ys.push(HEAD_Y - B * Math.sin(i / 120 * Math.PI / 2));
+  for (const y of ys) right.push(new THREE.Vector2(halfWidth(y), y));
+  for (let i = 1; i <= 120; i++) {
+    const a = i / 120 * Math.PI / 2;
+    right.push(new THREE.Vector2(A * Math.pow(Math.cos(a), 2 / N), HEAD_Y + B * Math.pow(Math.sin(a), 2 / N)));
+  }
+  return right.concat(right.slice(0, -1).reverse().map(p => new THREE.Vector2(-p.x, p.y)));
+}
+const faceUV = {
+  generateTopUV(g, v, a, b, c) {
+    return [a, b, c].map(i => {
+      const back = v[i * 3 + 2] < 0;   // the rear veneer is a different cut of the same log
+      return new THREE.Vector2(v[i * 3] / TEX + (back ? .87 : .5), (v[i * 3 + 1] - HEAD_Y) / TEX + (back ? .29 : .5));
+    });
+  },
+  generateSideWallUV(g, v, a, b, c, d) {
+    return [a, b, c, d].map(i => new THREE.Vector2((v[i * 3] + v[i * 3 + 1]) * .22, (v[i * 3 + 2] + this.bevel) / (this.depth + 2 * this.bevel)));
+  },
+};
+function flatLids(geo) {
+  const lids = geo.groups[0], n = geo.attributes.normal, p = geo.attributes.position;
+  for (let i = lids.start; i < lids.start + lids.count; i++) n.setXYZ(i, 0, 0, p.getZ(i) > 0 ? 1 : -1);
+  return geo;
+}
+// The floor shadow: the outline projected along the key light and blurred, softer for the head that sits higher.
+let shadowFor = null;
+function bakeShadow(outline) {
+  if (shadowFor === state.handleShape) return;
+  shadowFor = state.handleShape;
+  const S = SHADOW.size, c = document.createElement('canvas'); c.width = c.height = S;
+  const g = c.getContext('2d'), k = S / SHADOW.span, off = S * 2;
+  const draw = (points, blur) => {
+    g.shadowColor = '#000'; g.shadowBlur = blur; g.shadowOffsetX = off; g.fillStyle = '#000';
+    g.beginPath();
+    points.forEach((p, i) => {
+      const t = (p.y - FLOOR_Y) / LIGHT[1], x = (p.x - LIGHT[0] * t - SHADOW.x) * k + S / 2 - off, y = (-LIGHT[2] * t - SHADOW.z) * k + S / 2;
+      if (i) g.lineTo(x, y); else g.moveTo(x, y);
+    });
+    g.closePath(); g.fill();
+  };
+  draw(outline.filter(p => p.y > SHOULDER_Y - 1), 84);
+  draw(outline.filter(p => p.y < SHOULDER_Y + 1), 24);
+  if (floor.material.map) floor.material.map.dispose();
+  floor.material.map = new THREE.CanvasTexture(c);
+  floor.material.map.anisotropy = ANISO;
+  floor.material.needsUpdate = true;
+}
+// The edge of the stack: real ply thickness, long grain and end grain alternating, glue lines between.
+function plyTexture() {
+  const plies = LAYUPS[state.layup].plies, total = plies.reduce((n, p) => n + p.t, 0);
+  const W = 512, H = 512, c = document.createElement('canvas'); c.width = W; c.height = H;
+  let seed = 91;
+  const g = c.getContext('2d'), face = WOODS[state.face], rnd = (a, b) => { seed = seed * 16807 % 2147483647; return a + seed / 2147483647 * (b - a); };
+  let y = 0;
+  for (const p of plies) {
+    const h = p.t / total * H, kind = p.kind === 'face' ? 'long' : p.kind;
+    g.fillStyle = p.kind === 'face' ? face.swatch[0] : p.tone; g.fillRect(0, y, W, h + 1);
+    if (kind === 'long') for (let k = 0; k < h * 16; k++) { g.fillStyle = `rgba(50,28,12,${rnd(.03, .15)})`; g.fillRect(rnd(0, W), rnd(y, y + h), rnd(8, 70), rnd(.5, 1.4)); }
+    if (kind === 'end') for (let k = 0; k < h * 60; k++) { g.fillStyle = `rgba(45,24,10,${rnd(.08, .3)})`; g.fillRect(rnd(0, W), rnd(y, y + h), rnd(.6, 2), rnd(.6, 2)); }
+    if (kind === 'carbon') for (let k = 0; k < W; k += 6) { g.fillStyle = k % 12 ? 'rgba(255,255,255,.1)' : 'rgba(255,255,255,.03)'; g.fillRect(k, y, 3, h); }
+    y += h;
+    g.fillStyle = 'rgba(28,16,8,.5)'; g.fillRect(0, y - .7, W, 1.4);
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.MirroredRepeatWrapping; t.anisotropy = ANISO;
+  return t;
+}
+function cheekRing(s, T) {
+  const y = SHOULDER_Y - LEN * s, ht = handleProfile(s)[1], SR = 1 - .5 / LEN;
+  let hc = (ht - T) * smooth(0, .27, s);
+  if (s > SR) { const q = (s - SR) / (1 - SR); hc *= Math.sqrt(Math.max(0, 1 - q * q)); }
+  return {y, W:halfWidth(y), hc};
+}
+function cheekRings() {
+  const list = [], SR = 1 - .5 / LEN;
+  for (let i = 0; i < 110; i++) list.push(SR * i / 110);
+  for (let i = 0; i <= 14; i++) list.push(SR + (1 - SR) * Math.sin(i / 14 * Math.PI / 2));
+  return list;
+}
+function cheekGeometry(side) {
+  const T = halfStack(), P = 44, pos = [], uv = [], idx = [], rings = cheekRings();
+  const off = side > 0 ? [.11, .62] : [.57, .23];
+  rings.forEach(s => {
+    const {y, W, hc} = cheekRing(s, T);
+    let arc = 0, px = 0, pz = 0;
+    for (let i = 0; i <= P; i++) {
+      const a = i / P * Math.PI, c = Math.cos(a), si = Math.sin(a);
+      const x = W * Math.sign(c) * Math.pow(Math.abs(c), 2 / CHEEK_N);
+      const lift = Math.pow(Math.abs(si), 2 / CHEEK_N);
+      const z = T - BEVEL + .003 + (hc + BEVEL) * lift;
+      const bow = .5 * (1 - Math.pow(x / W, 2)) * (1 - smooth(0, .24, s));
+      if (i) arc += Math.hypot(x - px, z - pz);
+      px = x; pz = z;
+      pos.push(x, y + bow, side * z);
+      uv.push(off[0] + arc / TEX, off[1] + y / TEX);
+    }
+  });
+  const row = P + 1;
+  for (let r = 0; r < rings.length - 1; r++) for (let i = 0; i < P; i++) {
+    const a = r * row + i, b = a + row, c = a + 1, d = b + 1;
+    if (side > 0) idx.push(a, c, b, c, d, b); else idx.push(a, b, c, c, b, d);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx); g.computeVertexNormals();
+  return g;
+}
+function cheekVolume() {
+  const T = halfStack(), rings = cheekRings();
+  let unit = 0;    // area of a half superellipse with width and height 1
+  const steps = 200;
+  for (let i = 0; i < steps; i++) { const x = (i + .5) / steps; unit += 2 * Math.pow(1 - Math.pow(x, CHEEK_N), 1 / CHEEK_N) / steps; }
+  let vol = 0;
+  for (let i = 0; i < rings.length - 1; i++) {
+    const a = cheekRing(rings[i], T), b = cheekRing(rings[i + 1], T);
+    vol += unit * (a.W * a.hc + b.W * b.hc) / 2 * (a.y - b.y);
+  }
+  return vol;
+}
+function rubberOutline() {
+  const inset = .03, right = [];
+  for (let i = 0; i <= 80; i++) { const yl = RUBBER_CUT * (1 - i / 80); right.push(new THREE.Vector2(headHalf(yl) - inset, HEAD_Y + yl)); }
+  for (let i = 1; i <= 120; i++) { const a = i / 120 * Math.PI / 2; right.push(new THREE.Vector2((A - inset) * Math.pow(Math.cos(a), 2 / N), HEAD_Y + (B - inset) * Math.pow(Math.sin(a), 2 / N))); }
+  return right.concat(right.slice(0, -1).reverse().map(p => new THREE.Vector2(-p.x, p.y)));
+}
+let pebble = null;
+function pebbleTexture() {
+  if (pebble) return pebble;
+  const S = 512, c = document.createElement('canvas'); c.width = c.height = S;
+  const g = c.getContext('2d'), im = g.createImageData(S, S);
+  for (let i = 0; i < S * S * 4; i += 4) { const v = 120 + Math.random() * 70; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; }
+  g.putImageData(im, 0, 0);
+  pebble = new THREE.CanvasTexture(c); pebble.wrapS = pebble.wrapT = THREE.RepeatWrapping; pebble.anisotropy = ANISO;
+  return pebble;
+}
+function rubberMesh(color, side) {
+  const T = halfStack(), depth = .19, sheet = new THREE.Shape(rubberOutline());
+  const uvs = {
+    generateTopUV: (g, v, a, b, c) => [a, b, c].map(i => new THREE.Vector2(v[i * 3] * .42, v[i * 3 + 1] * .42)),
+    generateSideWallUV: (g, v, a, b, c, d) => [a, b, c, d].map(() => new THREE.Vector2(0, 0)),
+  };
+  const geo = new THREE.ExtrudeGeometry(sheet, {depth, bevelEnabled:true, bevelThickness:.012, bevelSize:.012, bevelOffset:-.012, bevelSegments:2, steps:1, UVGenerator:uvs});
+  geo.translate(0, 0, -depth / 2);
+  const m = new THREE.Mesh(flatLids(toCreasedNormals(geo, .6)), [
+    new THREE.MeshStandardMaterial({color, roughness:.5, bumpMap:pebbleTexture(), bumpScale:.004}),
+    new THREE.MeshStandardMaterial({color:0xcfa95a, roughness:.85}),   // the sponge shows on the edge
+  ]);
+  m.position.z = side * (T + depth / 2 + .012);
+  return m;
+}
+// The soft dark line the sheet leaves on the bare wood just below its cut edge.
+let contactTex = null;
+function rubberContact(side) {
+  if (!contactTex) {
+    const c = document.createElement('canvas'); c.width = 4; c.height = 64;
+    const g = c.getContext('2d'), d = g.createLinearGradient(0, 0, 0, 64);
+    d.addColorStop(0, 'rgba(24,12,6,.6)'); d.addColorStop(1, 'rgba(24,12,6,0)');
+    g.fillStyle = d; g.fillRect(0, 0, 4, 64);
+    contactTex = new THREE.CanvasTexture(c); contactTex.colorSpace = THREE.SRGBColorSpace;
+  }
+  const h = .3, y = HEAD_Y + RUBBER_CUT, a = headHalf(RUBBER_CUT) - .04, b = headHalf(RUBBER_CUT - h) - .04, z = side * (halfStack() + .002);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute([-a, y, z, a, y, z, -b, y - h, z, b, y - h, z], 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute([0, 1, 1, 1, 0, 0, 1, 0], 2));
+  g.setIndex(side > 0 ? [0, 2, 1, 1, 2, 3] : [0, 1, 2, 1, 3, 2]);
+  return new THREE.Mesh(g, new THREE.MeshBasicMaterial({map:contactTex, transparent:true, depthWrite:false, toneMapped:false}));
+}
+function textCanvas(text, W, H, color) {
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  let size = H * .62;
+  g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = color;
+  const set = () => { g.font = `600 ${size}px Archivo, Arial, sans-serif`; try { g.letterSpacing = `${size * .1}px`; } catch (e) {} };
+  set();
+  while (g.measureText(text).width > W * .94 && size > 10) { size *= .94; set(); }
+  g.fillText(text, W / 2, H / 2 + size * .04);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = ANISO;
+  return t;
+}
+function engraving() {
+  const text = state.text.trim().toUpperCase().slice(0, 16);
+  if (!text) return null;
+  const T = halfStack(), from = .42, to = .86, half = .33, X = 8, Y = 40, pos = [], uv = [], idx = [];
+  for (let j = 0; j <= Y; j++) {
+    const s = to + (from - to) * j / Y, {y, W, hc} = cheekRing(s, T);
+    for (let i = 0; i <= X; i++) {
+      const q = i / X, x = half * (2 * q - 1);
+      pos.push(x, y, T - BEVEL + .003 + (hc + BEVEL) * Math.pow(1 - Math.pow(Math.abs(x / W), CHEEK_N), 1 / CHEEK_N) + .004);
+      uv.push(j / Y, 1 - q);   // reads from the butt up, with the top of the letters to the left
+    }
+  }
+  const row = X + 1;
+  for (let j = 0; j < Y; j++) for (let i = 0; i < X; i++) { const a = j * row + i, b = a + row; idx.push(a, a + 1, b, a + 1, b + 1, b); }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx); g.computeVertexNormals();
+  const dark = state.handleWood === 'walnut' || state.handleWood === 'ebony';
+  return new THREE.Mesh(g, new THREE.MeshStandardMaterial({map:textCanvas(text, 1408, 212, dark ? '#e4c88f' : '#1f120a'), transparent:true, roughness:.8, depthWrite:false, polygonOffset:true, polygonOffsetFactor:-2, polygonOffsetUnits:-2}));
+}
+function badgeMesh() {
+  const b = BADGES[state.badge];
+  if (b.color === undefined) return null;
+  const T = halfStack(), {y, hc} = cheekRing(.31, T), w = 1.4, h = .52, r = .11, depth = .045, s = new THREE.Shape();
+  s.moveTo(-w / 2 + r, -h / 2); s.lineTo(w / 2 - r, -h / 2); s.absarc(w / 2 - r, -h / 2 + r, r, -Math.PI / 2, 0);
+  s.lineTo(w / 2, h / 2 - r); s.absarc(w / 2 - r, h / 2 - r, r, 0, Math.PI / 2);
+  s.lineTo(-w / 2 + r, h / 2); s.absarc(-w / 2 + r, h / 2 - r, r, Math.PI / 2, Math.PI);
+  s.lineTo(-w / 2, -h / 2 + r); s.absarc(-w / 2 + r, -h / 2 + r, r, Math.PI, Math.PI * 1.5);
+  const uvs = {
+    generateTopUV: (g, v, a, c, d) => [a, c, d].map(i => new THREE.Vector2(v[i * 3] / w + .5, v[i * 3 + 1] / h + .5)),
+    generateSideWallUV: (g, v, a, c, d, e) => [a, c, d, e].map(() => new THREE.Vector2(0, 0)),
+  };
+  const geo = new THREE.ExtrudeGeometry(s, {depth, bevelEnabled:true, bevelThickness:.014, bevelSize:.014, bevelOffset:-.014, bevelSegments:3, curveSegments:10, steps:1, UVGenerator:uvs});
+  const lc = document.createElement('canvas'); lc.width = 648; lc.height = 240;
+  const lg = lc.getContext('2d'); lg.fillStyle = hex(b.color); lg.fillRect(0, 0, 648, 240);
+  lg.fillStyle = b.ink; lg.font = '600 92px Archivo, Arial, sans-serif'; lg.textAlign = 'center'; lg.textBaseline = 'middle';
+  try { lg.letterSpacing = '14px'; } catch (e) {}
+  lg.fillText('CUSTOM', 328, 124);
+  const map = new THREE.CanvasTexture(lc); map.colorSpace = THREE.SRGBColorSpace; map.anisotropy = ANISO;
+  const m = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({map, metalness:b.metal, roughness:b.rough, anisotropy:.7}));
+  m.position.set(0, y, T - BEVEL + .003 + hc + BEVEL - .004);
+  return m;
+}
+function disposeBlade() {
+  blade.traverse(o => {
+    if (o.geometry) o.geometry.dispose();
+    for (const m of [].concat(o.material || [])) {
+      for (const k of ['map', 'bumpMap']) if (m[k] && m[k].isCanvasTexture && m[k] !== pebble && m[k] !== contactTex) m[k].dispose();
+      m.dispose();
+    }
+  });
+  blade.clear();
+}
+let outlineArea = 0, sheetArea = 0;
+function build() {
+  disposeBlade();
+  const T = halfStack(), depth = 2 * T - 2 * BEVEL, outline = bladeOutline();
+  outlineArea = Math.abs(THREE.ShapeUtils.area(outline));
+  sheetArea = Math.abs(THREE.ShapeUtils.area(rubberOutline()));
+  bakeShadow(outline);
+  faceUV.depth = depth; faceUV.bevel = BEVEL;
+  let geo = new THREE.ExtrudeGeometry(new THREE.Shape(outline), {depth, bevelEnabled:true, bevelThickness:BEVEL, bevelSize:BEVEL, bevelOffset:-BEVEL, bevelSegments:5, steps:1, UVGenerator:faceUV});
+  geo.translate(0, 0, -depth / 2);
+  geo = flatLids(toCreasedNormals(geo, .7));
+  const f = FINISHES[state.finish];
+  const stack = new THREE.Mesh(geo, [woodMaterial(state.face), new THREE.MeshStandardMaterial({map:plyTexture(), roughness:Math.min(.8, f.rough + .1)})]);
+  blade.add(stack);
+  for (const side of [1, -1]) blade.add(new THREE.Mesh(cheekGeometry(side), woodMaterial(state.handleWood)));
+  const r = RUBBERS[state.rubber];
+  if (r.front !== undefined) for (const [color, side] of [[r.front, 1], [r.rear, -1]]) blade.add(rubberMesh(color, side), rubberContact(side));
+  const badge = badgeMesh(); if (badge) blade.add(badge);
+  const mark = engraving(); if (mark) blade.add(mark);
+  dirty = true;
+}
+
+// ---- Price and weight, from the model's own area and volumes.
+function figures() {
+  const L = LAYUPS[state.layup], face = WOODS[state.face];
+  let grams = 0, mm = 0;
+  for (const p of L.plies) { grams += outlineArea * (p.t / 10) * (p.kind === 'face' ? face.density : p.density); mm += p.t; }
+  grams += 2 * cheekVolume() * WOODS[state.handleWood].density;
+  if (RUBBERS[state.rubber].front !== undefined) grams += 2 * sheetArea * .235;
+  grams += BADGES[state.badge].grams;
+  const price = 89 + face.price + L.price + HANDLES[state.handleShape].price + WOODS[state.handleWood].handle + FINISHES[state.finish].price + RUBBERS[state.rubber].price + BADGES[state.badge].price + (state.text.trim() ? 9 : 0);
+  return {grams, price, mm};
+}
+const configCode = () => ['BL', ...KEYS.map(k => state[k].slice(0, 3).toUpperCase())].join('-');
+function refreshFigures() {
+  const f = figures();
+  document.getElementById('price').textContent = '€' + Math.round(f.price);
+  document.getElementById('weight').textContent = Math.round(f.grams) + ' g';
+  document.getElementById('thick').textContent = f.mm.toFixed(1) + ' mm';
+  document.getElementById('code').textContent = configCode();
+}
+
+// ---- Options panel. The state lives in the link, so a design can be shared.
+function readHash() {
+  let parts = [];
+  try { parts = decodeURIComponent(location.hash.slice(1)).split('|'); } catch (e) { return; }
+  if (parts.length < KEYS.length) return;
+  KEYS.forEach((k, i) => { if (TABLES[k][parts[i]]) state[k] = parts[i]; });
+  if (parts[KEYS.length] !== undefined) state.text = parts[KEYS.length].slice(0, 16);
+}
+function writeHash() {
+  history.replaceState(null, '', '#' + encodeURIComponent([...KEYS.map(k => state[k]), state.text].join('|')));
+}
+const options = document.getElementById('options'), disclose = document.getElementById('disclose');
+function group(label, key, items, swatchOf, priceOf) {
+  const fs = document.createElement('fieldset'), lg = document.createElement('legend'), row = document.createElement('div');
+  lg.textContent = label; row.className = 'chips'; fs.append(lg, row);
+  for (const [id, item] of Object.entries(items)) {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.dataset.id = id;
+    if (swatchOf) { const i = document.createElement('i'); i.style.background = swatchOf(item); b.append(i); }
+    b.append(document.createTextNode(item.name));
+    const cost = priceOf(item);
+    if (cost) { const e = document.createElement('em'); e.textContent = '+€' + cost; b.append(e); }
+    b.setAttribute('aria-pressed', String(state[key] === id));
+    b.onclick = () => { state[key] = id; [...row.children].forEach(c => c.setAttribute('aria-pressed', String(c.dataset.id === id))); update(); };
+    row.append(b);
+  }
+  options.insertBefore(fs, disclose);
+}
+readHash();
+const woodSwatch = w => `repeating-linear-gradient(90deg,${w.swatch[0]} 0 3px,${w.swatch[1]} 3px 4px)`;
+group('Face veneer', 'face', WOODS, woodSwatch, w => w.price);
+group('Core layup', 'layup', LAYUPS, null, l => l.price);
+group('Handle shape', 'handleShape', HANDLES, null, h => h.price);
+group('Handle wood', 'handleWood', WOODS, woodSwatch, w => w.handle);
+group('Finish', 'finish', FINISHES, null, f => f.price);
+group('Rubber preview, front / back', 'rubber', RUBBERS, r => r.front === undefined ? '#fff' : `linear-gradient(135deg,${hex(r.front)} 50%,${hex(r.rear)} 50%)`, r => r.price);
+group('Handle badge', 'badge', BADGES, b => b.color === undefined ? '#fff' : hex(b.color), b => b.price);
+const fsText = document.createElement('fieldset');
+fsText.innerHTML = '<legend><label for="engrave">Laser engraving</label><span>+€9</span></legend><input id="engrave" type="text" maxlength="16" autocomplete="off"><p class="note">Up to 16 characters, along the handle.</p>';
+options.insertBefore(fsText, disclose);
+const input = fsText.querySelector('input'); input.value = state.text;
+let textTimer;
+input.oninput = () => { state.text = input.value; clearTimeout(textTimer); textTimer = setTimeout(update, 180); };
+function update() { build(); refreshFigures(); writeHash(); }
+
+// ---- Camera. Views fit the blade to the stage at any size.
+const VIEWS = {
+  hero:   {dir:[.44, .13, 1],  target:[0, 0, 0],     fit:1},
+  front:  {dir:[0, .02, 1],    target:[0, 0, 0],     fit:1},
+  back:   {dir:[0, .02, -1],   target:[0, 0, 0],     fit:1},
+  plies:  {dir:[1, .18, .5],   target:[A, HEAD_Y, 0], dist:8.6},
+  handle: {dir:[.72, .05, 1],  target:[0, -7.9, 0],  fit:.5},
+};
+let tween = null, currentView = 'hero', dirty = true;
+function fitDistance() {
+  const v = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+  return Math.max(25.7 / 2 * (camera.aspect < 1 ? 1.45 : 1.27) / v, 15.2 / 2 * 1.3 / (v * camera.aspect));   // a tall stage also carries the title and the view buttons
+}
+function goView(name, instant) {
+  currentView = name;
+  document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === name)));
+  const view = VIEWS[name], tgt = new THREE.Vector3(...view.target);
+  const to = new THREE.Vector3(...view.dir).normalize().multiplyScalar(view.dist || fitDistance() * view.fit).add(tgt);
+  if (instant) { camera.position.copy(to); controls.target.copy(tgt); controls.update(); dirty = true; return; }
+  tween = {t:0, fromP:camera.position.clone(), fromT:controls.target.clone(), to, tgt};
+}
+document.querySelectorAll('[data-view]').forEach(b => { b.onclick = () => goView(b.dataset.view); });
+const spin = document.getElementById('spin');
+spin.onclick = () => { controls.autoRotate = !controls.autoRotate; spin.setAttribute('aria-pressed', String(controls.autoRotate)); };
+controls.addEventListener('change', () => { dirty = true; });
+controls.addEventListener('start', () => { currentView = null; tween = null; document.querySelectorAll('[data-view]').forEach(b => b.setAttribute('aria-pressed', 'false')); });
+function resize() {
+  const r = stage.getBoundingClientRect();
+  if (!r.width || !r.height) return;
+  renderer.setSize(r.width, r.height, false);
+  camera.aspect = r.width / r.height;
+  camera.updateProjectionMatrix();
+  if (currentView) goView(currentView, true);
+  dirty = true;
+}
+new ResizeObserver(resize).observe(stage);
+function loop() {
+  requestAnimationFrame(loop);
+  if (tween) {
+    tween.t = Math.min(1, tween.t + .035);
+    const e = tween.t * tween.t * (3 - 2 * tween.t);
+    camera.position.lerpVectors(tween.fromP, tween.to, e);
+    controls.target.lerpVectors(tween.fromT, tween.tgt, e);
+    dirty = true;
+    if (tween.t >= 1) tween = null;
+  }
+  controls.update();
+  if (dirty) { dirty = false; renderer.render(scene, camera); }
+}
+
+// ---- Catalog render: the same scene and materials at 3000 px on a transparent background.
+async function renderPng() {
+  const box = stage.getBoundingClientRect(), pr = renderer.getPixelRatio(), aspect = camera.aspect;
+  const gl = renderer.getContext(), size = Math.min(3000, gl.getParameter(gl.MAX_RENDERBUFFER_SIZE));
+  floor.visible = false;
+  renderer.setPixelRatio(1); renderer.setSize(size, size, false);
+  camera.aspect = 1; camera.updateProjectionMatrix();
+  renderer.render(scene, camera);
+  const blob = await new Promise(done => renderer.domElement.toBlob(done, 'image/png'));
+  floor.visible = true;
+  renderer.setPixelRatio(pr); renderer.setSize(box.width, box.height, false);
+  camera.aspect = aspect; camera.updateProjectionMatrix();
+  dirty = true;
+  return {blob, size};
+}
+const shotDlg = document.getElementById('shotDlg');
+let shotUrl = null;
+document.getElementById('render').onclick = async e => {
+  const btn = e.currentTarget, old = btn.innerHTML;
+  btn.textContent = 'Rendering…'; btn.disabled = true;
+  await new Promise(r => setTimeout(r, 40));
+  const {blob, size} = await renderPng();
+  if (shotUrl) URL.revokeObjectURL(shotUrl);
+  shotUrl = URL.createObjectURL(blob);
+  document.getElementById('shotImg').src = shotUrl;
+  document.getElementById('shotInfo').textContent = `${size} × ${size} px PNG, transparent background, ${(blob.size / 1048576).toFixed(1)} MB. This is the view on screen, rendered again at catalog size.`;
+  const save = document.getElementById('shotSave');
+  save.href = shotUrl; save.download = `blade-${configCode().toLowerCase()}.png`;
+  btn.innerHTML = old; btn.disabled = false;
+  shotDlg.showModal();
+};
+document.getElementById('cart').onclick = () => {
+  const f = figures();
+  document.getElementById('payload').textContent = JSON.stringify({
+    sku:configCode(),
+    configuration:{face_veneer:state.face, core_layup:state.layup, handle_shape:state.handleShape, handle_wood:state.handleWood, finish:state.finish, rubber:state.rubber, handle_badge:state.badge, engraving:state.text.trim().toUpperCase()},
+    thickness_mm:Number(f.mm.toFixed(1)), estimated_weight_g:Math.round(f.grams), price_eur:Math.round(f.price),
+  }, null, 2);
+  document.getElementById('cartDlg').showModal();
+};
+document.getElementById('share').onclick = async e => {
+  const b = e.currentTarget;
+  try { await navigator.clipboard.writeText(location.href); b.textContent = 'Link copied'; }
+  catch (err) { b.textContent = 'Copy from the address bar'; }
+  setTimeout(() => { b.textContent = 'Copy link'; }, 1800);
+};
+
+resize(); update(); goView('hero', true);
+loop();
+if (document.fonts && document.fonts.load) document.fonts.load('600 100px Archivo').then(() => update()).catch(() => {});
+window.blade = {state, update, goView, figures, renderPng};
+</script>
+</body>
+</html>
