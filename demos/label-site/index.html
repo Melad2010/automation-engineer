@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vesper Hall Records: label site sample</title>
+<meta name="description" content="A working sample of a music label site: featured release, cover grid, release and artist templates, track previews, checkout link and single-use download flow.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#f6f6f3;--ink:#16171a;--mute:#62656c;--line:#dcdcd6;--card:#fff;--brass:#8a6a2c;--brass-ink:#fff;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;--sans:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --gut:clamp(16px,4vw,56px);--max:1320px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+body.listening{padding-bottom:84px}
+.strip{background:#e9e9e3;color:var(--mute);font-size:12.5px;text-align:center;padding:6px var(--gut)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+header.top{position:sticky;top:0;z-index:20;background:rgba(246,246,243,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:66px}
+.brand{font:400 26px/1 var(--serif);letter-spacing:.2px;white-space:nowrap}
+nav.main{display:flex;gap:clamp(14px,2.4vw,30px);font-size:14px;font-weight:500}
+nav.main a{padding:6px 0;border-bottom:1px solid transparent}
+nav.main a:hover,nav.main a[aria-current=page]{border-bottom-color:var(--ink)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.05;text-wrap:balance}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:clamp(28px,6vw,72px)}
+.hero h1{font-size:clamp(44px,7vw,92px);margin:12px 0 10px}
+.hero .by{font-size:20px;color:var(--mute);margin:0 0 20px}
+.hero p.blurb{max-width:46ch;margin:0 0 26px}
+.cover{display:block;width:100%;aspect-ratio:1;background:#222;box-shadow:0 18px 40px -22px rgba(20,20,30,.55)}
+.cover svg{display:block;width:100%;height:100%}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 22px;border:1px solid var(--ink);font-weight:500;font-size:15px;transition:background .15s,color .15s}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{background:var(--brass);border-color:var(--brass);color:var(--brass-ink)}
+section.block{padding-block:clamp(30px,5vw,60px);border-top:1px solid var(--line)}
+.headrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:26px}
+.headrow h2{font-size:clamp(30px,4vw,46px)}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.6vw,34px)}
+.tile{display:block}
+.tile .cover{box-shadow:none;transition:transform .25s}
+.tile:hover .cover{transform:translateY(-4px)}
+.tile b{display:block;font:400 21px/1.2 var(--serif);margin-top:12px}
+.tile span{display:block;font-size:13.5px;color:var(--mute)}
+.artist-feature{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(24px,5vw,72px);align-items:center}
+.portrait{aspect-ratio:4/5;width:100%;display:block}
+.portrait svg{width:100%;height:100%;display:block}
+.artist-feature h2{font-size:clamp(36px,5vw,64px);margin:10px 0 16px}
+.artist-feature p{max-width:54ch;margin:0 0 22px}
+.news{background:var(--ink);color:var(--paper)}
+.news .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:22px;padding-block:clamp(30px,5vw,54px)}
+.news h2{font-size:clamp(28px,4vw,44px);max-width:17ch}
+.news form{display:flex;flex-wrap:wrap;gap:10px;flex:1 1 300px;max-width:480px}
+.news input{flex:1 1 200px;min-height:46px;padding:0 14px;background:transparent;border:1px solid #6e7077;color:var(--paper);font:inherit;min-width:0}
+.news input::placeholder{color:#a5a7ad}
+.news button{min-height:46px;padding:0 22px;background:var(--paper);color:var(--ink);font-weight:500}
+.news small{flex-basis:100%;color:#c4c5c9;min-height:1.4em}
+footer{padding-block:clamp(30px,5vw,54px)}
+footer .cols{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:26px}
+footer h3{font:500 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:12px}
+footer a{display:block;padding:3px 0;font-size:14.5px}
+footer .brand{display:block;margin-bottom:10px}
+footer p{margin:0;font-size:14.5px;color:var(--mute);max-width:36ch}
+.note{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--mute);max-width:80ch}
+.rel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,5vw,72px);padding-block:clamp(26px,5vw,56px);align-items:start}
+.rel .side{position:sticky;top:90px}
+.rel h1{font-size:clamp(40px,6vw,76px);margin:10px 0 6px}
+.rel .by{display:inline-block;font-size:19px;color:var(--mute);border-bottom:1px solid var(--line);margin-bottom:20px}
+.tracks{list-style:none;margin:24px 0;padding:0;border-top:1px solid var(--line)}
+.tracks li{border-bottom:1px solid var(--line)}
+.tracks button{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;width:100%;padding:13px 2px;text-align:left}
+.tracks button:hover{background:rgba(0,0,0,.03)}
+.tracks .ic{width:28px;height:28px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:10px;padding-left:1px}
+.tracks .playing .ic{background:var(--ink);color:var(--paper);padding-left:0}
+.tracks small{color:var(--mute);font-size:13px;font-variant-numeric:tabular-nums}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:22px 0 14px}
+.price b{font:400 32px/1 var(--serif);white-space:nowrap}
+.price span{font-size:13.5px;color:var(--mute)}
+dl.credits{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;margin:26px 0 0;font-size:14.5px}
+dl.credits dt{color:var(--mute)}dl.credits dd{margin:0}
+.dlbox{margin-top:26px;background:var(--card);border:1px solid var(--line);padding:18px 20px}
+.dlbox h3{font:500 15px/1.4 var(--sans);margin-bottom:6px}
+.dlbox p{margin:0 0 12px;font-size:14.5px;color:var(--mute)}
+.dlbox code{display:block;font:12.5px/1.5 ui-monospace,Consolas,monospace;word-break:break-all;background:var(--paper);padding:8px 10px;margin-bottom:12px;color:var(--ink)}
+.bar{height:6px;background:var(--line);margin-bottom:10px}.bar i{display:block;height:100%;width:0;background:var(--brass)}
+.status{font-size:14px;font-weight:500;min-height:1.5em;margin:0}
+.player{position:fixed;inset-inline:0;bottom:0;z-index:30;background:var(--ink);color:var(--paper);padding-bottom:env(safe-area-inset-bottom,0)}
+.player .wrap{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;min-height:66px}
+.player button.pp{width:40px;height:40px;border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center;font-size:13px}
+.player .ti{min-width:0;font-size:14px}.player .ti b{display:block;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player .ti span{display:block;color:#b8b9be;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player .prog{height:3px;background:#44464c;margin-top:7px}.player .prog i{display:block;height:100%;width:0;background:var(--paper)}
+.player .tm{font-size:12.5px;color:#b8b9be;font-variant-numeric:tabular-nums}
+dialog{border:0;padding:0;background:var(--card);color:var(--ink);width:min(460px,calc(100vw - 32px));box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+dialog::backdrop{background:rgba(15,15,20,.55)}
+dialog .in{padding:24px 24px 22px}
+dialog h3{font-size:30px;margin-bottom:8px}
+dialog p{margin:0 0 18px;font-size:15px;color:var(--mute)}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}footer .cols{grid-template-columns:1fr 1fr}.rel .side{position:static}}
+@media (max-width:720px){.hero,.artist-feature,.rel{grid-template-columns:minmax(0,1fr)}.hero .cover{order:-1}nav.main{gap:14px;font-size:13px}.brand{font-size:21px}}
+@media (max-width:480px){nav.main a[data-scroll]{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="strip">Sample site built for a music label brief. The label, artists and audio are fictional.</div>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#/">Vesper Hall Records</a>
+  <nav class="main" aria-label="Main">
+    <a href="#/" data-nav="home">Releases</a>
+    <a href="#/artist/ines-valmar" data-nav="artist">Artists</a>
+    <a href="#news" data-scroll>Newsletter</a>
+  </nav>
+</div></header>
+<main id="view"></main>
+<section class="news" id="news"><div class="wrap">
+  <h2>New recordings, once a month.</h2>
+  <form id="newsform">
+    <input type="email" required placeholder="Your email" aria-label="Your email">
+    <button type="submit">Sign up</button>
+    <small id="newsmsg" role="status"></small>
+  </form>
+</div></section>
+<footer><div class="wrap">
+  <div class="cols">
+    <div><a class="brand" href="#/">Vesper Hall Records</a><p>Independent classical and contemporary recordings, mastered for high-resolution listening.</p></div>
+    <div><h3>Listen</h3><a href="#/">Latest releases</a><a href="#/release/quiet-meridian">Featured release</a></div>
+    <div><h3>Artists</h3><a href="#/artist/ines-valmar">Ines Valmar</a><a href="#/artist/tomas-erdal">Tomas Erdal</a><a href="#/artist/aldermere-quartet">Aldermere Quartet</a></div>
+    <div><h3>Help</h3><a href="#/release/quiet-meridian">Downloads</a><a href="#news" data-scroll>Newsletter</a></div>
+  </div>
+  <p class="note">Sample site for a music label brief. The label, artists and releases are fictional and the audio is generated for this demo. It is plain HTML, not hosted on Squarespace. The checkout and the download link on the release pages are simulated in the browser.</p>
+</div></footer>
+<div class="player" hidden id="player"><div class="wrap">
+  <button class="pp" id="pp" aria-label="Pause preview">&#10074;&#10074;</button>
+  <div class="ti"><b id="ptitle"></b><span id="psub"></span><div class="prog"><i id="pbar"></i></div></div>
+  <div class="tm" id="ptime">0:00 / 0:12</div>
+</div></div>
+<dialog id="buy"><div class="in">
+  <h3 id="buytitle"></h3>
+  <p>In a real build this button opens the label's Square Payment Link for this release. After payment, Square calls a small serverless function, which emails the buyer a single-use download link.</p>
+  <div class="btns"><button class="btn solid" id="buyok">Simulate a paid order</button><button class="btn" id="buyno">Close</button></div>
+</div></dialog>
+<script>
+"use strict";
+const ARTISTS={
+  "ines-valmar":{name:"Ines Valmar",role:"Piano",bio:"Ines Valmar records in small halls with a single pair of microphones. Her readings favour long lines and the sound of the room over display.",seed:7,hue:[28,44,62]},
+  "tomas-erdal":{name:"Tomas Erdal",role:"Composer",bio:"Tomas Erdal writes slow, spacious music for piano and strings, often built from one harmonic idea that changes colour over time.",seed:19,hue:[46,62,80]},
+  "aldermere-quartet":{name:"Aldermere Quartet",role:"String quartet",bio:"Founded in 2014, the Aldermere Quartet divides its time between the core repertoire and new commissions, recorded live to two tracks.",seed:31,hue:[70,46,50]}
+};
+const R=(id,title,artist,year,price,fmt,pal,blurb)=>({id,title,artist,year,price,fmt,pal,blurb});
+const RELEASES=[
+  R("quiet-meridian","Quiet Meridian","ines-valmar",2026,"18.00","DSD256 + 24/192 FLAC",["#20252b","#b98d45","#e8e2d2"],"Four nocturnal pieces recorded in one evening at a deserted concert hall, with no edits between takes."),
+  R("salt-and-silver","Salt and Silver","tomas-erdal",2026,"16.00","24/192 FLAC",["#c9d2cd","#23423f","#8fa79e"],"Music for piano and strings that moves at the pace of a tide."),
+  R("nine-rooms","Nine Rooms","aldermere-quartet",2025,"20.00","DSD256 + 24/192 FLAC",["#5e2a2a","#e4c9a7","#1e1a1a"],"A quartet recorded in nine different spaces, one movement for each room."),
+  R("low-light-etudes","Low Light Etudes","ines-valmar",2025,"16.00","24/96 FLAC",["#141a2a","#6f86b5","#d5dbe8"],"Studies written for a piano tuned a little low, played after dark."),
+  R("harbour-hours","Harbour Hours","tomas-erdal",2025,"14.00","24/96 FLAC",["#e6dfcf","#2e3a46","#b4552d"],"Short pieces for early mornings, written over one winter by the water."),
+  R("second-winter","Second Winter","aldermere-quartet",2024,"18.00","DSD256 + 24/192 FLAC",["#dfe5e8","#31404a","#90a4ae"],"Two late quartets, separated by a long silence and played as one work."),
+  R("glass-orchard","Glass Orchard","ines-valmar",2024,"14.00","24/96 FLAC",["#23352a","#c5d36f","#eaf0d8"],"Bright, close-miked miniatures with the action of the piano left audible."),
+  R("distant-weather","Distant Weather","tomas-erdal",2023,"12.00","24/96 FLAC",["#3b3550","#d9a68c","#ece4df"],"Slow-moving harmony heard from far away, as if through a window.")
+];
+const TRACKS=["Prelude","Second movement","Interlude","Closing"];
+const byId=id=>RELEASES.find(r=>r.id===id);
+function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}}
+function hash(t){let h=2166136261;for(const c of t){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+/* Each cover is drawn from its release id: rings like a sound spreading through a room. */
+function cover(r){
+  const a=rng(hash(r.id)),[bg,fg,hi]=r.pal,cx=120+a()*360,cy=120+a()*360;let rings="";
+  const n=9+Math.floor(a()*9);
+  for(let i=0;i<n;i++){const rad=30+i*(26+a()*14),w=(.6+a()*2.6).toFixed(2),op=(.25+a()*.7).toFixed(2);
+    rings+=`<circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="${rad.toFixed(0)}" fill="none" stroke="${i%3==0?hi:fg}" stroke-width="${w}" opacity="${op}"/>`}
+  const disc=`<circle cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="${(16+a()*26).toFixed(0)}" fill="${hi}"/>`;
+  const ink=contrast(fg,bg)>=contrast(hi,bg)?fg:hi;
+  return `<svg viewBox="0 0 600 600" role="img" aria-label="${r.title} cover" xmlns="http://www.w3.org/2000/svg"><rect width="600" height="600" fill="${bg}"/>${rings}${disc}<rect y="498" width="600" height="102" fill="${bg}"/><line x1="30" x2="570" y1="498" y2="498" stroke="${ink}" stroke-width="1"/><text x="30" y="548" font-family="Instrument Serif,Georgia,serif" font-size="40" fill="${ink}">${r.title}</text><text x="30" y="576" font-family="Inter,Arial,sans-serif" font-size="13" letter-spacing="2" fill="${ink}">${ARTISTS[r.artist].name.toUpperCase()}</text></svg>`;
+}
+function lum(h){const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+function contrast(a,b){const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+function portrait(k){
+  const A=ARTISTS[k],a=rng(A.seed),[h1,h2,h3]=A.hue;let lines="";
+  for(let i=0;i<46;i++){const y=(i+1)*17,amp=12+a()*70;let d=`M0 ${y}`;for(let x=0;x<=480;x+=40)d+=` L${x} ${(y+Math.sin(x/70+i/3)*amp*(x/480)).toFixed(1)}`;
+    lines+=`<path d="${d}" fill="none" stroke="hsl(${h1},16%,${h3}%)" stroke-width="${(.5+a()*1.4).toFixed(2)}" opacity="${(.35+a()*.6).toFixed(2)}"/>`}
+  return `<svg viewBox="0 0 480 600" role="img" aria-label="${A.name}, abstract image" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><rect width="480" height="600" fill="hsl(${h1},18%,${Math.max(h2-34,12)}%)"/>${lines}</svg>`;
+}
+const tile=r=>`<a class="tile" href="#/release/${r.id}"><span class="cover">${cover(r)}</span><b>${r.title}</b><span>${ARTISTS[r.artist].name} &middot; ${r.year}</span></a>`;
+const view=document.getElementById("view");
+function home(){
+  const f=RELEASES[0],A=ARTISTS[f.artist],feat=ARTISTS["aldermere-quartet"];
+  view.innerHTML=`<div class="wrap"><section class="hero">
+    <div><div class="eyebrow">New release</div><h1>${f.title}</h1><p class="by">${A.name}, ${A.role.toLowerCase()}</p><p class="blurb">${f.blurb}</p>
+      <div class="btns"><a class="btn solid" href="#/release/${f.id}">View release</a><button class="btn" data-play="${f.id}:0">&#9654; Listen, 12 seconds</button></div></div>
+    <a class="cover" href="#/release/${f.id}">${cover(f)}</a></section></div>
+  <section class="block"><div class="wrap"><div class="headrow"><h2>Latest releases</h2><span class="eyebrow">${RELEASES.length} recordings</span></div>
+    <div class="grid">${RELEASES.map(tile).join("")}</div></div></section>
+  <section class="block"><div class="wrap artist-feature"><a class="portrait" href="#/artist/aldermere-quartet">${portrait("aldermere-quartet")}</a>
+    <div><div class="eyebrow">Featured artist</div><h2>${feat.name}</h2><p>${feat.bio}</p><a class="btn" href="#/artist/aldermere-quartet">Artist page</a></div></div></section>`;
+}
+function release(id){
+  const r=byId(id);if(!r)return home();const A=ARTISTS[r.artist];
+  view.innerHTML=`<div class="wrap rel"><div class="side"><span class="cover">${cover(r)}</span></div>
+    <div><div class="eyebrow">${r.year} &middot; ${r.fmt}</div><h1>${r.title}</h1><a class="by" href="#/artist/${r.artist}">${A.name}</a><p>${r.blurb}</p>
+      <ol class="tracks" id="tracks">${TRACKS.map((t,i)=>`<li><button data-play="${r.id}:${i}" aria-label="Preview ${t}"><span class="ic">&#9654;</span><span>${i+1}. ${t}</span><small>0:12 preview</small></button></li>`).join("")}</ol>
+      <div class="price"><b>USD ${r.price}</b><span>Album download, ${r.fmt}</span></div>
+      <div class="btns"><button class="btn solid" id="buybtn">Buy this album</button></div>
+      <div class="dlbox" id="dlbox" hidden aria-live="polite"><h3>Your download (simulated)</h3><p>In a real build the link is signed for one buyer, can resume a dropped 2 GB download, and stops working once the file has finished.</p><code id="dlurl"></code><div class="bar"><i id="dlbar"></i></div><div class="btns" style="margin-bottom:10px"><button class="btn" id="dlgo">Download</button></div><p class="status" id="dlst"></p></div>
+      <dl class="credits"><dt>Artist</dt><dd>${A.name}</dd><dt>Recorded</dt><dd>Vesper Hall, ${r.year}</dd><dt>Format</dt><dd>${r.fmt}</dd></dl></div></div>
+    <section class="block"><div class="wrap"><div class="headrow"><h2>More from the label</h2></div><div class="grid">${RELEASES.filter(x=>x.id!==r.id).sort((a,b)=>(b.artist===r.artist)-(a.artist===r.artist)).slice(0,4).map(tile).join("")}</div></div></section>`;
+  document.getElementById("buybtn").onclick=()=>openBuy(r);
+}
+function artist(k){
+  const A=ARTISTS[k];if(!A)return home();
+  view.innerHTML=`<div class="wrap"><section class="artist-feature" style="padding-block:clamp(26px,5vw,56px)"><span class="portrait">${portrait(k)}</span>
+    <div><div class="eyebrow">${A.role}</div><h2 style="font-size:clamp(40px,6vw,76px)">${A.name}</h2><p>${A.bio}</p></div></section></div>
+    <section class="block"><div class="wrap"><div class="headrow"><h2>Releases</h2></div><div class="grid">${RELEASES.filter(x=>x.artist===k).map(tile).join("")}</div></div></section>`;
+}
+function route(){
+  const h=location.hash||"#/",p=h.split("/");
+  if(h.startsWith("#news"))return;
+  if(p[1]==="release")release(p[2]);else if(p[1]==="artist")artist(p[2]);else home();
+  document.querySelectorAll("nav.main a").forEach(a=>a.removeAttribute("aria-current"));
+  const cur=document.querySelector(`nav.main a[data-nav="${p[1]==="artist"?"artist":"home"}"]`);if(cur)cur.setAttribute("aria-current","page");
+  scrollTo({top:0,behavior:"instant"});markPlaying();
+}
+addEventListener("hashchange",route);
+/* Preview player: one audio element, real 12-second clips, never the full track. */
+const audio=new Audio();audio.preload="none";let now=null;
+const $=id=>document.getElementById(id),fmt=s=>`0:${String(Math.floor(s||0)).padStart(2,"0")}`;
+function markPlaying(){document.querySelectorAll("#tracks button").forEach(b=>{const on=now&&b.dataset.play===now&&!audio.paused;b.classList.toggle("playing",!!on);b.querySelector(".ic").innerHTML=on?"&#10074;&#10074;":"&#9654;"})}
+function play(key){
+  if(now===key&&!audio.paused){audio.pause();return}
+  if(now!==key){const[id,i]=key.split(":"),r=byId(id),n=hash(id)+Number(i);audio.src=`audio/clip-${n%4+1}.mp3`;now=key;
+    $("ptitle").textContent=`${TRACKS[i]} (preview)`;$("psub").textContent=`${r.title}, ${ARTISTS[r.artist].name}`}
+  $("player").hidden=false;document.body.classList.add("listening");audio.play().catch(()=>{$("psub").textContent="Press play to start the preview"});
+}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-play]");if(b){e.preventDefault();play(b.dataset.play)}
+  const s=e.target.closest("[data-scroll]");if(s){e.preventDefault();$("news").scrollIntoView()}});
+$("pp").onclick=()=>audio.paused?audio.play():audio.pause();
+audio.addEventListener("timeupdate",()=>{const d=audio.duration||12;$("pbar").style.width=(audio.currentTime/d*100)+"%";$("ptime").textContent=`${fmt(audio.currentTime)} / ${fmt(d)}`});
+const sync=()=>{$("pp").innerHTML=audio.paused?"&#9654;":"&#10074;&#10074;";$("pp").setAttribute("aria-label",audio.paused?"Play preview":"Pause preview");markPlaying()};
+audio.addEventListener("play",sync);audio.addEventListener("pause",sync);audio.addEventListener("ended",()=>{audio.currentTime=0;sync()});
+/* Checkout and single-use link: simulated here, a Cloudflare Worker with R2 storage in a real build. */
+const dlg=$("buy");let buying=null;
+function openBuy(r){buying=r;$("buytitle").textContent=r.title;dlg.showModal()}
+$("buyno").onclick=()=>dlg.close();
+$("buyok").onclick=()=>{dlg.close();issue(buying)};
+function issue(r){
+  const box=$("dlbox");box.hidden=false;const token=Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,"0")).join("");
+  $("dlurl").textContent=`https://downloads.example.com/${r.id}?t=${token}`;$("dlbar").style.width="0";$("dlst").textContent="Link issued and sent by email.";
+  const go=$("dlgo");go.disabled=false;go.textContent="Download";let state="fresh";
+  go.onclick=()=>{
+    if(state==="used"){$("dlst").textContent="This link has been used. Contact the label for a new one.";return}
+    if(state==="busy")return;state="busy";go.textContent="Downloading";let p=0;
+    const t=setInterval(()=>{p+=4;$("dlbar").style.width=p+"%";$("dlst").textContent=`Downloaded ${(p/100*2).toFixed(2)} GB of 2.00 GB`;
+      if(p>=100){clearInterval(t);state="used";go.textContent="Download again";$("dlst").textContent="Finished. The link is now used up; a second try is refused."}},80);
+  };
+  box.scrollIntoView({block:"nearest"});
+}
+$("newsform").addEventListener("submit",e=>{e.preventDefault();$("newsmsg").textContent="Thanks. This demo does not store your address.";e.target.reset()});
+route();
+</script>
+</body>
+</html>
