@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help Assistant Test Results</title>
+<meta name="description" content="How often the help assistant finds the right passage and refuses questions the documents do not cover, measured on a fixed question set.">
+<link rel="stylesheet" href="styles.css">
+<style>
+  body { overflow: auto; }
+  .page { width: min(980px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 48px; }
+  .page h1 { font-size: 26px; margin: 18px 0 6px; }
+  .page h2 { font-size: 19px; margin: 32px 0 10px; }
+  .lead { color: var(--muted); margin: 0 0 16px; max-width: 70ch; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; box-shadow: var(--shadow); }
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 18px 0; }
+  .kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .kpi .v { font-size: 28px; font-weight: 700; }
+  .kpi .l { font-size: 13px; color: var(--muted); }
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  thead th { font-size: 12.5px; color: var(--muted); font-weight: 600; background: var(--panel-2); }
+  td.best { font-weight: 700; color: var(--accent); }
+  td.ok { color: var(--accent); }
+  td.miss { color: var(--warn); font-weight: 600; }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+  .page ul { padding-left: 20px; }
+  .page li { margin: 4px 0; }
+  .note { font-size: 13px; color: var(--muted); }
+  details summary { cursor: pointer; font-weight: 600; margin: 8px 0; }
+  .back { display: inline-flex; gap: 6px; align-items: center; text-decoration: none; font-size: 14px; }
+  @media (max-width: 760px) { .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kpi .v { font-size: 24px; } }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo" aria-hidden="true">P</span><div><h1>Pellbrook Hours Help</h1><p class="sub">Test results</p></div></div>
+  <div class="top-actions"><a class="link-btn" href="index.html">Back to the assistant</a></div>
+</header>
+<main class="page">
+  <h1>How well does it find the right answer?</h1>
+  <p class="lead">48 fixed questions, each with the passage that answers it, were run through the same search code the assistant page uses, in a real browser. The questions include plain questions, questions in other words than the documents use, questions that need two passages, and questions the documents do not cover, which must be refused. Sample for a fictional company: Pellbrook Software and its documents are invented.</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">89.5%</div><div class="l">right passage in the top 3 (meaning + keywords)</div></div>
+    <div class="kpi"><div class="v">78.9%</div><div class="l">right passage ranked first (meaning + keywords)</div></div>
+    <div class="kpi"><div class="v">8 of 10</div><div class="l">not-covered questions refused (meaning + keywords)</div></div>
+    <div class="kpi"><div class="v">6 of 6</div><div class="l">follow-up questions answered from the right passage</div></div>
+  </div>
+
+  <h2>Results on the test questions</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Search method</th><th>Right passage first</th><th>Right passage in top 3</th><th>Mean reciprocal rank</th><th>Not-covered questions refused</th><th>Covered questions wrongly refused</th><th>Two-passage questions: both in top 3</th></tr></thead>
+    <tbody><tr><th scope="row">Keywords only</th>
+  <td class="best">81.6%</td><td class="">92.1%</td><td class="best">0.871</td>
+  <td class="">80.0%</td>
+  <td>4 of 38</td>
+  <td>6 of 6</td></tr><tr><th scope="row">Meaning only</th>
+  <td class="">73.7%</td><td class="best">94.7%</td><td class="">0.830</td>
+  <td class="best">90.0%</td>
+  <td>6 of 38</td>
+  <td>5 of 6</td></tr><tr><th scope="row">Meaning + keywords</th>
+  <td class="">78.9%</td><td class="">89.5%</td><td class="">0.860</td>
+  <td class="">80.0%</td>
+  <td>4 of 38</td>
+  <td>6 of 6</td></tr></tbody>
+  </table></div>
+  <p class="note">38 covered questions (17 direct, 15 in other words, 6 needing two passages) and 10 questions the documents do not cover. Best value in each column in bold. Mean reciprocal rank is 1 when the right passage is always first, 0.5 when it is always second.</p>
+
+  <div class="card">
+    <strong>What this shows.</strong>
+    Combining meaning and keywords was <strong>not</strong> the best in every column on this test set. The best mean reciprocal rank came from keywords only. Meaning-only search put the right passage in the top 3 most often, and keywords alone ranked it first most often. With 38 questions, one question is 2.6 points, so the three methods are close; the combined method is kept as the default because it does not depend on the user using the documents' exact words, and on the separate tuning questions it was as good as or better than either method alone.
+    The weak spot is questions in other words than the documents (for example “money back” for “refund”): these cause most of the misses and most of the wrong refusals below.
+    Not-covered questions that the combined method still answered: “Do you integrate with Salesforce?”, “Is the app available in Arabic?”. Each shares a word with a real topic in the documents, so the match passed the threshold; the threshold was not changed after the test run.
+  </div>
+
+  <h2>Follow-up questions</h2>
+  <p>6 pairs such as “What does the Business plan cost?” then “Does it include single sign-on?”. The assistant recognised 6 of 6 as follow-ups. Read alone, the second question found the right passage in the top 3 in 4 of 6 cases; read together with the first question, in 6 of 6.</p>
+
+  <h2>Method</h2>
+  <ul>
+    <li><strong>Documents.</strong> 40 documents (plans and billing, policies, product guide, troubleshooting, getting started, developer notes, release notes), split into 131 passages at their section headings. Each passage keeps its document title and heading as context.</li>
+    <li><strong>Keyword search.</strong> A ranked keyword index (BM25) over the passages, with simple word-ending handling so that “refund” finds “refunded”.</li>
+    <li><strong>Meaning search.</strong> A meaning index learned from these documents (latent semantic analysis, 64 dimensions): words that appear in similar passages end up close together, so a question can match a passage that uses related words. It is computed when the site is built; each question is turned into the same kind of vector inside the browser. No outside service is called.</li>
+    <li><strong>Combined ranking.</strong> Both scores are scaled to the best match for the question and added with equal weight.</li>
+    <li><strong>Refusing.</strong> The assistant answers only when the best passage covers enough of the question. Words that appear nowhere in the documents count against the match. Below the threshold it says the documents do not cover the question.</li>
+    <li><strong>Answers.</strong> Sentences are taken word for word from the best passages, each with a numbered link to its source. Nothing is added beyond what the passages say.</li>
+    <li><strong>Fair testing.</strong> The settings (thresholds, weights, index size) were chosen on 16 separate tuning questions, then frozen. The 48 test questions were written before the first test run and were not changed after it. Results on the tuning questions are shown below for comparison.</li>
+    <li><strong>Size.</strong> The whole demo is 486 KB, including the keyword index (125 KB) and the meaning index (258 KB). The page answers with keyword search as soon as the keyword index is loaded and adds meaning search when the second index arrives.</li>
+  </ul>
+
+  <h2>Tuning questions</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Search method</th><th>Right passage first</th><th>Right passage in top 3</th><th>Mean reciprocal rank</th><th>Not-covered questions refused</th><th>Covered questions wrongly refused</th></tr></thead>
+    <tbody><tr><th scope="row">Keywords only</th><td>66.7%</td><td>91.7%</td><td>0.794</td><td>3 of 4</td><td>0 of 12</td></tr><tr><th scope="row">Meaning only</th><td>66.7%</td><td>91.7%</td><td>0.794</td><td>3 of 4</td><td>1 of 12</td></tr><tr><th scope="row">Meaning + keywords</th><td>66.7%</td><td>91.7%</td><td>0.808</td><td>3 of 4</td><td>0 of 12</td></tr></tbody>
+  </table></div>
+
+  <h2>Every test question</h2>
+  <details>
+    <summary>Show all 48 questions with the rank of the right passage</summary>
+    <div class="table-wrap"><table>
+      <thead><tr><th>#</th><th>Question</th><th>Kind</th><th>Keywords</th><th>Meaning</th><th>Combined</th></tr></thead>
+      <tbody><tr><td>t01</td><td>What is the uptime commitment on the Business plan?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t02</td><td>How long is the free trial?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t03</td><td>What are the API rate limits on the Business plan?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t04</td><td>How long is a password reset link valid?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t05</td><td>What is the minimum number of users on the Business plan?</td><td>Direct</td><td class="ok">#1</td><td class="miss">#2</td><td class="ok">#1</td></tr><tr><td>t06</td><td>What file format does the full data export use?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t07</td><td>How many rows can a CSV import file have?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t08</td><td>When do invitations expire?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t09</td><td>What does API status 403 mean?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t10</td><td>How many recovery codes do I get with two-step sign-in?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t11</td><td>Which rate is used when a task rate and a project rate are both set?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t12</td><td>What are the support hours?</td><td>Direct</td><td class="ok">#1</td><td class="miss">#2</td><td class="ok">#1</td></tr><tr><td>t13</td><td>How many taxes can an invoice have?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t14</td><td>Can I undo an import?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t15</td><td>Can I get my money back if I paid for a whole year?</td><td>Own words</td><td class="miss">#7</td><td class="miss">#3</td><td class="miss">#4</td></tr><tr><td>t16</td><td>My entries are not uploading from my Android phone</td><td>Own words</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t17</td><td>The app did not notice when I walked away from my computer</td><td>Own words</td><td class="miss">#2 · refused</td><td class="miss">#2</td><td class="miss">#2</td></tr><tr><td>t18</td><td>What happens if my card gets declined?</td><td>Own words</td><td class="ok">#1</td><td class="miss">#1 · refused</td><td class="miss">#1 · refused</td></tr><tr><td>t19</td><td>Is our information scrambled when it is stored?</td><td>Own words</td><td class="miss">#2 · refused</td><td class="miss">#1 · refused</td><td class="miss">#2 · refused</td></tr><tr><td>t20</td><td>Can someone other than my manager sign off my week of hours?</td><td>Own words</td><td class="miss">–</td><td class="miss">–</td><td class="miss">–</td></tr><tr><td>t21</td><td>The person who set up our account quit and we can't reach them</td><td>Own words</td><td class="ok">#1</td><td class="miss">#3 · refused</td><td class="miss">#2 · refused</td></tr><tr><td>t22</td><td>Does it take pictures of my screen?</td><td>Own words</td><td class="miss">#1 · refused</td><td class="miss">#3 · refused</td><td class="miss">#2 · refused</td></tr><tr><td>t23</td><td>How do I get a warning before a project uses up its hours?</td><td>Own words</td><td class="miss">#8</td><td class="miss">#5 · refused</td><td class="miss">#6</td></tr><tr><td>t24</td><td>Can we keep our data in Europe?</td><td>Own words</td><td class="ok">#1</td><td class="miss">#1 · refused</td><td class="ok">#1</td></tr><tr><td>t25</td><td>How fast will support answer me on the Team plan?</td><td>Own words</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t26</td><td>Can I bill my clients in a different currency?</td><td>Own words</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t27</td><td>What happens to our account if we stop paying?</td><td>Own words</td><td class="miss">#2</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t28</td><td>Is there a way to start and stop tracking without opening the app window?</td><td>Own words</td><td class="miss">#3</td><td class="miss">#3</td><td class="miss">#4</td></tr><tr><td>t29</td><td>What does the Team plan cost per year, and is there a discount for nonprofits?</td><td>Two passages</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t30</td><td>Is a monthly plan refunded, and when does a downgrade take effect?</td><td>Two passages</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t31</td><td>How long do entries stay on the phone offline, and how do I fix syncing on iPhone?</td><td>Two passages</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t32</td><td>What happens to our data when we close the workspace, and how do we export it first?</td><td>Two passages</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t33</td><td>Which plans have scheduled reports, and in which version were they added?</td><td>Two passages</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t34</td><td>Which plan includes single sign-on, and can the owner still sign in with a password?</td><td>Two passages</td><td class="ok">#1</td><td class="miss">#2</td><td class="ok">#1</td></tr><tr><td>t35</td><td>What changed in version 5.1?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t36</td><td>Who can see billable rates?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t37</td><td>Can a timer keep running overnight and into the next day?</td><td>Own words</td><td class="miss">#1 · refused</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>t38</td><td>How do I transfer ownership of the workspace?</td><td>Direct</td><td class="ok">#1</td><td class="ok">#1</td><td class="ok">#1</td></tr><tr><td>o01</td><td>Do you integrate with Salesforce?</td><td>Not covered</td><td class="miss">answered</td><td class="ok">refused</td><td class="miss">answered</td></tr><tr><td>o02</td><td>What is the weather in Paris today?</td><td>Not covered</td><td class="ok">refused</td><td class="ok">refused</td><td class="ok">refused</td></tr><tr><td>o03</td><td>Does Pellbrook Hours have a built-in video call feature?</td><td>Not covered</td><td class="ok">refused</td><td class="ok">refused</td><td class="ok">refused</td></tr><tr><td>o04</td><td>Who is the CEO of Pellbrook?</td><td>Not covered</td><td class="ok">refused</td><td class="ok">refused</td><td class="ok">refused</td></tr><tr><td>o05</td><td>How do I reset my home router?</td><td>Not covered</td><td class="ok">refused</td><td class="ok">refused</td><td class="ok">refused</td></tr><tr><td>o06</td><td>Is there a Pellbrook office in Berlin I can visit?</td><td>Not covered</td><td class="ok">refused</td><td class="ok">refused</td><td class="ok">refused</td></tr><tr><td>o07</td><td>Can Pellbrook Hours run payroll and pay salaries?</td><td>Not covered</td><td class="ok">refused</td><td class="ok">refused</td><td class="ok">refused</td></tr><tr><td>o08</td><td>Write me a poem about autumn</td><td>Not covered</td><td class="ok">refused</td><td class="ok">refused</td><td class="ok">refused</td></tr><tr><td>o09</td><td>What is the best recipe for banana bread?</td><td>Not covered</td><td class="ok">refused</td><td class="ok">refused</td><td class="ok">refused</td></tr><tr><td>o10</td><td>Is the app available in Arabic?</td><td>Not covered</td><td class="miss">answered</td><td class="miss">answered</td><td class="miss">answered</td></tr></tbody>
+    </table></div>
+    <p class="note">#1 means the right passage was ranked first. For not-covered questions the right result is “refused”.</p>
+  </details>
+
+  <p class="note">Measured 2026-11-14. <a href="index.html">Back to the assistant</a></p>
+</main>
+<script>
+  try { const t = localStorage.getItem('pb-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
+</script>
+</body>
+</html>

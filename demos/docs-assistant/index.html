@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pellbrook Help Assistant</title>
+<meta name="description" content="A help assistant that answers questions from a company's own documents and shows the source of every sentence.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232f6f5e'/%3E%3Cpath d='M9 22V10h7a4 4 0 0 1 0 8h-4v4' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <button class="icon-btn only-narrow" id="docs-toggle" aria-controls="sidebar" aria-expanded="false" title="Documents">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span class="sr">Documents</span>
+    </button>
+    <div class="brand">
+      <span class="logo" aria-hidden="true">P</span>
+      <div>
+        <h1>Pellbrook Hours Help</h1>
+        <p class="sub">Ask about plans, billing, features and fixes</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <span class="status" id="status" role="status"><span class="dot"></span><span id="status-text">Loading documents…</span><span id="status-short">Loading</span></span>
+      <a class="link-btn hide-narrow" href="evaluation.html">Test results</a>
+      <button class="icon-btn" id="theme-toggle" title="Switch light or dark">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg><span class="sr">Switch theme</span>
+      </button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar" aria-label="Documents">
+    <div class="side-head">
+      <h2>Documents <span class="count" id="doc-count"></span></h2>
+      <input type="search" id="doc-filter" placeholder="Filter documents" aria-label="Filter documents">
+    </div>
+    <nav id="doc-list" class="doc-list"></nav>
+    <p class="side-note">Sample for a fictional company: Pellbrook Software, its product and all its documents are invented.</p>
+  </aside>
+
+  <main class="chat" id="chat">
+    <div class="notice">Answers are built only from the cited passages of these documents; if the documents do not cover a question, the assistant says so instead of guessing.</div>
+    <div class="messages" id="messages" aria-live="polite">
+      <div class="welcome" id="welcome">
+        <h2>How can I help?</h2>
+        <p>Ask a question in your own words. Every answer shows where it comes from.</p>
+        <div class="suggestions" id="suggestions"></div>
+      </div>
+    </div>
+    <form class="composer" id="composer" autocomplete="off">
+      <label class="sr" for="question">Your question</label>
+      <input id="question" name="question" maxlength="300" placeholder="Type your question…">
+      <button type="submit" class="send" id="send" aria-label="Ask">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </button>
+    </form>
+    <div class="composer-meta">
+      <label>Search by
+        <select id="mode">
+          <option value="hybrid">meaning and keywords</option>
+          <option value="keyword">keywords only</option>
+          <option value="vector">meaning only</option>
+        </select>
+      </label>
+      <button type="button" class="text-btn" id="new-chat">New conversation</button>
+      <a class="text-btn only-narrow" href="evaluation.html">Test results</a>
+    </div>
+  </main>
+
+  <aside class="reader" id="reader" aria-label="Source" hidden>
+    <div class="reader-head">
+      <div>
+        <p class="eyebrow" id="reader-eyebrow"></p>
+        <h2 id="reader-title"></h2>
+      </div>
+      <button class="icon-btn" id="reader-close" title="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="sr">Close</span>
+      </button>
+    </div>
+    <div class="reader-body" id="reader-body"></div>
+  </aside>
+  <div class="scrim" id="scrim" hidden></div>
+</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
