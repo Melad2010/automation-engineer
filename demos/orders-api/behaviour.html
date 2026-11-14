@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orders API Behaviour</title>
+<meta name="description" content="Orders and inventory REST API sample in Python, FastAPI and SQLAlchemy.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f5fbf'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='white' font-family='Arial' font-weight='700'%3EB%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="top"><div class="wrap">
+<div class="brand"><div class="logo" aria-hidden="true">B</div><div><h1>Brindlecove Supply Orders API</h1>
+<p>Python &middot; FastAPI &middot; SQLAlchemy &middot; Alembic &middot; pytest</p></div></div>
+<nav class="tabs" aria-label="Pages"><a href="index.html">API reference</a><a href="behaviour.html" aria-current=page>How it behaves</a><a href="openapi.json">openapi.json</a></nav>
+</div></header>
+<div class="wrap">
+<p class="note">Static reference for a sample service. The service itself runs locally with one command: <code>python -m app serve --seed</code>. Brindlecove Supply is a fictional wholesale company; all data here is invented.</p>
+<main>
+<h2>Test run</h2>
+<div class=grid><div class=card><div class=big>112 passed</div><div class=lbl>pytest, 0 failed</div></div><div class=card><div class=big>98%</div><div class=lbl>line and branch coverage of the app package</div></div><div class=card><div class=big>Clean</div><div class=lbl>ruff lint and format check</div></div><div class=card><div class=big>409, 201</div><div class=lbl>two orders for the last unit, sent together: one wins, one is refused</div></div></div>
+<div class=tablewrap><table><thead><tr><th>Test file</th><th>Tests</th><th>What it covers</th></tr></thead><tbody><tr><td><code>test_api_auth.py</code></td><td>23</td><td>Auth, roles, users, health, errors, request ids, rate limits</td></tr><tr><td><code>test_api_catalog.py</code></td><td>22</td><td>Products, stock adjustments, audit trail, customers, paging</td></tr><tr><td><code>test_api_orders.py</code></td><td>23</td><td>Orders, idempotency, status changes, HTTP races, reports, CSV</td></tr><tr><td><code>test_cli_seed.py</code></td><td>2</td><td>Migrations match the models; demo data is consistent</td></tr><tr><td><code>test_stock_rules.py</code></td><td>13</td><td>Stock and order rules on a real database, including races</td></tr><tr><td><code>test_units.py</code></td><td>29</td><td>Unit rules (status table, tokens, passwords, rate limiter, CSV safety)</td></tr></tbody></table></div>
+<p class=small>Every test gets its own SQLite database file built by the real migrations. The race tests start several threads at the same instant: two orders for the last unit, twelve buyers for five units, eight HTTP requests for four units, six retries with one idempotency key, two cancels of one order.</p>
+<h2>Order status and stock</h2>
+<div class=card><div class=flow><svg viewBox="0 0 760 210" width="100%" role="img" aria-label="Order status flow" style="max-width:760px">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<g style="color:var(--muted)" fill="none" stroke="currentColor" stroke-width="1.6">
+<path d="M140 60 H300" marker-end="url(#ah)"/><path d="M440 60 H600" marker-end="url(#ah)"/>
+<path d="M90 85 V160 H300" marker-end="url(#ah)"/><path d="M370 85 V135" marker-end="url(#ah)"/></g>
+<g font-size="14"><rect x="20" y="35" width="120" height="50" rx="10" fill="var(--chip)" stroke="var(--line)"/>
+<text x="80" y="65" text-anchor="middle" fill="var(--ink)" font-weight="600">draft</text>
+<rect x="300" y="35" width="140" height="50" rx="10" fill="var(--chip)" stroke="var(--accent)"/>
+<text x="370" y="65" text-anchor="middle" fill="var(--ink)" font-weight="600">confirmed</text>
+<rect x="600" y="35" width="130" height="50" rx="10" fill="var(--chip)" stroke="var(--ok)"/>
+<text x="665" y="65" text-anchor="middle" fill="var(--ink)" font-weight="600">shipped</text>
+<rect x="300" y="135" width="140" height="50" rx="10" fill="var(--chip)" stroke="var(--warn)"/>
+<text x="370" y="165" text-anchor="middle" fill="var(--ink)" font-weight="600">cancelled</text>
+<g font-size="12" fill="var(--muted)"><text x="220" y="50" text-anchor="middle">reserve stock</text>
+<text x="520" y="50" text-anchor="middle">stock leaves</text>
+<text x="378" y="115">release stock</text><text x="160" y="152">no stock effect</text></g></g></svg></div><p class=small>Stock per product: <b>on hand</b> (in the warehouse), <b>reserved</b> (promised to confirmed orders) and <b>available</b> = on hand &minus; reserved. Each change is a single conditional update in the database and writes an audit row.</p></div>
+<h2>Real requests and responses</h2>
+<p class=small>Recorded from the service running locally with its demo data. Tokens and passwords are hidden; long lists are shortened.</p>
+<div class=ex><h3>Admin login</h3><div class=line><span class="m post">POST</span><code>/auth/login</code><span class='status s2'>&rarr; 200</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /auth/login
+
+{
+  &quot;email&quot;: &quot;admin@brindlecove.example.com&quot;,
+  &quot;password&quot;: &quot;&lt;demo password&gt;&quot;
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 200
+x-request-id: 3a12d9c18c744011870e445b3456cf32
+
+{
+  &quot;access_token&quot;: &quot;eyJhbGciOiJIUzI1...(shortened)&quot;,
+  &quot;token_type&quot;: &quot;bearer&quot;,
+  &quot;expires_in&quot;: 3600,
+  &quot;role&quot;: &quot;admin&quot;
+}</code></pre></div></div></div>
+<div class=ex><h3>Login with a wrong password</h3><div class=line><span class="m post">POST</span><code>/auth/login</code><span class='status s4'>&rarr; 401</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /auth/login
+
+{
+  &quot;email&quot;: &quot;admin@brindlecove.example.com&quot;,
+  &quot;password&quot;: &quot;&lt;demo password&gt;&quot;
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 401
+x-request-id: dc642c5d923f45bba32bb1f05cf59a05
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;unauthorized&quot;,
+    &quot;message&quot;: &quot;Email or password is wrong.&quot;,
+    &quot;details&quot;: [],
+    &quot;request_id&quot;: &quot;dc642c5d923f45bba32bb1f05cf59a05&quot;
+  }
+}</code></pre></div></div></div>
+<div class=ex><h3>Filter, sort and page products</h3><div class=line><span class="m get">GET</span><code>/products?category=Packaging&amp;sort=-unit_price_cents&amp;limit=3&amp;offset=0</code><span class='status s2'>&rarr; 200</span></div><div class=cols><div><div class=small>Request</div><pre><code>GET /products?category=Packaging&amp;sort=-unit_price_cents&amp;limit=3&amp;offset=0
+Authorization: Bearer &lt;token&gt;</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 200
+x-request-id: db193865f4e640dd98a4044a735df9ac
+
+{
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: 25,
+      &quot;sku&quot;: &quot;BC-PKG-1010&quot;,
+      &quot;name&quot;: &quot;Stretch Wrap Film 500 mm (6 rolls)&quot;,
+      &quot;category&quot;: &quot;Packaging&quot;,
+      &quot;unit_price_cents&quot;: 4275,
+      &quot;on_hand&quot;: 3,
+      &quot;reserved&quot;: 0,
+      &quot;available&quot;: 3,
+      &quot;reorder_level&quot;: 2,
+      &quot;is_active&quot;: true,
+      &quot;created_at&quot;: &quot;2026-11-14T09:17:18.343601Z&quot;,
+      &quot;updated_at&quot;: &quot;2026-11-14T09:17:18.345559Z&quot;
+    },
+    {
+      &quot;id&quot;: 4,
+      &quot;sku&quot;: &quot;BC-PKG-1004&quot;,
+      &quot;name&quot;: &quot;Bubble Wrap Roll 50 cm x 100 m&quot;,
+      &quot;category&quot;: &quot;Packaging&quot;,
+      &quot;unit_price_cents&quot;: 3480,
+      &quot;on_hand&quot;: 38,
+      &quot;reserved&quot;: 0,
+      &quot;available&quot;: 38,
+      &quot;reorder_level&quot;: 40,
+      &quot;is_active&quot;: true,
+      &quot;created_at&quot;: &quot;2026-11-14T09:16:46.814232Z&quot;,
+      &quot;updated_at&quot;: &quot;2026-11-14T09:16:46.814232Z&quot;
+    },
+    &quot;... 1 more&quot;
+  ],
+  &quot;total&quot;: 6,
+  &quot;limit&quot;: 3,
+  &quot;offset&quot;: 0
+}</code></pre></div></div></div>
+<div class=ex><h3>Invalid product</h3><div class=line><span class="m post">POST</span><code>/products</code><span class='status s4'>&rarr; 422</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /products
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;sku&quot;: &quot;x&quot;,
+  &quot;name&quot;: &quot;&quot;,
+  &quot;category&quot;: &quot;Packaging&quot;,
+  &quot;unit_price_cents&quot;: -5
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 422
+x-request-id: cc337ef0daca4a68bda3dd52c7a32bdd
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;validation_error&quot;,
+    &quot;message&quot;: &quot;Some fields are missing or invalid.&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;field&quot;: &quot;sku&quot;,
+        &quot;issue&quot;: &quot;String should match pattern &#x27;^[A-Z0-9][A-Z0-9-]{2,39}$&#x27;&quot;
+      },
+      {
+        &quot;field&quot;: &quot;name&quot;,
+        &quot;issue&quot;: &quot;String should have at least 2 characters&quot;
+      },
+      {
+        &quot;field&quot;: &quot;unit_price_cents&quot;,
+        &quot;issue&quot;: &quot;Input should be greater than or equal to 0&quot;
+      }
+    ],
+    &quot;request_id&quot;: &quot;cc337ef0daca4a68bda3dd52c7a32bdd&quot;
+  }
+}</code></pre></div></div></div>
+<div class=ex><h3>Staff may not create products</h3><div class=line><span class="m post">POST</span><code>/products</code><span class='status s4'>&rarr; 403</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /products
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;sku&quot;: &quot;BC-PKG-1010&quot;,
+  &quot;name&quot;: &quot;Stretch Wrap Film 500 mm (6 rolls)&quot;,
+  &quot;category&quot;: &quot;Packaging&quot;,
+  &quot;unit_price_cents&quot;: 4275,
+  &quot;on_hand&quot;: 3,
+  &quot;reorder_level&quot;: 2
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 403
+x-request-id: d8842bb280924dbda25ba8ff969201ca
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;forbidden&quot;,
+    &quot;message&quot;: &quot;This action needs the admin role.&quot;,
+    &quot;details&quot;: [],
+    &quot;request_id&quot;: &quot;d8842bb280924dbda25ba8ff969201ca&quot;
+  }
+}</code></pre></div></div></div>
+<div class=ex><h3>Confirmed order with an Idempotency-Key (reserves 2 units)</h3><div class=line><span class="m post">POST</span><code>/orders</code><span class='status s2'>&rarr; 201</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /orders
+Idempotency-Key: pos-terminal-7-0001
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;customer_id&quot;: 6,
+  &quot;lines&quot;: [
+    {
+      &quot;product_id&quot;: 25,
+      &quot;quantity&quot;: 2
+    }
+  ],
+  &quot;notes&quot;: &quot;Deliver to loading bay B&quot;,
+  &quot;confirm&quot;: true
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 201
+location: /orders/9
+x-request-id: 77ebe1e0738b415b97e2952855223890
+
+{
+  &quot;id&quot;: 9,
+  &quot;customer_id&quot;: 6,
+  &quot;customer_name&quot;: &quot;Corran Bay Leisure Centre&quot;,
+  &quot;status&quot;: &quot;confirmed&quot;,
+  &quot;notes&quot;: &quot;Deliver to loading bay B&quot;,
+  &quot;total_cents&quot;: 8550,
+  &quot;lines&quot;: [
+    {
+      &quot;product_id&quot;: 25,
+      &quot;sku&quot;: &quot;BC-PKG-1010&quot;,
+      &quot;name&quot;: &quot;Stretch Wrap Film 500 mm (6 rolls)&quot;,
+      &quot;quantity&quot;: 2,
+      &quot;unit_price_cents&quot;: 4275,
+      &quot;line_total_cents&quot;: 8550
+    }
+  ],
+  &quot;created_at&quot;: &quot;2026-11-14T09:17:18.397609Z&quot;,
+  &quot;updated_at&quot;: &quot;2026-11-14T09:17:18.402005Z&quot;
+}</code></pre></div></div></div>
+<div class=ex><h3>Same request retried with the same key</h3><div class=line><span class="m post">POST</span><code>/orders</code><span class='status s2'>&rarr; 200</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /orders
+Idempotency-Key: pos-terminal-7-0001
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;customer_id&quot;: 6,
+  &quot;lines&quot;: [
+    {
+      &quot;product_id&quot;: 25,
+      &quot;quantity&quot;: 2
+    }
+  ],
+  &quot;notes&quot;: &quot;Deliver to loading bay B&quot;,
+  &quot;confirm&quot;: true
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 200
+idempotent-replayed: true
+location: /orders/9
+x-request-id: 3df9c9e7a7ba4e5eab7ab6914919144b
+
+{
+  &quot;id&quot;: 9,
+  &quot;customer_id&quot;: 6,
+  &quot;customer_name&quot;: &quot;Corran Bay Leisure Centre&quot;,
+  &quot;status&quot;: &quot;confirmed&quot;,
+  &quot;notes&quot;: &quot;Deliver to loading bay B&quot;,
+  &quot;total_cents&quot;: 8550,
+  &quot;lines&quot;: [
+    {
+      &quot;product_id&quot;: 25,
+      &quot;sku&quot;: &quot;BC-PKG-1010&quot;,
+      &quot;name&quot;: &quot;Stretch Wrap Film 500 mm (6 rolls)&quot;,
+      &quot;quantity&quot;: 2,
+      &quot;unit_price_cents&quot;: 4275,
+      &quot;line_total_cents&quot;: 8550
+    }
+  ],
+  &quot;created_at&quot;: &quot;2026-11-14T09:17:18.397609Z&quot;,
+  &quot;updated_at&quot;: &quot;2026-11-14T09:17:18.402005Z&quot;
+}</code></pre></div></div><p class=small>Same order returned, no second reservation</p></div>
+<div class=ex><h3>Same key, different body</h3><div class=line><span class="m post">POST</span><code>/orders</code><span class='status s4'>&rarr; 409</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /orders
+Idempotency-Key: pos-terminal-7-0001
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;customer_id&quot;: 6,
+  &quot;lines&quot;: [
+    {
+      &quot;product_id&quot;: 25,
+      &quot;quantity&quot;: 1
+    }
+  ],
+  &quot;notes&quot;: &quot;Deliver to loading bay B&quot;,
+  &quot;confirm&quot;: true
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 409
+x-request-id: 94d28c00faaf47b0859c62b6246f7c96
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;conflict&quot;,
+    &quot;message&quot;: &quot;This Idempotency-Key was already used with a different request body.&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;field&quot;: &quot;Idempotency-Key&quot;,
+        &quot;issue&quot;: &quot;use a new key for a new order&quot;
+      }
+    ],
+    &quot;request_id&quot;: &quot;94d28c00faaf47b0859c62b6246f7c96&quot;
+  }
+}</code></pre></div></div></div>
+<div class=ex><h3>Two orders sent at the same moment for the last unit (request 1 of 2)</h3><div class=line><span class="m post">POST</span><code>/orders</code><span class='status s4'>&rarr; 409</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /orders
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;customer_id&quot;: 6,
+  &quot;lines&quot;: [
+    {
+      &quot;product_id&quot;: 25,
+      &quot;quantity&quot;: 1
+    }
+  ],
+  &quot;confirm&quot;: true
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 409
+x-request-id: b8d3e8ec41464bb8ade39f1b6ca7e11b
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;insufficient_stock&quot;,
+    &quot;message&quot;: &quot;Not enough stock for this order.&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;field&quot;: &quot;product 25&quot;,
+        &quot;issue&quot;: &quot;requested 1, available 0&quot;
+      }
+    ],
+    &quot;request_id&quot;: &quot;b8d3e8ec41464bb8ade39f1b6ca7e11b&quot;
+  }
+}</code></pre></div></div></div>
+<div class=ex><h3>Two orders sent at the same moment for the last unit (request 2 of 2)</h3><div class=line><span class="m post">POST</span><code>/orders</code><span class='status s2'>&rarr; 201</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /orders
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;customer_id&quot;: 6,
+  &quot;lines&quot;: [
+    {
+      &quot;product_id&quot;: 25,
+      &quot;quantity&quot;: 1
+    }
+  ],
+  &quot;confirm&quot;: true
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 201
+location: /orders/10
+x-request-id: 7cfdc42a79384751a95cf5849bdee7d7
+
+{
+  &quot;id&quot;: 10,
+  &quot;customer_id&quot;: 6,
+  &quot;customer_name&quot;: &quot;Corran Bay Leisure Centre&quot;,
+  &quot;status&quot;: &quot;confirmed&quot;,
+  &quot;notes&quot;: null,
+  &quot;total_cents&quot;: 4275,
+  &quot;lines&quot;: [
+    {
+      &quot;product_id&quot;: 25,
+      &quot;sku&quot;: &quot;BC-PKG-1010&quot;,
+      &quot;name&quot;: &quot;Stretch Wrap Film 500 mm (6 rolls)&quot;,
+      &quot;quantity&quot;: 1,
+      &quot;unit_price_cents&quot;: 4275,
+      &quot;line_total_cents&quot;: 4275
+    }
+  ],
+  &quot;created_at&quot;: &quot;2026-11-14T09:17:18.483791Z&quot;,
+  &quot;updated_at&quot;: &quot;2026-11-14T09:17:18.485311Z&quot;
+}</code></pre></div></div></div>
+<div class=ex><h3>Stock after the race: never oversold</h3><div class=line><span class="m get">GET</span><code>/products/25</code><span class='status s2'>&rarr; 200</span></div><div class=cols><div><div class=small>Request</div><pre><code>GET /products/25
+Authorization: Bearer &lt;token&gt;</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 200
+x-request-id: 0c3adea3e7ab4238b8dc0a3b3903c291
+
+{
+  &quot;id&quot;: 25,
+  &quot;sku&quot;: &quot;BC-PKG-1010&quot;,
+  &quot;name&quot;: &quot;Stretch Wrap Film 500 mm (6 rolls)&quot;,
+  &quot;category&quot;: &quot;Packaging&quot;,
+  &quot;unit_price_cents&quot;: 4275,
+  &quot;on_hand&quot;: 3,
+  &quot;reserved&quot;: 3,
+  &quot;available&quot;: 0,
+  &quot;reorder_level&quot;: 2,
+  &quot;is_active&quot;: true,
+  &quot;created_at&quot;: &quot;2026-11-14T09:17:18.343601Z&quot;,
+  &quot;updated_at&quot;: &quot;2026-11-14T09:17:18.483791Z&quot;
+}</code></pre></div></div></div>
+<div class=ex><h3>Cancelling a shipped order is refused</h3><div class=line><span class="m post">POST</span><code>/orders/9/status</code><span class='status s4'>&rarr; 409</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /orders/9/status
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;status&quot;: &quot;cancelled&quot;
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 409
+x-request-id: cbac17f5547343aca9dd7bc08062f68e
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;invalid_status_change&quot;,
+    &quot;message&quot;: &quot;Cannot change an order from shipped to cancelled.&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;field&quot;: &quot;status&quot;,
+        &quot;issue&quot;: &quot;allowed next: none (final status)&quot;
+      }
+    ],
+    &quot;request_id&quot;: &quot;cbac17f5547343aca9dd7bc08062f68e&quot;
+  }
+}</code></pre></div></div></div>
+<div class=ex><h3>Remove more stock than allowed</h3><div class=line><span class="m post">POST</span><code>/products/25/adjustments</code><span class='status s4'>&rarr; 422</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /products/25/adjustments
+Authorization: Bearer &lt;token&gt;
+
+{
+  &quot;change&quot;: -5,
+  &quot;reason&quot;: &quot;Stock count&quot;
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 422
+x-request-id: c5d6c783d633415b91690150d54c2c43
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;validation_error&quot;,
+    &quot;message&quot;: &quot;This change would leave less stock than is already reserved for orders.&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;field&quot;: &quot;change&quot;,
+        &quot;issue&quot;: &quot;lowest allowed change is 0&quot;
+      }
+    ],
+    &quot;request_id&quot;: &quot;c5d6c783d633415b91690150d54c2c43&quot;
+  }
+}</code></pre></div></div></div>
+<div class=ex><h3>Audit trail for the product</h3><div class=line><span class="m get">GET</span><code>/products/25/movements?limit=10</code><span class='status s2'>&rarr; 200</span></div><div class=cols><div><div class=small>Request</div><pre><code>GET /products/25/movements?limit=10
+Authorization: Bearer &lt;token&gt;</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 200
+x-request-id: 57f60a60399e4b5099ab433b36228464
+
+{
+  &quot;items&quot;: [
+    {
+      &quot;id&quot;: 50,
+      &quot;product_id&quot;: 25,
+      &quot;kind&quot;: &quot;adjustment&quot;,
+      &quot;on_hand_change&quot;: 24,
+      &quot;reserved_change&quot;: 0,
+      &quot;on_hand_after&quot;: 25,
+      &quot;reserved_after&quot;: 1,
+      &quot;reason&quot;: &quot;Purchase delivery received&quot;,
+      &quot;order_id&quot;: null,
+      &quot;user_id&quot;: 1,
+      &quot;created_at&quot;: &quot;2026-11-14T09:17:18.550040Z&quot;
+    },
+    {
+      &quot;id&quot;: 49,
+      &quot;product_id&quot;: 25,
+      &quot;kind&quot;: &quot;ship&quot;,
+      &quot;on_hand_change&quot;: -2,
+      &quot;reserved_change&quot;: -2,
+      &quot;on_hand_after&quot;: 1,
+      &quot;reserved_after&quot;: 1,
+      &quot;reason&quot;: &quot;shipped with order 9&quot;,
+      &quot;order_id&quot;: 9,
+      &quot;user_id&quot;: 2,
+      &quot;created_at&quot;: &quot;2026-11-14T09:17:18.526190Z&quot;
+    },
+    &quot;... 3 more&quot;
+  ],
+  &quot;total&quot;: 5,
+  &quot;limit&quot;: 10,
+  &quot;offset&quot;: 0
+}</code></pre></div></div></div>
+<div class=ex><h3>Low-stock report</h3><div class=line><span class="m get">GET</span><code>/reports/low-stock</code><span class='status s2'>&rarr; 200</span></div><div class=cols><div><div class=small>Request</div><pre><code>GET /reports/low-stock
+Authorization: Bearer &lt;token&gt;</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 200
+x-request-id: fdd4a50b604940eab05e9488c99b25ae
+
+[
+  {
+    &quot;id&quot;: 13,
+    &quot;sku&quot;: &quot;BC-KIT-3003&quot;,
+    &quot;name&quot;: &quot;Napkins 2-ply 33 cm (2000)&quot;,
+    &quot;category&quot;: &quot;Catering&quot;,
+    &quot;on_hand&quot;: 9,
+    &quot;reserved&quot;: 0,
+    &quot;available&quot;: 9,
+    &quot;reorder_level&quot;: 30,
+    &quot;shortfall&quot;: 21
+  },
+  {
+    &quot;id&quot;: 9,
+    &quot;sku&quot;: &quot;BC-CLN-2004&quot;,
+    &quot;name&quot;: &quot;Hand Soap Refill 5 L&quot;,
+    &quot;category&quot;: &quot;Cleaning&quot;,
+    &quot;on_hand&quot;: 6,
+    &quot;reserved&quot;: 0,
+    &quot;available&quot;: 6,
+    &quot;reorder_level&quot;: 20,
+    &quot;shortfall&quot;: 14
+  },
+  &quot;... 5 more&quot;
+]</code></pre></div></div></div>
+<div class=ex><h3>Orders CSV export</h3><div class=line><span class="m get">GET</span><code>/exports/orders.csv?status=shipped</code><span class='status s2'>&rarr; 200</span></div><div class=cols><div><div class=small>Request</div><pre><code>GET /exports/orders.csv?status=shipped
+Authorization: Bearer &lt;token&gt;</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 200
+x-request-id: 80d7f7eca5bc4fe990e13ae7a42fff0c
+
+order_id,created_at,status,customer,sku,product,quantity,unit_price,line_total
+1,2026-11-14T09:16:46+00:00,shipped,Harlow Lane Cafe Group,BC-KIT-3001,Paper Cups 12 oz (1000),4,54.80,219.20
+1,2026-11-14T09:16:46+00:00,shipped,Harlow Lane Cafe Group,BC-KIT-3002,Wooden Stirrers 14 cm (5000),2,18.60,37.20
+1,2026-11-14T09:16:46+00:00,shipped,Harlow Lane Cafe Group,BC-KIT-3003,Napkins 2-ply 33 cm (2000),3,27.40,82.20
+... 3 more lines</code></pre></div></div></div>
+<div class=ex><h3>Unknown sort field</h3><div class=line><span class="m get">GET</span><code>/products?sort=password_hash</code><span class='status s4'>&rarr; 422</span></div><div class=cols><div><div class=small>Request</div><pre><code>GET /products?sort=password_hash
+Authorization: Bearer &lt;token&gt;</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 422
+x-request-id: 50c662112b844886bbc1a2f88b2639de
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;validation_error&quot;,
+    &quot;message&quot;: &quot;Unknown sort field.&quot;,
+    &quot;details&quot;: [
+      {
+        &quot;field&quot;: &quot;sort&quot;,
+        &quot;issue&quot;: &quot;use one of: category, created_at, name, on_hand, sku, unit_price_cents&quot;
+      }
+    ],
+    &quot;request_id&quot;: &quot;50c662112b844886bbc1a2f88b2639de&quot;
+  }
+}</code></pre></div></div></div>
+<div class=ex><h3>Twelfth wrong login in one minute (limit 10)</h3><div class=line><span class="m post">POST</span><code>/auth/login</code><span class='status s4'>&rarr; 429</span></div><div class=cols><div><div class=small>Request</div><pre><code>POST /auth/login
+
+{
+  &quot;email&quot;: &quot;staff@brindlecove.example.com&quot;,
+  &quot;password&quot;: &quot;&lt;demo password&gt;&quot;
+}</code></pre></div><div><div class=small>Response</div><pre><code>HTTP 429
+retry-after: 59
+x-request-id: 033d83b06e0c4d74a04c16f3906d8c61
+
+{
+  &quot;error&quot;: {
+    &quot;code&quot;: &quot;rate_limited&quot;,
+    &quot;message&quot;: &quot;Too many requests. Try again shortly.&quot;,
+    &quot;details&quot;: [],
+    &quot;request_id&quot;: &quot;033d83b06e0c4d74a04c16f3906d8c61&quot;
+  }
+}</code></pre></div></div><p class=small>status codes of the 12 attempts: [401, 401, 401, 401, 401, 401, 401, 429, 429, 429, 429, 429]</p></div>
+</main>
+<footer>Version 1.0.0. Generated from the service's own OpenAPI schema. Sample service, not client work.</footer>
+</div>
+</body>
+</html>
