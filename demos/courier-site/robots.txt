@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /automation-engineer/demos/courier-site/
+
+Sitemap: https://melad2010.github.io/automation-engineer/demos/courier-site/sitemap.xml

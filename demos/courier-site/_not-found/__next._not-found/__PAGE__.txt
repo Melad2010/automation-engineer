@@ -1,0 +1,36 @@
+1:"$Sreact.fragment"
+2:"static/chunks/500-fc3b64d9ff4a32a7.js"
+3:"static/chunks/443-55639d627a346ee8.js"
+4:"static/chunks/app/layout-f2563f8b9dc71c3c.js"
+5:I[6563,["500","$2","443","$3","177","$4"],"Header"]
+6:I[7121,[],""]
+7:I[4581,[],""]
+8:"static/chunks/app/page-abbb60ac43231c9d.js"
+9:I[8500,["500","$2","443","$3","974","$8"],""]
+13:"ViewportBoundary"
+14:I[484,[],"$13"]
+:HL["/automation-engineer/demos/courier-site/_next/static/css/7cbff48658b0d50a.css","style"]
+b:X
+f:X
+f:C
+10:[["children",{"s":"__PAGE__","h":160,"d":{"r":"$L11","p":"$@12","v":null,"s":"$b"}}]]
+c:[["children",{"s":"_not-found","h":96,"d":{"r":["$","$1","c",{"children":[null,["$","$L6",null,{"parallelRouterKey":"children","template":"$Ld"}]]}],"p":"$@e","v":"$f","s":"$b"},"c":"$Q10"}]]
+0:{"t":{"t":{"s":"","h":80,"d":{"r":["$","$1","c",{"children":[[["$","link","0",{"rel":"stylesheet","href":"/automation-engineer/demos/courier-site/_next/static/css/7cbff48658b0d50a.css","precedence":"next"}]],["$","html",null,{"lang":"en-IN","children":["$","body",null,{"children":[["$","a",null,{"className":"skip-link","href":"#main","children":"Skip to content"}],[["$","script","Organization",{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"@id\":\"https://melad2010.github.io/automation-engineer/demos/courier-site/#organization\",\"name\":\"Tavvique\",\"description\":\"A fictional courier brand. All routes, shipments and figures are examples.\",\"url\":\"https://melad2010.github.io/automation-engineer/demos/courier-site/\",\"logo\":\"https://melad2010.github.io/automation-engineer/demos/courier-site/brand-mark.svg\",\"email\":\"hello@tavvique.example\"}"}}],["$","script","WebSite",{"type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"WebSite\",\"@id\":\"https://melad2010.github.io/automation-engineer/demos/courier-site/#website\",\"name\":\"Tavvique\",\"url\":\"https://melad2010.github.io/automation-engineer/demos/courier-site/\",\"inLanguage\":\"en-IN\",\"description\":\"A fictional courier brand. All routes, shipments and figures are examples.\",\"publisher\":{\"@id\":\"https://melad2010.github.io/automation-engineer/demos/courier-site/#organization\"}}"}}]],["$","$L5",null,{}],["$","main",null,{"id":"main","children":["$","$L6",null,{"parallelRouterKey":"children","template":["$","$L7",null,{}],"notFound":[["$","section",null,{"className":"container inner-page page-intro","children":[["$","p",null,{"className":"eyebrow","children":"A SMALL DETOUR"}],["$","h1",null,{"children":"This page hasn’t arrived."}],["$","p",null,{"children":"Let’s get you back to the right place."}],["$","$L9",null,{"className":"button button-dark","href":"/","prefetch":false,"children":["Return to the home page",["$","svg",null,{"className":"","width":"24","height":"24","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.6","strokeLinecap":"round","strokeLinejoin":"round","aria-hidden":"true","children":["$","path",null,{"d":"M4 12h16m-6-6 6 6-6 6"}]}]]}]]}],[]]}]}],["$","footer",null,{"className":"site-footer","children":[["$","div",null,{"className":"container footer-grid","children":[["$","div",null,{"children":[["$","$L9",null,{"className":"wordmark","href":"/","prefetch":false,"children":[["$","svg",null,{"className":"","width":"38","height":"38","viewBox":"0 0 40 40","fill":"none","aria-hidden":"true","children":[["$","rect",null,{"width":"40","height":"40","rx":"11","fill":"currentColor"}],["$","path",null,{"d":"M9 13h23l-4 5h-9l-5 10H8l5-10H6z","fill":"var(--color-accent)"}],["$","path",null,{"d":"m23 22 6-1-4 7h-6z","fill":"var(--color-paper)"}]]}],["$","span",null,{"children":["tavvique",["$","small",null,{"children":"COURIER & CARGO"}]]}]]}],["$","p",null,{"className":"footer-description","children":"From a small parcel to your next big shipment. A considered approach to getting things there."}]]}],["$","div",null,{"children":[["$","h2",null,{"children":"Our sample network"}],["$","ul",null,{"className":"city-list","children":[["$","li","Mumbai",{"children":"Mumbai"}],["$","li","Delhi",{"children":"Delhi"}],["$","li","Bengaluru",{"children":"Bengaluru"}],["$","li","Chennai",{"children":"Chennai"}],["$","li","Hyderabad",{"children":"Hyderabad"}],["$","li","Ahmedabad",{"children":"Ahmedabad"}]]}]]}],["$","div",null,{"children":[["$","h2",null,{"children":"Say hello"}],["$","p",null,{"className":"contact-value","children":"hello@tavvique.example"}],["$","p",null,{"className":"contact-value","children":"+91 00000 00000"}],["$","p",null,{"className":"small muted","children":"Illustrative number · not connected"}]]}]]}],["$","div",null,{"className":"container footer-bottom","children":[["$","p",null,{"children":"© 2026 Tavvique. A fictional website sample."}],["$","p",null,{"children":"Fictional contact details. No staffed branches or delivery operations."}]]}]]}],["$","div",null,{"className":"demo-badge","children":[["$","span",null,{"className":"tiny-dot"}],"Demo site with sample content"]}]]}]}]]}],"p":"$@a","v":null,"s":"$b"},"c":"$Qc"},"h":{"r":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L14",null,{"children":"$L15"}],"$L16",null]}],"p":"$@17","v":null,"s":"$b"}},"a":"$@18","u":"$@19","b":"foUzK6y7BSBb7GoWm_PEz"}
+1a:I[484,[],"OutletBoundary"]
+1b:"$Sreact.suspense"
+1d:"MetadataBoundary"
+1e:I[484,[],"$1d"]
+1f:I[6869,[],"IconMark"]
+d:["$","$L7",null,{}]
+11:["$","$1","c",{"children":[["$","section",null,{"className":"container inner-page page-intro","children":[["$","p",null,{"className":"eyebrow","children":"A SMALL DETOUR"}],["$","h1",null,{"children":"This page hasn’t arrived."}],["$","p",null,{"children":"Let’s get you back to the right place."}],["$","$L9",null,{"className":"button button-dark","href":"/","prefetch":false,"children":["Return to the home page",["$","svg",null,{"className":"","width":"24","height":"24","viewBox":"0 0 24 24","fill":"none","stroke":"currentColor","strokeWidth":"1.6","strokeLinecap":"round","strokeLinejoin":"round","aria-hidden":"true","children":["$","path",null,{"d":"M4 12h16m-6-6 6 6-6 6"}]}]]}]]}],null,["$","$L1a",null,{"children":["$","$1b",null,{"name":"Next.MetadataOutlet","children":"$@1c"}]}]]}]
+15:[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","2",{"name":"theme-color","content":"#173f35"}]]
+16:["$","$L1e",null,{"children":[["$","div",null,{"hidden":true,"children":["$","$1b",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Page not found | Tavvique demo"}],["$","meta","1",{"name":"description","content":"This page is not part of the fictional Tavvique courier website sample."}],["$","meta","2",{"name":"robots","content":"noindex, nofollow"}],["$","link","3",{"rel":"icon","href":"/automation-engineer/demos/courier-site/brand-mark.svg"}],["$","$L1f","4",{}]]}]}],null]}]
+b:300
+1c:null
+19:true
+b:C
+18:0
+e:"$undefined"
+a:"$undefined"
+17:"$undefined"
+12:"$undefined"
