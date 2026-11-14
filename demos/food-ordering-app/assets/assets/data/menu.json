@@ -1,0 +1,248 @@
+{
+  "restaurant": "Quillfern Kitchen",
+  "categories": [
+    {"id": "starters", "name": {"en": "Starters", "es": "Entrantes"}},
+    {"id": "mains", "name": {"en": "Mains", "es": "Principales"}},
+    {"id": "bowls", "name": {"en": "Bowls", "es": "Bowls"}},
+    {"id": "desserts", "name": {"en": "Desserts", "es": "Postres"}},
+    {"id": "drinks", "name": {"en": "Drinks", "es": "Bebidas"}}
+  ],
+  "items": [
+    {
+      "id": "herb-fries", "category": "starters", "price": 549, "icon": "fries", "colors": ["#F6C453", "#E8862A"],
+      "tags": ["vegetarian", "glutenFree"], "popular": false,
+      "name": {"en": "Crispy Herb Fries", "es": "Patatas crujientes a las hierbas"},
+      "description": {"en": "Hand-cut potatoes, rosemary salt and a squeeze of lemon.", "es": "Patatas cortadas a mano, sal de romero y un toque de limón."},
+      "optionGroups": [
+        {"id": "size", "name": {"en": "Size", "es": "Tamaño"}, "choices": [
+          {"id": "regular", "name": {"en": "Regular", "es": "Normal"}, "price": 0},
+          {"id": "large", "name": {"en": "Large", "es": "Grande"}, "price": 200}
+        ]}
+      ],
+      "extras": [
+        {"id": "garlic-dip", "name": {"en": "Garlic dip", "es": "Salsa de ajo"}, "price": 75},
+        {"id": "cheese-sauce", "name": {"en": "Cheese sauce", "es": "Salsa de queso"}, "price": 120}
+      ]
+    },
+    {
+      "id": "tomato-soup", "category": "starters", "price": 649, "icon": "soup", "colors": ["#F28C6B", "#C8402F"],
+      "tags": ["vegetarian", "glutenFree"], "popular": false,
+      "name": {"en": "Roasted Tomato Soup", "es": "Sopa de tomate asado"},
+      "description": {"en": "Slow-roasted tomatoes, sweet onion and fresh basil.", "es": "Tomates asados a fuego lento, cebolla dulce y albahaca fresca."},
+      "optionGroups": [],
+      "extras": [
+        {"id": "basil-oil", "name": {"en": "Basil oil", "es": "Aceite de albahaca"}, "price": 60},
+        {"id": "croutons", "name": {"en": "Garlic croutons", "es": "Picatostes al ajo"}, "price": 100}
+      ]
+    },
+    {
+      "id": "chili-wings", "category": "starters", "price": 899, "icon": "wings", "colors": ["#F5A25D", "#B83B2E"],
+      "tags": ["spicy", "glutenFree"], "popular": true,
+      "name": {"en": "Chili Lime Wings", "es": "Alitas de chile y lima"},
+      "description": {"en": "Oven-crisp wings tossed in chili, lime and honey.", "es": "Alitas crujientes al horno con chile, lima y miel."},
+      "optionGroups": [
+        {"id": "pieces", "name": {"en": "Pieces", "es": "Piezas"}, "choices": [
+          {"id": "six", "name": {"en": "6 pieces", "es": "6 piezas"}, "price": 0},
+          {"id": "ten", "name": {"en": "10 pieces", "es": "10 piezas"}, "price": 400}
+        ]}
+      ],
+      "extras": [
+        {"id": "ranch-dip", "name": {"en": "Ranch dip", "es": "Salsa ranch"}, "price": 80}
+      ]
+    },
+    {
+      "id": "spring-rolls", "category": "starters", "price": 699, "icon": "rolls", "colors": ["#B5D86A", "#4E9A47"],
+      "tags": ["vegetarian"], "popular": false,
+      "name": {"en": "Garden Spring Rolls", "es": "Rollitos de primavera"},
+      "description": {"en": "Crunchy vegetables in a golden wrap with sweet chili sauce.", "es": "Verduras crujientes en masa dorada con salsa de chile dulce."},
+      "optionGroups": [],
+      "extras": []
+    },
+    {
+      "id": "classic-burger", "category": "mains", "price": 1299, "icon": "burger", "colors": ["#F3B562", "#A8552B"],
+      "tags": [], "popular": true,
+      "name": {"en": "Quillfern Classic Burger", "es": "Hamburguesa clásica Quillfern"},
+      "description": {"en": "Grilled beef patty, cheddar, pickles and house sauce on a soft bun.", "es": "Carne a la parrilla, cheddar, pepinillos y salsa de la casa en pan suave."},
+      "optionGroups": [
+        {"id": "side", "name": {"en": "Side", "es": "Acompañamiento"}, "choices": [
+          {"id": "fries", "name": {"en": "Fries", "es": "Patatas"}, "price": 0},
+          {"id": "salad", "name": {"en": "Side salad", "es": "Ensalada"}, "price": 0},
+          {"id": "sweet-fries", "name": {"en": "Sweet potato fries", "es": "Boniato frito"}, "price": 150}
+        ]}
+      ],
+      "extras": [
+        {"id": "bacon", "name": {"en": "Bacon", "es": "Beicon"}, "price": 180},
+        {"id": "extra-cheese", "name": {"en": "Extra cheddar", "es": "Cheddar extra"}, "price": 100},
+        {"id": "extra-patty", "name": {"en": "Extra patty", "es": "Carne extra"}, "price": 350}
+      ]
+    },
+    {
+      "id": "margherita", "category": "mains", "price": 1199, "icon": "pizza", "colors": ["#F07D5A", "#B32F2F"],
+      "tags": ["vegetarian"], "popular": true,
+      "name": {"en": "Wood-Fired Margherita", "es": "Margarita al horno de leña"},
+      "description": {"en": "Tomato, mozzarella and basil on a thin, blistered crust.", "es": "Tomate, mozzarella y albahaca sobre masa fina y crujiente."},
+      "optionGroups": [
+        {"id": "size", "name": {"en": "Size", "es": "Tamaño"}, "choices": [
+          {"id": "ten-inch", "name": {"en": "10 inch", "es": "25 cm"}, "price": 0},
+          {"id": "fourteen-inch", "name": {"en": "14 inch", "es": "35 cm"}, "price": 400}
+        ]}
+      ],
+      "extras": [
+        {"id": "mushrooms", "name": {"en": "Mushrooms", "es": "Champiñones"}, "price": 120},
+        {"id": "olives", "name": {"en": "Olives", "es": "Aceitunas"}, "price": 90},
+        {"id": "extra-mozzarella", "name": {"en": "Extra mozzarella", "es": "Mozzarella extra"}, "price": 150}
+      ]
+    },
+    {
+      "id": "spicy-chicken-pizza", "category": "mains", "price": 1399, "icon": "pizza", "colors": ["#F4A259", "#A23B1F"],
+      "tags": ["spicy"], "popular": false,
+      "name": {"en": "Spicy Chicken Pizza", "es": "Pizza picante de pollo"},
+      "description": {"en": "Roast chicken, red onion, jalapeños and smoked chili oil.", "es": "Pollo asado, cebolla morada, jalapeños y aceite de chile ahumado."},
+      "optionGroups": [
+        {"id": "size", "name": {"en": "Size", "es": "Tamaño"}, "choices": [
+          {"id": "ten-inch", "name": {"en": "10 inch", "es": "25 cm"}, "price": 0},
+          {"id": "fourteen-inch", "name": {"en": "14 inch", "es": "35 cm"}, "price": 400}
+        ]}
+      ],
+      "extras": [
+        {"id": "extra-jalapenos", "name": {"en": "Extra jalapeños", "es": "Jalapeños extra"}, "price": 70}
+      ]
+    },
+    {
+      "id": "grilled-salmon", "category": "mains", "price": 1749, "icon": "fish", "colors": ["#F9A88B", "#D0605A"],
+      "tags": ["glutenFree"], "popular": false,
+      "name": {"en": "Grilled Salmon Plate", "es": "Salmón a la parrilla"},
+      "description": {"en": "Salmon fillet with herb rice or greens and a lemon wedge.", "es": "Filete de salmón con arroz a las hierbas o verduras y limón."},
+      "optionGroups": [
+        {"id": "side", "name": {"en": "Side", "es": "Acompañamiento"}, "choices": [
+          {"id": "rice", "name": {"en": "Herb rice", "es": "Arroz a las hierbas"}, "price": 0},
+          {"id": "greens", "name": {"en": "Green vegetables", "es": "Verduras verdes"}, "price": 0}
+        ]}
+      ],
+      "extras": [
+        {"id": "lemon-butter", "name": {"en": "Lemon butter", "es": "Mantequilla de limón"}, "price": 90}
+      ]
+    },
+    {
+      "id": "bean-tacos", "category": "mains", "price": 1049, "icon": "tacos", "colors": ["#E9C46A", "#7A9E3B"],
+      "tags": ["vegetarian", "spicy"], "popular": false,
+      "name": {"en": "Smoky Bean Tacos", "es": "Tacos de frijoles ahumados"},
+      "description": {"en": "Three tacos with smoky black beans, slaw and salsa roja.", "es": "Tres tacos con frijoles negros ahumados, col y salsa roja."},
+      "optionGroups": [
+        {"id": "tortilla", "name": {"en": "Tortilla", "es": "Tortilla"}, "choices": [
+          {"id": "corn", "name": {"en": "Corn", "es": "Maíz"}, "price": 0},
+          {"id": "flour", "name": {"en": "Flour", "es": "Trigo"}, "price": 0}
+        ]}
+      ],
+      "extras": [
+        {"id": "guacamole", "name": {"en": "Guacamole", "es": "Guacamole"}, "price": 150}
+      ]
+    },
+    {
+      "id": "teriyaki-bowl", "category": "bowls", "price": 1249, "icon": "riceBowl", "colors": ["#F2B880", "#8C4A2F"],
+      "tags": [], "popular": true,
+      "name": {"en": "Teriyaki Rice Bowl", "es": "Bowl de arroz teriyaki"},
+      "description": {"en": "Steamed rice, glazed protein, pickled carrot and sesame.", "es": "Arroz al vapor, proteína glaseada, zanahoria encurtida y sésamo."},
+      "optionGroups": [
+        {"id": "protein", "name": {"en": "Protein", "es": "Proteína"}, "choices": [
+          {"id": "chicken", "name": {"en": "Chicken", "es": "Pollo"}, "price": 0},
+          {"id": "tofu", "name": {"en": "Tofu", "es": "Tofu"}, "price": 0},
+          {"id": "beef", "name": {"en": "Beef", "es": "Ternera"}, "price": 200}
+        ]}
+      ],
+      "extras": [
+        {"id": "fried-egg", "name": {"en": "Fried egg", "es": "Huevo frito"}, "price": 100},
+        {"id": "avocado", "name": {"en": "Avocado", "es": "Aguacate"}, "price": 150}
+      ]
+    },
+    {
+      "id": "green-salad", "category": "bowls", "price": 1099, "icon": "salad", "colors": ["#A8D672", "#3F8F4E"],
+      "tags": ["vegetarian", "glutenFree"], "popular": false,
+      "name": {"en": "Green Goddess Salad", "es": "Ensalada Green Goddess"},
+      "description": {"en": "Crisp greens, cucumber, herbs and a creamy avocado dressing.", "es": "Hojas verdes, pepino, hierbas y aliño cremoso de aguacate."},
+      "optionGroups": [],
+      "extras": [
+        {"id": "grilled-chicken", "name": {"en": "Grilled chicken", "es": "Pollo a la parrilla"}, "price": 300},
+        {"id": "feta", "name": {"en": "Feta", "es": "Queso feta"}, "price": 120}
+      ]
+    },
+    {
+      "id": "chili-ramen", "category": "bowls", "price": 1349, "icon": "ramen", "colors": ["#F6B26B", "#A6332A"],
+      "tags": ["spicy"], "popular": false,
+      "name": {"en": "Chili Ramen", "es": "Ramen picante"},
+      "description": {"en": "Rich broth, wavy noodles, greens and toasted sesame.", "es": "Caldo intenso, fideos ondulados, verduras y sésamo tostado."},
+      "optionGroups": [
+        {"id": "heat", "name": {"en": "Heat", "es": "Picante"}, "choices": [
+          {"id": "mild", "name": {"en": "Mild", "es": "Suave"}, "price": 0},
+          {"id": "hot", "name": {"en": "Extra hot", "es": "Muy picante"}, "price": 0}
+        ]}
+      ],
+      "extras": [
+        {"id": "soft-egg", "name": {"en": "Soft egg", "es": "Huevo marinado"}, "price": 100},
+        {"id": "extra-noodles", "name": {"en": "Extra noodles", "es": "Fideos extra"}, "price": 180}
+      ]
+    },
+    {
+      "id": "lava-cake", "category": "desserts", "price": 749, "icon": "cake", "colors": ["#C08A6E", "#5B3527"],
+      "tags": ["vegetarian"], "popular": true,
+      "name": {"en": "Chocolate Lava Cake", "es": "Volcán de chocolate"},
+      "description": {"en": "Warm chocolate cake with a soft, melting center.", "es": "Bizcocho de chocolate caliente con centro fundente."},
+      "optionGroups": [],
+      "extras": [
+        {"id": "vanilla-scoop", "name": {"en": "Vanilla ice cream", "es": "Helado de vainilla"}, "price": 150}
+      ]
+    },
+    {
+      "id": "mango-sorbet", "category": "desserts", "price": 549, "icon": "iceCream", "colors": ["#FFD166", "#F08A24"],
+      "tags": ["vegetarian", "glutenFree"], "popular": false,
+      "name": {"en": "Mango Sorbet", "es": "Sorbete de mango"},
+      "description": {"en": "Two scoops of bright, dairy-free mango sorbet.", "es": "Dos bolas de sorbete de mango sin lácteos."},
+      "optionGroups": [],
+      "extras": []
+    },
+    {
+      "id": "churros", "category": "desserts", "price": 649, "icon": "bakery", "colors": ["#E9B872", "#9C5F2A"],
+      "tags": ["vegetarian"], "popular": false,
+      "name": {"en": "Cinnamon Churros", "es": "Churros con canela"},
+      "description": {"en": "Crisp churros rolled in cinnamon sugar.", "es": "Churros crujientes con azúcar y canela."},
+      "optionGroups": [],
+      "extras": [
+        {"id": "chocolate-dip", "name": {"en": "Chocolate dip", "es": "Chocolate para mojar"}, "price": 90}
+      ]
+    },
+    {
+      "id": "lemonade", "category": "drinks", "price": 399, "icon": "drink", "colors": ["#F9E07F", "#E0B423"],
+      "tags": ["vegetarian", "glutenFree"], "popular": false,
+      "name": {"en": "Fresh Lemonade", "es": "Limonada natural"},
+      "description": {"en": "Squeezed lemons, a little cane sugar and mint.", "es": "Limones exprimidos, un poco de azúcar de caña y menta."},
+      "optionGroups": [
+        {"id": "size", "name": {"en": "Size", "es": "Tamaño"}, "choices": [
+          {"id": "regular", "name": {"en": "Regular", "es": "Normal"}, "price": 0},
+          {"id": "large", "name": {"en": "Large", "es": "Grande"}, "price": 100}
+        ]}
+      ],
+      "extras": []
+    },
+    {
+      "id": "iced-coffee", "category": "drinks", "price": 449, "icon": "coffee", "colors": ["#C9A27E", "#6F4A33"],
+      "tags": ["vegetarian", "glutenFree"], "popular": false,
+      "name": {"en": "Iced Coffee", "es": "Café helado"},
+      "description": {"en": "Cold-brew coffee over ice with your choice of milk.", "es": "Café de extracción en frío con hielo y la leche que elijas."},
+      "optionGroups": [
+        {"id": "milk", "name": {"en": "Milk", "es": "Leche"}, "choices": [
+          {"id": "whole", "name": {"en": "Whole milk", "es": "Leche entera"}, "price": 0},
+          {"id": "oat", "name": {"en": "Oat milk", "es": "Leche de avena"}, "price": 50}
+        ]}
+      ],
+      "extras": []
+    },
+    {
+      "id": "hibiscus-tea", "category": "drinks", "price": 399, "icon": "tea", "colors": ["#E27396", "#9B2C55"],
+      "tags": ["vegetarian", "glutenFree"], "popular": false,
+      "name": {"en": "Hibiscus Iced Tea", "es": "Té helado de hibisco"},
+      "description": {"en": "Floral hibiscus tea with orange peel, served cold.", "es": "Té de hibisco con piel de naranja, servido frío."},
+      "optionGroups": [],
+      "extras": []
+    }
+  ]
+}
