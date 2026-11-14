@@ -1,0 +1,46 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "Northside Booking Requests",
+    "author": "Synthetic sample",
+    "description": "An invented bicycle shop. All content is synthetic sample data."
+  },
+  "preferredVersions": {
+    "php": "7.4",
+    "wp": "6.4"
+  },
+  "features": {
+    "networking": false
+  },
+  "login": true,
+  "landingPage": "/book-a-repair/",
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_HTTP_BLOCK_EXTERNAL": true,
+        "DISABLE_WP_CRON": true,
+        "WP_DEBUG": false
+      }
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/mu-plugins/northside-demo.php",
+      "data": "<?php\n// Demo-only: never send mail; no personal data leaves Playground.\nadd_filter('pre_wp_mail', static function () { return true; });\nadd_filter('show_admin_bar', '__return_false');\n"
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "url",
+        "url": "https://melad2010.github.io/automation-engineer/demos/wordpress-booking/northside-booking.zip"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\n// This fixture is not included in the plugin ZIP. All identities are synthetic.\nupdate_option( 'blogname', 'Northside Bike Repair \u2014 Sample' );\nupdate_option( 'blogdescription', 'An invented bicycle workshop. Synthetic sample data only.' );\nupdate_option( 'nsb_settings', array(\n    'services' => array( 'Safety check', 'Puncture repair', 'Brake service', 'Full tune-up' ),\n    'notification_email' => 'workshop@example.invalid',\n    'success_text' => 'Sample request received. This demo does not make a real booking.',\n    'delete_data' => false,\n) );\n$page = get_page_by_path( 'book-a-repair' );\n$page_id = wp_insert_post( array(\n    'ID' => $page ? $page->ID : 0,\n    'post_type' => 'page', 'post_status' => 'publish', 'post_name' => 'book-a-repair',\n    'post_title' => 'Book a repair', 'post_content' => '<!-- wp:shortcode -->[northside_booking]<!-- /wp:shortcode -->',\n) );\nupdate_option( 'show_on_front', 'page' );\nupdate_option( 'page_on_front', $page_id );\nupdate_option( 'permalink_structure', '/%postname%/' );\n$states = array( 'new', 'confirmed', 'done', 'cancelled' );\n$services = array( 'Safety check', 'Puncture repair', 'Brake service', 'Full tune-up' );\nfor ( $i = 1; $i <= 8; ++$i ) {\n    $slug = sprintf( 'northside-sample-%02d', $i );\n    $found = get_posts( array( 'post_type' => 'nsb_request', 'post_status' => array( 'private', 'trash' ), 'name' => $slug, 'posts_per_page' => 1 ) );\n    wp_insert_post( array(\n        'ID' => $found ? $found[0]->ID : 0,\n        'post_type' => 'nsb_request', 'post_status' => 'private', 'post_name' => $slug,\n        'post_title' => sprintf( 'Sample Rider %02d', $i ),\n        'meta_input' => array(\n            '_nsb_name' => sprintf( 'Sample Rider %02d', $i ),\n            '_nsb_email' => sprintf( 'rider%02d@example.invalid', $i ),\n            '_nsb_phone' => '', '_nsb_service' => $services[ ( $i - 1 ) % 4 ],\n            '_nsb_date' => wp_date( 'Y-m-d', strtotime( '+' . ( 7 + $i ) . ' days' ) ),\n            '_nsb_notes' => 'Synthetic sample request. No real person or appointment.',\n            '_nsb_state' => $states[ ( $i - 1 ) % 4 ], '_nsb_mail_status' => 'sample',\n        ),\n    ) );\n}\nflush_rewrite_rules( false );\necho \"Seed complete: eight synthetic requests; two per state.\\n\";\n"
+    }
+  ]
+}
